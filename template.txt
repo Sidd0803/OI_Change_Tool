@@ -1,0 +1,434 @@
+—------------------------------
+AMZN Apr 230 Call 3707 traded 20.30 (looks sold), Apr24th 245 Call 3707 traded 8.40 (mid) live; stk ref 250.05
+
+AMZN Apr 230 Call OI Change:
+---------------------------------
+AMZN Apr 245 Call 3936 traded 6.19 - looks bought live; stk ref 249.70
+
+AMZN Apr 245 Call OI Change:
+---------------------------------
+AMZN Apr 250 Call bot 1k for 4.55 live; stk ref 252.03
+
+AMZN Apr 250 Call OI Change:
+---------------------------------
+AMZN Apr 260 Call 9k traded up to 0.57 - looks bought live; stk ref 249.64
+
+AMZN Apr 260 Call OI Change:
+---------------------------------
+AMZN Apr 277.50 Call bot 3k for 0.03 live
+
+AMZN Apr 277.50 Call OI Change:
+---------------------------------
+AMZN Apr24th 250 Calls sold 4700 @ 4.00 live; stk ref 247.19
+
+AMZN Apr24th 250 Call OI Change:
+---------------------------------
+AMZN Apr27th 265 Call sold 1k @ 0.64 live; stk ref 245.77 - opening
+
+AMZN Apr27th 265 Call OI Change:
+---------------------------------
+AMZN Aug 250 Call sold 2500 @ 20.80 live; stk ref 245.95
+
+AMZN Aug 250 Call OI Change:
+---------------------------------
+AMZN Aug 250 Call sold 2500 more @ 20.25 live; stk ref 245.28 - 10k traded OTD
+
+AMZN Aug 250 Call OI Change:
+---------------------------------
+AMZN Dec 190 Put 3k traded down to 7.35 (looks sold), Dec 200 Put 3k traded down to 9.48 (looks sold) live; stk ref 245.32
+
+AMZN Dec 190 Put OI Change:
+AMZN Dec 200 Put OI Change:
+---------------------------------
+AMZN Jan 180/350 RR 1k traded 1.02 vs 248.77 31d - looks like sold call and collected
+
+AMZN Jan 180 Put OI Change:
+AMZN Jan 350 Call OI Change:
+---------------------------------
+AMZN Jun 220 Call bot 7400 for 35.10 vs 248.60
+
+AMZN Jun 220 Call OI Change:
+---------------------------------
+AMZN Jun 230 Call 4k traded down to 25.80 - looks sold live; stk ref 246.90
+
+AMZN Jun 230 Call OI Change:
+---------------------------------
+AMZN Jun 270 / 300 1x2 CS 3k traded 2.84 vs 245.13 - looks bought
+
+AMZN Jun 270 Call OI Change:
+AMZN Jun 300 Call OI Change:
+---------------------------------
+AMZN Jun 275 Call sold 2600 @ 6.85 live; stk ref  250.55
+
+AMZN Jun 275 Call OI Change:
+---------------------------------
+AMZN Jun 275/250 1x1.5 CS 2k traded 15.80 vs 247.35 50d - looks sold
+
+AMZN Jun 250 Call OI Change:
+AMZN Jun 275 Call OI Change:
+---------------------------------
+AMZN Jun 300 Call 5k traded up to 2.39 (looks bought), Jun 335 Call 5k traded down to 0.59 (looks sold) live; stk ref 249.66
+
+AMZN Jun 300 Call OI Change:
+AMZN Jun 335 Call OI Change:
+---------------------------------
+AMZN May 220 Put 2400 traded down to 3.20 elec - looks sold live; stk ref 246.00
+
+AMZN May 220 Put OI Change:
+---------------------------------
+AMZN May 230 Put 1400 traded 4.74 vs 248.11 25d - looks bought
+
+AMZN May 230 Put OI Change:
+---------------------------------
+AMZN May 240/265 RR 2k traded 3.12 vs 246.54 68d - looks like BP/SC
+
+AMZN May 240 Put OI Change:
+AMZN May 265 Call OI Change:
+---------------------------------
+AMZN May 260 Call bought 1500 for 7.35 live; stk ref 248.10
+
+AMZN May 260 Call OI Change:
+---------------------------------
+AMZN May 270 Call 3k traded 5.02 (looks bought), May 255 Call 2k traded 9.925 (looks sold) live; stk ref 249.57
+
+AMZN May 270 Call OI Change:
+---------------------------------
+AMZN May 270 Call sold 10k @ 4.20 live; stk ref 247.44
+
+AMZN May 270 Call OI Change:
+---------------------------------
+AMZN May 300 Call sold 1037 @ 1.15 live; stk ref 249.45
+
+AMZN May 300 Call OI Change:
+---------------------------------
+AMZN Nov 260 Call 1150 traded up to 24.50 (looks bought), Jan 270 Call 1150 traded 23.92 (looks sold) live; stk ref 246.58
+
+AMZN Nov 260 Call OI Change:
+AMZN Jan 270 Call OI Change:
+---------------------------------
+AMZN Nov 340 Call 2k traded 5.35 vs 247.65 17d - looks bought
+
+AMZN Nov 340 Call OI Change:
+---------------------------------
+AMZN Oct 265 Call 1k traded 20.34 vs 248.78 50d - looks bought
+
+AMZN Oct 265 Call OI Change:
+---------------------------------
+AMZN Sep 290 Call 4k traded down to 8.80 elec - looks sold live; stk ref 245.54
+
+AMZN Sep 290 Call OI Change:
+---------------------------------
+AMZN Sep 290 Call 7k more traded down to 8.80 elec - looks sold live; stk ref 245.52 - 11k OTD
+
+AMZN Sep 290 Call OI Change:
+---------------------------------
+AMZN Sep 305 Calls 3k traded 6.65 - looks bought live; stk ref 247.85
+
+AMZN Sep 305 Call OI Change:
+---------------------------------
+BTDR Apr 12.5 Call sold 20k down to 0.145 live; stk ref 12.26
+
+BTDR Apr 12.5 Call OI Change:
+---------------------------------
+BTDR Jun 10 Call sold 3k, Jun 15/25 CS bot 9k collected 0.03 live; stk ref 12.06
+
+BTDR Jun 10 Call OI Change:
+---------------------------------
+BTDR Jun 10 Put 2750 traded 1.13 vs 12.20 - looks sold
+
+BTDR Jun 10 Put OI Change:
+---------------------------------
+BTDR Jun 20/25 CS paid 0.35 for 15,625 live; stk ref 12.05
+
+BTDR Jun 25 Call OI Change:
+BTDR Jun 20 Call OI Change:
+---------------------------------
+BTDR May 10 / 12.5 Call Spread trades 1.22 - 1,250x Cust-Cust
+
+BTDR May 12.5 Call OI Change:
+BTDR May 10 Call OI Change:
+---------------------------------
+CORZ Apr 169 Call sold 1k @ 0.63 live; stk ref 18.93
+
+CORZ Apr 169 Call OI Change:
+---------------------------------
+CORZ Apr 17 Puts 3k traded 0.07 (looks sold), Apr 20 Calls 3k traded up to 0.45 (looks bought) live; stk ref 19.39
+
+CORZ Apr 17 Put OI Change:
+CORZ Apr 20 Put OI Change:
+---------------------------------
+CORZ Apr 19.5 Calls 1k traded 0.63 - looks sold live; stk ref 19.40
+
+CORZ Apr 19.5 Call OI Change:
+---------------------------------
+CORZ Apr 20 Call 3k traded 0.42 vs 19.3674 38d - looks bought
+
+CORZ Apr 20 Call OI Change:
+---------------------------------
+CORZ Apr 20 Call 4500 traded 0.35 - looks bought live; stk ref 19.09
+
+CORZ Apr 20 Call OI Change:
+---------------------------------
+CORZ Apr 20 Call 4k more traded 0.33 - looks bought live; stk ref 19.07 - 9k OTD
+
+CORZ Apr 20 Call OI Change:
+---------------------------------
+CORZ Apr24th 21 Call 2500 traded 0.35 (looks bought) live; stk ref 18.93
+
+CORZ Apr24th 21 Call OI Change:
+---------------------------------
+CORZ Jun 16 Call 5900 traded up to 4.56 (looks bought), Jun 25 Call 5900 traded down to 0.92 (looks sold) live; stk ref 19.30
+
+CORZ Jun 16 Call OI Change:
+CORZ Jun 25 Call OI Change:
+---------------------------------
+CORZ Jun 19 Call 1250 traded 2.61 (looks sold), Jun 27 Call 2500 traded 0.59 (looks bought) live; stk ref 18.97
+
+CORZ Jun 19 Call OI Change:
+CORZ Jun 27 Call OI Change:
+---------------------------------
+CORZ Jun 20 Put 3k traded 3.36 (looks bought), Jun 16 Put 3k traded 1.31 (looks sold) live; stk ref 18.59
+
+CORZ Jun 20 Put OI Change:
+CORZ Jun 16 Put OI Change:
+---------------------------------
+CORZ May 21 Call 2k traded up to 1.41 - looks bought live; stk ref 19.33
+
+CORZ May 21 Call OI Change:
+---------------------------------
+CORZ May 23 Call 8500 traded up to 0.71 elec - looks bought live; stk ref 18.93
+
+CORZ May 23 Call OI Change:
+---------------------------------
+CORZ May1st 23 Calls 1k traded 0.32 - looks sold live; stk ref 19.40 - opening
+
+CORZ May1st 23 Call OI Change:
+---------------------------------
+CORZ Sep 22/27 1x2 CS sold 2 collected 0.375 10k live; stk ref 19.01 - opening 22c
+
+CORZ Sep 22 Call OI Change:
+CORZ Sep 27 Call OI Change:
+---------------------------------
+CRM Jan 185 Put 1k traded 29.45 (looks sold), Jan 190 Call 1k traded 20.75 (looks bought) live; stk ref 173.25
+
+CRM Jan 185 Put OI Change:
+CRM Jan 190 Call  OI Change:
+---------------------------------
+CRM Jul 170 Call 1k traded 17.50 vs 173.50 59d - looks sold
+
+CRM Jul 170 Call OI Change:
+---------------------------------
+META Apr 602.50 Call 2558 traded 51.55 (looks sold), Apr24th 650 Call 2558 traded 16.10 (looks sold) live; stk ref 654.24
+
+META Apr 602.50 Call OI Change:
+META Apr24th 650 Call  OI Change:
+---------------------------------
+META Apr 627.5 Call 2300 traded 30.80 (looks sold), Apr 660 Call 2300 traded 7.20 (looks sold) live; stk ref 657.30
+
+META Apr 627.5 Call OI Change:
+META Apr 660 Call OI Change:
+---------------------------------
+META Apr 640 Call 1k traded 14.32 (looks sold), Apr 645 Call 1k traded 11.20 (looks bought) live; stk ref 649.27
+
+META Apr 640 Call OI Change:
+META Apr 645 Call OI Change:
+---------------------------------
+META Apr 640 Put 1500 traded 1.93 vs 662.00 16d - looks sold
+
+META Apr 640 Put OI Change:
+---------------------------------
+META Apr 660/695 CS 1k traded 9.90 vs 663.30 46d - looks bought
+
+META Apr 660 Call OI Change:
+META Apr 695 Call OI Change:
+---------------------------------
+META Apr 675 Call 1k traded 4.65 vs 663.603 33d - looks bought
+
+META Apr 675 Call OI Change:
+---------------------------------
+META Jun 675 Call 4k traded 36.00 - looks bought live; stk ref 657.57
+
+META Jun 675 Call  OI Change:
+---------------------------------
+META Jun 690 Call 6k traded 32.80 - looks bought live; stk ref 662.81
+
+META Jun 690 Call OI Change:
+---------------------------------
+META Jun 900 Call 2k traded up to 1.73 - looks bought live; stk ref 663.42
+
+META Jun 900 Call OI Change:
+---------------------------------
+META May 800 Calls 5k traded 3.00 - looks bought live; stk ref 665.25 - 10k traded OTD
+
+META May 800 Call OI Change:
+---------------------------------
+META Sep 850 Call 1k traded 15.50 vs 663.00 19d - looks bought
+
+META Sep 850 Call OI Change:
+---------------------------------
+MSFT Apr / May 380 Put Spread 1k traded 10.72 vs 391.35 20d - looks bought
+
+MSFT May 380 Put OI Change:
+MSFT Apr  380 Put OI Change:
+---------------------------------
+MSFT Jul 370 Put 2k traded 14.70 vs 392.00 32d - looks bought
+
+MSFT Jul 370 Put OI Change:
+---------------------------------
+MSFT Jul 390 Put 2k traded 23.225 (looks sold),  Jul 350 Put 2600 traded 9.25 (looks bought) vs 391.50 16d
+
+MSFT Jul 390 Put OI Change:
+---------------------------------
+MSFT Jun 335/390 Put Spread 1500 traded 16.01 vs 391.00 32d - looks sold
+
+MSFT Jun 335 Put OI Change:
+MSFT Jun 390 Put OI Change:
+---------------------------------
+MSFT Jun 450 Call 5k traded 5.20 - looks sold live; stk ref 391.22
+
+MSFT Jun 450 Call OI Change:
+---------------------------------
+MSFT Jun 450 Call 6920 traded 5.30 - looks sold live; stk ref 391.81 - 23k OTD
+
+MSFT Jun 450 Call OI Change:
+---------------------------------
+MSFT Jun 460 Call 2424 traded up to 4.47 (looks bought), Jun 530 Call 2424 traded 0.84 (looks sold) live; stk ref 394.36
+
+MSFT Jun 460 Call OI Change:
+---------------------------------
+MSFT jun 480 Call 4k traded 2.50 - looks sold live; stk ref 391.77 - 13.9k traded OTD
+MSFT Jun 480 Call 2k traded 2.50 - looks sold live; stk ref 393.06 - 20k traded OTD
+MSFT Jun 480 Call 2500 more traded 2.16 - looks sold live; stk ref 393.06 - 25k traded OTD
+MSFT Jun 480 Call 4k more traded 2.10 - looks sold live; stk ref 392.14 - 30k traded OTD
+MSFT Jun 480 Call 2.5k more traded 2.06 - looks sold live; stk ref 391.89 - 36k traded OTD
+MSFT Jun 480 Call 4k more traded 2.27 - looks sold live; stk ref 390.72 - 52k traded OTD
+MSFT Jun 480 Call 4k more traded down to 2.11 - looks sold live; stk ref 391.65 - 41k traded OTD
+MSFT Jun 480 Call 4k more traded 2.35 - looks sold live; stk ref 391045 - 47k traded OTD
+MSFT Jun 480 Call 15k more traded down to 2.29 - looks sold live; stk ref 391.67 - 67k traded OTD
+
+MSFT Jun 480 Call OI Change:
+---------------------------------
+MSFT May 410/470 1x2 CS vs 391.41 paid 7.60 for 1k 22d
+
+MSFT May 410 Call OI Change:
+MSFT May 470 Call OI Change:
+---------------------------------
+MSFT May 415 Call 1500 traded 9.0667 (looks bought), May 445 Call 1500 traded 3.50 (looks bought) live; stk ref 391.22
+
+MSFT May 415 Call OI Change:
+---------------------------------
+MU Apr 400 Put bot 2k for 2.10 live; stk ref 438.95
+
+MU Apr 400 Put OI Change:
+---------------------------------
+MU Apr 450 Put 2750 traded 9.66 (looks sold), Apr 450 Put 3500 traded 8.09 (looks bought) live; stk ref 457.70
+
+MU Apr 450 Put OI Change:
+---------------------------------
+MU Apr 510 Call 1150 traded 1.14 - looks sold live; stk ref 456.75
+
+MU Apr 510 Call OI Change:
+---------------------------------
+MU Apr24th 420 Put sold 1k @ 12.75 live; stk ref 437.74
+
+MU Apr24th 420 Put OI Change:
+---------------------------------
+MU Jun 500 Call 2500 traded 28.64 vs 437.60 39d - looks sold
+
+MU Jun 500 Call OI Change:
+---------------------------------
+MU May 460 Put 1k traded 41.00 vs 454.00 48d - looks bought
+
+MU May 460 Put OI Change:
+---------------------------------
+MU May 600 Call bot 1k for 3.25 live; stk ref 434.58
+
+MU May 600 Call OI Change:
+---------------------------------
+NET Apr24th 125 Put bot 2100 for 0.15 live; stk ref 180.81
+
+NET Apr24th 125 Put OI Change:
+---------------------------------
+NFLX Apr 111 Call bot 1500 for 1.79 live; stk ref 106.30
+
+NFLX Apr 111 Call OI Change:
+---------------------------------
+NFLX Apr24th 125 Call sold 1k @ 0.24 live; stk ref 106.17
+
+NFLX Apr24th 125 Call OI Change:
+---------------------------------
+NFLX Dec27 210 Call sold 1968 @ 2.00 live; stk ref 106.27
+
+NFLX Dec27 210 Call OI Change:
+---------------------------------
+NFLX Jun 100 Call bot 2k for 9.20 live; stk ref 104.98
+
+NFLX Jun 100 Call OI Change:
+---------------------------------
+NFLX Jun 75 Put bot 1k for 0.21 live; stk ref 105.57
+
+NFLX Jun 75 Put OI Change:
+---------------------------------
+NFLX May 104 Put 4800 traded 4.20 (looks bought), May 95 Put 4200 traded 1.18 (looks sold) live; stk ref 104.65
+
+NFLX May 104 Put OI Change:
+---------------------------------
+NFLX May1st 99 Put 1k traded 1.40 vs 106.19 22d - looks sold
+
+NFLX May1st 99 Put OI Change:
+---------------------------------
+PANW Jan 200 Call 1k traded 12.65 vs 161.28 37d - looks sold
+
+PANW Jan 200 Call OI Change:
+---------------------------------
+PSKY Apr24th 9 Put bot 3k for 0.03 vs 11.095
+
+PSKY Apr24th 9 Put OI Change:
+---------------------------------
+PSKY May1st 12 Call sold 6k @ 0.20 vs 11.0441
+
+PSKY May1st 12 Call OI Change:
+---------------------------------
+SNDK Jan 670/780 CS sold 2k @ 48.90 live; stk ref 925.50
+
+SNDK Jan 780 Call OI Change:
+SNDK Jan 670 Call OI Change:
+---------------------------------
+SNOW May22nd 170 Call 1400 traded 2.74 (looks sold), May22nd 160 Call 2k traded up to 4.13 (looks bought) live; stk ref 134.20 - opening
+
+SNOW May22nd 170 Call OI Change:
+SNOW May22nd 160 Call OI Change:
+---------------------------------
+SNOW May27 200 Call 1k traded 14.80 vs 134.88 37d - looks bought
+
+SNOW May27 200 Call OI Change:
+---------------------------------
+SOLS May 60 Put 16,860 traded 0.42 vs 79.00 - crossed elec, looks sold
+
+SOLS May 60 Put OI Change:
+---------------------------------
+TEAM May 55 Put 1500 traded 3.90 - looks sold live; stk ref 61.74
+
+TEAM May 55 Put OI Change:
+---------------------------------
+WBD Jul 21 Put 19,350 traded 0.19 vs 27.37, looks bought
+
+WBD Jul 21 Put OI Change:
+---------------------------------
+WBD Jun/May 27 PS bot 7500 for 0.35 live; stk ref 27.34
+
+WBD Jun 27 Put OI Change:
+WBD May 27 Put OI Change:
+---------------------------------
+WBD Sep 22 Put sold 3k @ 0.55 live
+
+WBD Sep 22 Put OI Change:
+---------------------------------
+WBD Sep 28/30 1x2 CS bot 1k for 0.55 live; stk ref 27.34
+WBD Sep 28/30 1x2 CS bot 1k more for 0.55 live; stk ref 27.35 - 2k OTD
+
+WBD Sep 30 Call OI Change:
+WBD Sep 28 Call OI Change:
+---------------------------------
+
+
