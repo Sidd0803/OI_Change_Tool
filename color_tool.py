@@ -83,6 +83,21 @@ def convert_to_bloomberg_format(input_string):
             else:
                 raise ValueError(f"Invalid month abbreviation: {month_abbr}")
     
+    # Check for <month><day><ordinal> format (e.g., "Apr24th")
+    elif re.match(r'^[A-Z][a-z]+\d+(st|nd|rd|th)$', month_field):
+        match = re.match(r'^([A-Z][a-z]+)(\d+)(?:st|nd|rd|th)$', month_field)
+        if match:
+            month_abbr = match.group(1)
+            day = match.group(2)
+            if month_abbr in month_to_date:
+                base_date = month_to_date[month_abbr]
+                date_parts = base_date.split('/')
+                month_num = date_parts[0]
+                year = date_parts[2]
+                expiration_date = f"{month_num}/{day}/{year}"
+            else:
+                raise ValueError(f"Invalid month abbreviation: {month_abbr}")
+
     # Check for <month><Year> format (e.g., "Jan27")
     elif re.match(r'^[A-Z][a-z]+\d+$', month_field):
         # Extract month and year
