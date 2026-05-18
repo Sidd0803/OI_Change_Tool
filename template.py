@@ -2,7 +2,7 @@ import re
 
 # Regex building blocks
 _MONTH = r'(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)'
-EXPIRY_RE = rf'{_MONTH}\w*'          # Apr, Apr24th, May1st, Dec27, etc.
+EXPIRY_RE = rf'(?:\d{{1,2}})?{_MONTH}\w*'  # Apr, Apr24th, May1st, Dec27, 8May, 6May, 5Jun, etc.
 STRIKE_RE = r'\d+(?:\.\d+)?'         # 230, 12.5, 277.50, etc.
 OPT_RE    = r'(?:Ca[a-zA-Z]+|Puts?)' # Call/Calls/CAll/Cakk  or  Put/Puts
 RATIO_RE  = r'(?:\d[\d.]*x\d[\d.]*\s+)?'   # optional 1x2, 1x1.5, etc.
@@ -111,31 +111,64 @@ def parse_line_options(line):
     return results
 
 
+_COLOR_RE = re.compile(r'Color\s*-\s+', re.IGNORECASE)
+_TIME_RE  = re.compile(r'^\d{2}:\d{2}:\d{2}\s+')
+
+
+def extract_color_lines(raw_lines):
+    """
+    From a raw chat log, return (timestamp, cleaned_trade_line) tuples.
+    Finds every line containing 'Color -', captures any leading HH:MM:SS
+    timestamp, and returns the text after 'Color - '.
+    """
+    result = []
+    for line in raw_lines:
+        line = line.rstrip('\n')
+        m = _COLOR_RE.search(line)
+        if m:
+            cleaned = line[m.end():]
+            ts_match = _TIME_RE.match(line)
+            timestamp = ts_match.group(0).strip() if ts_match else ''
+            result.append((timestamp, cleaned))
+    return result
+
+
 def template(input_file, output_file):
     """
-    For every line in input_file write:
-        {original line}
+    Reads a raw chat log, extracts Color trade lines, strips timestamps and
+    the 'Color -' prefix, then for each cleaned line writes:
+        {cleaned trade line}
         {blank line}
         {TICKER EXPIRY STRIKE Type OI Change:}   <- one per parsed option
         ---------------------------------
 
-    Returns the number of lines processed.
+    Lines are sorted by ticker alphabetically, then by timestamp within each ticker.
+    Returns the number of color lines processed.
     """
     try:
         with open(input_file, 'r', encoding='utf-8') as f:
-            lines = f.readlines()
+            raw_lines = f.readlines()
+
+        color_lines = extract_color_lines(raw_lines)
+
+        def sort_key(item):
+            timestamp, line = item
+            tm = re.match(r'^([A-Z]+)\s+', line)
+            ticker = tm.group(1) if tm else ''
+            return (ticker, timestamp)
+
+        color_lines.sort(key=sort_key)
 
         with open(output_file, 'w', encoding='utf-8') as f:
-            for line in lines:
-                # line already ends with \n; writing '\n' again gives the blank line
-                f.write(line + '\n')
+            for _timestamp, line in color_lines:
+                f.write(line + '\n\n')
                 for opt in parse_line_options(line):
                     f.write(f"{opt} OI Change:\n")
                 f.write("---------------------------------\n")
 
-        print(f"Processed {len(lines)} lines")
+        print(f"Processed {len(color_lines)} color lines")
         print(f"Output written to: {output_file}")
-        return len(lines)
+        return len(color_lines)
 
     except FileNotFoundError:
         raise FileNotFoundError(f"Input file not found: {input_file}")
