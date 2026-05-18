@@ -1,0 +1,168 @@
+Color - AMZN May18th 270 Call bot 1k for 0.25 live; stk ref 265.13 - 6.7k traded OTD
+AMZN May18th 270 Call OI Change: 848
+Volume = 87103
+---------------------------------
+Color - AMZN Jun 270 Call bot 2k for 6.20 live; stk ref 265.86
+AMZN Jun 270 Call OI Change: 6612
+Volume = 4778
+---------------------------------
+Color - AMZN Jun 290 Call 6k traded 2.25 elec - looks bought live; stk ref; stk ref 266.24
+AMZN Jun 290 Call OI Change: 235
+Volume = 29613
+---------------------------------
+Color - AMZN Jun 275 2k traded 6.20 elec - looks bought live; stk ref 266.52
+---------------------------------
+Color - AMZN Jun 325 Call 10,046 traded 0.18 - looks sold live; stk ref 266.61
+AMZN Jun 325 Call OI Change: 609
+Volume = 16959
+---------------------------------
+Color - AMZN Jun5th 285 Put 6945 traded 18.65 vs 267.695 - looks bought
+AMZN Jun5th 285 Put OI Change: 0
+Volume = 6952
+---------------------------------
+Color - AMZN Jul 300 Call bot 2k up to 2.87 live; stk ref 264.89
+AMZN Jul 300 Call OI Change: 193
+Volume = 5427
+---------------------------------
+Color - CORZ Jun 21 Put 4k traded up to 1.22 (looks bought) Jun 17 Put 4k traded down to 0.23 (looks sold) traded elec live; stk ref 22.76
+CORZ Jun 21 Put OI Change: -1
+Volume = 4008
+---------------------------------
+Color - CRM Sep 190 Call 1k traded 15.95 vs 178.80 49d - looks bought
+CRM Sep 190 Call OI Change: 2
+Volume = 1114
+---------------------------------
+Color - IGV Aug 85 Put bot 40k, Aug 80 Put sold 25k paid $8.835 mil live; stk ref 92.02 - opening 85p
+IGV Aug 85 Put OI Change: 180
+IGV Aug 80 Put OI Change: 328
+Volume = 50098x25047
+---------------------------------
+Color - META May22nd 650 Call sold 1500 @ 1.20 live; stk ref 606.27
+META May22nd 650 Call OI Change: 1529
+Volume = 5511
+---------------------------------
+Color - META May 22nd 485 / Jun 5th 490 put spread sold 3,100 @ .23 LIVE; stk ref 607.66
+---------------------------------
+Color - MSFT Jun 420 Call sold 1120 @ 14.40 elec live; stk ref 418.49
+MSFT Jun 420 Call OI Change: 1633
+Volume = 15134
+---------------------------------
+Color - MSFT Jun 420 Call sold 1120 more @ 14.75 elec live; stk ref 419.33
+MSFT Jun 420 Call OI Change: 1633
+Volume = 15134
+---------------------------------
+Color - MSFT Jun 420 Call sold 1120 more @ 15.10 elec live; stk ref 420.15 - 4.5k traded OTD
+MSFT Jun 420 Call OI Change: 1633
+Volume = 15134
+---------------------------------
+Color - MSFT Jun 350 Put 1100 traded 6.95 elec - looks bought live; stk ref 420.47
+MSFT Jun 350 Put OI Change: -118
+Volume = 258
+---------------------------------
+Color - MSFT Jun 420 Call sold 1120 more @ 15.45 elec live; stk ref 420.82 - 5.7k traded OTD
+MSFT Jun 420 Call OI Change: 1633
+Volume = 15134
+---------------------------------
+Color - MSFT Jun 420 Call sold 1120 more @ 16.15 elec live; stk ref 422.06 - 8.1k traded OTD
+MSFT Jun 420 Call OI Change: 1633
+Volume = 15134
+---------------------------------
+Color - MSFT Jun12th 365 Put 1330 traded 0.97 - looks bought live; stk ref 422.15
+MSFT Jun12th 365 Put OI Change: -26
+Volume = 1333
+---------------------------------
+Color - MSFT Aug 390 Call 7k traded 46.25 vs 417.90 - looks bought
+MSFT Aug 390 Call OI Change: -51
+Volume = 7089
+---------------------------------
+Color - MSFT Aug 480 Call 1500 traded 8.95 vs 418.00 24d - looks sold
+MSFT Aug 480 Call OI Change: -13
+Volume = 2020
+---------------------------------
+Color - MSFT May22nd 430 Call 2k traded up to 2.34 - looks bought live; stk ref 418.90
+MSFT May22nd 430 Call OI Change: 1203
+Volume = 43323
+---------------------------------
+Color - MSFT May18th 425 Call bot 1k for 0.16 live; sk ref 420.46
+MSFT May18th 425 Call OI Change: 1934
+Volume = 159646
+---------------------------------
+Color - MSFT Jul 420 Put 1500 traded 17.44 vs 423.3191 47d - looks sold
+MSFT Jul 420 Put OI Change: 64
+Volume = 2758
+---------------------------------
+Color - MSFT May20th 435 Call 1800 traded up to 0.87 elec - looks bought live; stk ref 422.21 - 13.3k traded OTD
+MSFT May20th 435 Call OI Change: 441
+Volume = 17184
+---------------------------------
+Color - MSFT Jul 420/390 1x1.5 Put Spread vs 423.40 10d, 1k traded 6.86 - looks sold
+MSFT Jul 420 Put OI Change: 64
+MSFT Jul 390 Put OI Change: 95
+Volume = 1667
+---------------------------------
+Color - MSFT Jun 460 Calls, sold 4000 at 3.62 LIVE; stk ref 422.61
+MSFT Jun 460 Call OI Change: -66
+Volume = 7075
+---------------------------------
+Color - MU Oct 220 Put 3200 traded up to 3.40 elec - looks bought live; stk ref 725.99
+MU Oct 220 Put OI Change: 0
+Volume = 3319
+---------------------------------
+Color - MU May22nd 1000 Calls 2529 traded 0.64 - looks sold live; stk ref 714.66
+MU May22nd 1000 Call OI Change: 1344
+Volume = 8904
+---------------------------------
+Color - MU Oct 260 Calls 2800 traded up to 6.00 elec - looks bought live; stk ref 697.39
+MU Oct 260 Call OI Change: 0
+Volume = 30
+---------------------------------
+Color - MU Dec 280 Put 2500 traded 11.65 elec - looks bought live; stk ref 702.49
+MU Dec 280 Put OI Change: -1
+Volume = 2689
+---------------------------------
+Color - MU Dec 200 Put 2k traded 4.85 elec - looks bought live; stk ref 702.42
+MU Dec 200 Put OI Change: -2
+Volume = 2314
+---------------------------------
+Color - MU Nov 260 Put 2600 traded 8.10 elec - looks bought live; stk ref 699.06
+MU Nov 260 Put OI Change: 0
+Volume = 2601
+---------------------------------
+Color - MU Jul 1630 Call 1500 traded 5.00 - looks bought live; stk ref 699.59
+MU Jul 1630 Call OI Change: 497
+Volume = 1778
+---------------------------------
+Color - NOW May22nd 110 Calls 5k traded 0.95 elec - looks sold live; stk ref 101.06
+NOW May22nd 110 Call OI Change: 3727
+Volume = 63258
+---------------------------------
+Color - NOW May22nd 110 Calls 5k traded up to 1.58 elec - looks bought live; stk ref 103.00
+NOW May22nd 110 Call OI Change: 3727
+Volume = 63258
+---------------------------------
+Color - NOW May22nd 110 Calls 11.5k traded 1.30 elec - looks sold live; stk ref 102.95 - 46k OTD
+NOW May22nd 110 Call OI Change: 3727
+Volume = 63258
+---------------------------------
+Color - PANW Jan 155/220 Put Spread 1k traded 17.75 vs 245.65 21d - looks bought
+PANW Jan 155 Put OI Change: 0
+PANW Jan 220 Put OI Change: 76
+Volume = 1010x1029
+---------------------------------
+Color - PANW Jun 210 Put 1k traded 4.10 vs 246.45 16d - looks sold
+PANW Jun 210 Put OI Change: -3
+Volume = 1512
+---------------------------------
+Color - RTX Sep 190/220 CS sold 1k @ 4.95 live; stk ref 175.07
+RTX Sep 190 Call OI Change: 29
+RTX Sep 220 Call OI Change: -9
+Volume = 1039x1098
+---------------------------------
+Color - SNOW Jan28 200 Call 1k traded 44.00 vs 161.87 60d - traded mid, tough to tell direction
+SNOW Jan28 200 Call OI Change: #VALUE!
+Volume = #N/A Invalid Security
+---------------------------------
+Color - WBD Jan 25 Call 1k traded 4.75 vs 27.08 100d - looks bought
+WBD Jan 25 Call OI Change: -18616
+Volume = 1283
+---------------------------------
