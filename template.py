@@ -56,6 +56,21 @@ def _parse_segment(seg, ticker):
         return [f"{ticker} {expiry} {s1_str} {opt}",
                 f"{ticker} {expiry} {s2_str} {opt}"]
 
+    # ── Pattern D: two expiries, two different strikes ───────────────────────
+    m = re.search(
+        rf'({EXPIRY_RE})\s+({STRIKE_RE})\s*/\s*({EXPIRY_RE})\s+({STRIKE_RE})\s+{SPREAD_KW}',
+        seg, re.IGNORECASE
+    )
+    if m:
+        exp1, s1, exp2, s2 = m.group(1), m.group(2), m.group(3), m.group(4)
+        kind = _spread_type(m, 5, 6)
+        if kind == 'RR':
+            return [f"{ticker} {exp1} {s1} Put",
+                    f"{ticker} {exp2} {s2} Call"]
+        opt = 'Call' if kind == 'CS' else 'Put'
+        return [f"{ticker} {exp1} {s1} {opt}",
+                f"{ticker} {exp2} {s2} {opt}"]
+
     # ── Pattern B: two expiries, same strike ─────────────────────────────────
     m = re.search(
         rf'({EXPIRY_RE})\s*/\s*({EXPIRY_RE})\s+({STRIKE_RE})\s+{SPREAD_KW}',

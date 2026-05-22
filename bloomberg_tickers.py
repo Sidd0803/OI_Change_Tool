@@ -22,14 +22,36 @@ def filter_oi_change_lines(input_file, output_file):
 
 
 def convert_to_bloomberg_format(input_string):
-    month_to_date = {}
-    month_names = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-                   'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    month_num_to_abbr = {str(i + 1): m for i, m in enumerate(
+        ['jan', 'feb', 'mar', 'apr', 'may', 'jun',
+         'jul', 'aug', 'sep', 'oct', 'nov', 'dec']
+    )}
+
+    # (month_lower, year_2dig) -> full date string; month_lower -> earliest date seen
+    month_year_to_date = {}
+    month_to_first_date = {}
 
     with open('dates.txt', 'r') as f:
-        dates = [line.strip() for line in f if line.strip()]
-        for i, date in enumerate(dates[:12]):
-            month_to_date[month_names[i]] = date
+        for line in f:
+            date_str = line.strip()
+            if not date_str:
+                continue
+            d = date_str.split('/')
+            if len(d) == 3:
+                abbr = month_num_to_abbr.get(d[0])
+                if abbr:
+                    month_year_to_date[f"{abbr}_{d[2]}"] = date_str
+                    month_to_first_date.setdefault(abbr, date_str)
+
+    def find_date(month_abbr, year_2dig=None):
+        if year_2dig:
+            key = f"{month_abbr}_{year_2dig}"
+            if key in month_year_to_date:
+                return month_year_to_date[key]
+            raise ValueError(f"No expiry found for {month_abbr.capitalize()} '{year_2dig}' in dates.txt")
+        if month_abbr in month_to_first_date:
+            return month_to_first_date[month_abbr]
+        raise ValueError(f"No expiry found for {month_abbr.capitalize()} in dates.txt")
 
     parts = input_string.split()
 
@@ -42,49 +64,31 @@ def convert_to_bloomberg_format(input_string):
     option_type = parts[3].lower()
 
     expiration_date = None
+    mf = month_field.lower()
 
-    if month_field in month_to_date:
-        expiration_date = month_to_date[month_field]
+    # Case 1: plain month, e.g. "Jun" / "jun" / "JUN"
+    if re.match(r'^[a-z]+$', mf):
+        expiration_date = find_date(mf)
 
-    elif re.match(r'^\d+[A-Z][a-z]+$', month_field):
-        match = re.match(r'^(\d+)([A-Z][a-z]+)$', month_field)
-        if match:
-            day = match.group(1)
-            month_abbr = match.group(2)
-            if month_abbr in month_to_date:
-                base_date = month_to_date[month_abbr]
-                date_parts = base_date.split('/')
-                month_num = date_parts[0]
-                year = date_parts[2]
-                expiration_date = f"{month_num}/{day}/{year}"
-            else:
-                raise ValueError(f"Invalid month abbreviation: {month_abbr}")
+    # Case 2: day + month, e.g. "15Jun"
+    elif re.match(r'^\d+[a-z]+$', mf):
+        match = re.match(r'^(\d+)([a-z]+)$', mf)
+        day, abbr = match.group(1), match.group(2)
+        base = find_date(abbr).split('/')
+        expiration_date = f"{base[0]}/{day}/{base[2]}"
 
-    elif re.match(r'^[A-Z][a-z]+\d+(st|nd|rd|th)$', month_field):
-        match = re.match(r'^([A-Z][a-z]+)(\d+)(?:st|nd|rd|th)$', month_field)
-        if match:
-            month_abbr = match.group(1)
-            day = match.group(2)
-            if month_abbr in month_to_date:
-                base_date = month_to_date[month_abbr]
-                date_parts = base_date.split('/')
-                month_num = date_parts[0]
-                year = date_parts[2]
-                expiration_date = f"{month_num}/{day}/{year}"
-            else:
-                raise ValueError(f"Invalid month abbreviation: {month_abbr}")
+    # Case 3: month + day + ordinal, e.g. "Jun15th"
+    elif re.match(r'^[a-z]+\d+(st|nd|rd|th)$', mf):
+        match = re.match(r'^([a-z]+)(\d+)(?:st|nd|rd|th)$', mf)
+        abbr, day = match.group(1), match.group(2)
+        base = find_date(abbr).split('/')
+        expiration_date = f"{base[0]}/{day}/{base[2]}"
 
-    elif re.match(r'^[A-Z][a-z]+\d+$', month_field):
-        match = re.match(r'^([A-Z][a-z]+)(\d+)$', month_field)
-        if match:
-            month_abbr = match.group(1)
-            year = match.group(2)
-            if month_abbr in month_to_date:
-                base_date = month_to_date[month_abbr]
-                month_num = base_date.split('/')[0]
-                expiration_date = f"{month_num}/??/{year}"
-            else:
-                raise ValueError(f"Invalid month abbreviation: {month_abbr}")
+    # Case 4: month + 2-digit year, e.g. "Jan27"
+    elif re.match(r'^[a-z]+\d+$', mf):
+        match = re.match(r'^([a-z]+)(\d+)$', mf)
+        abbr, year_2dig = match.group(1), match.group(2)
+        expiration_date = find_date(abbr, year_2dig)
 
     else:
         raise ValueError(f"Invalid month format: {month_field}")
