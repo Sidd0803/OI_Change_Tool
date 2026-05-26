@@ -1,7 +1,10 @@
 import os
+import sys
 import unittest
 
-os.chdir(os.path.dirname(os.path.abspath(__file__)))
+# Run from project root so data/ paths resolve correctly
+os.chdir(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
+sys.path.insert(0, 'src')
 from bloomberg_tickers import convert_to_bloomberg_format
 
 

@@ -1,4 +1,8 @@
+import sys
+import os
 import unittest
+
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'src'))
 from template import parse_line_options
 
 

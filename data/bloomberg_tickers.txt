@@ -1,0 +1,51 @@
+AMZN US 1/15/27 P220 Equity
+AMZN US 9/18/26 P200 Equity
+AMZN US 9/18/26 P240 Equity
+AMZN US 7/17/26 C300 Equity
+AMZN US 8/21/26 P160 Equity
+AMZN US 6/18/26 P245 Equity
+AMZN US 1/15/27 P250 Equity
+AMZN US 12/15/28 P250 Equity
+AMZN US 5/29/27 C275 Equity
+AMZN US 5/29/27 C300 Equity
+10 occurrences of AMZN
+CORZ US 5/29/27 C28 Equity
+1 occurrences of CORZ
+HON US 6/18/26 C240 Equity
+HON US 6/18/26 C250 Equity
+HON US 9/18/26 C290 Equity
+3 occurrences of HON
+META US 5/29/27 C800 Equity
+META US 5/26/27 C705 Equity
+META US 5/22/27 C610 Equity
+META US 6/18/26 P540 Equity
+4 occurrences of META
+MSFT US 5/22/27 P410 Equity
+1 occurrences of MSFT
+MU US 5/29/27 P390 Equity
+MU US 5/22/27 C800 Equity
+MU US 5/22/27 C790 Equity
+MU US 5/29/27 P460 Equity
+4 occurrences of MU
+NOW US 7/17/26 C130 Equity
+NOW US 6/17/27 P90 Equity
+NOW US 8/21/26 P60 Equity
+NOW US 6/18/26 C130 Equity
+4 occurrences of NOW
+SNDK US 5/29/27 P830 Equity
+SNDK US 5/29/27 P1200 Equity
+2 occurrences of SNDK
+TMUS US 12/18/26 P140 Equity
+1 occurrences of TMUS
+WBD US 11/20/26 P20 Equity
+WBD US 8/21/26 C30 Equity
+WBD US 11/20/26 P20 Equity
+WBD US 8/21/26 C30 Equity
+WBD US 11/20/26 P20 Equity
+WBD US 8/21/26 C30 Equity
+6 occurrences of WBD
+WEN US 5/29/27 P7.5 Equity
+WEN US 1/15/27 C10 Equity
+2 occurrences of WEN
+WIX US 1/15/27 P50 Equity
+1 occurrences of WIX

@@ -3,136 +3,136 @@ DDOG:
 ---------------------------------
 AMZN Jan 220 Put sold 3k down to 8.70 live; stk ref 267.83
 
-AMZN Jan 220 Put OI Change:
+AMZN Jan 220 Put OI Change: 8 / Volume = 3278
 ---------------------------------
 AMZN Sep 200 Put 2k traded 2.065 (looks sold), Sep 240 Put 1k traded 7.98 (looks bought) both legs traded 1/2 penny from mid, tough to tell exact direction
 
-AMZN Sep 200 Put OI Change:
-AMZN Sep 240 Put OI Change:
+AMZN Sep 200 Put OI Change: -737 / Volume = 2126
+AMZN Sep 240 Put OI Change: 1015 / Volume = 1052
 ---------------------------------
 AMZN Jul 300 Call bot 1k for 3.35 live; stk ref 269.13
 
-AMZN Jul 300 Call OI Change:
+AMZN Jul 300 Call OI Change: 8255 / Volume = 10455
 ---------------------------------
 AMZN Aug 160 Put 5k traded 0.38 vs 269.12 - looks bought
 
-AMZN Aug 160 Put OI Change:
+AMZN Aug 160 Put OI Change: 652 / Volume = 5012
 ---------------------------------
 AMZN Jun 245 Put 1k traded 1.39 vs 269.12 12d - looks bought
 
-AMZN Jun 245 Put OI Change:
+AMZN Jun 245 Put OI Change: 986 / Volume = 1603
 ---------------------------------
 AMZN Jan 250 Put 1k traded 18.17 (looks bought), Dec28 250 Put 1k traded 39.67 (looks sold) traded elec live; stk ref 267.26
 
-AMZN Jan 250 Put OI Change:
-AMZN Dec28 250 Put OI Change:
+AMZN Jan 250 Put OI Change: 500 / Volume = 1008
+AMZN Dec28 250 Put OI Change: 1002 / Volume = 1002
 ---------------------------------
 AMZN May29th 275 Call 5k traded 1.11 (looks sold), May29th 300 Call 5k traded up to 0.04 (looks bought) elec live; stk ref 266.96
 
-AMZN May29th 275 Call OI Change:
-AMZN May29th 300 Call OI Change:
+AMZN May29th 275 Call OI Change: 342 / Volume = 11159
+AMZN May29th 300 Call OI Change: -44 / Volume = 6249
 ---------------------------------
 CORZ May29th 28 Calls 5k traded up to 0.15 elec - looks bought live; stk ref 24.77
 
-CORZ May29th 28 Call OI Change:
+CORZ May29th 28 Call OI Change: 4988 / Volume = 5301
 ---------------------------------
 HON Jun 240/250 1x2 CS bot 1k for 0.55 live; stk ref 226.06
 
-HON Jun 240 Call OI Change:
-HON Jun 250 Call OI Change:
+HON Jun 240 Call OI Change: -21 / Volume = 2378
+HON Jun 250 Call OI Change: 989 / Volume = 2903
 ---------------------------------
 HON Sep 290 Call 2500 traded 2.02 vs 228.4045 11d - looks bought
 
-HON Sep 290 Call OI Change:
+HON Sep 290 Call OI Change: 2543 / Volume = 2670
 ---------------------------------
 META May29th 800 Call bot 7900 for 0.12 live; stk ref 607.76
 
-META May29th 800 Call OI Change:
+META May29th 800 Call OI Change: 7718 / Volume = 8615
 ---------------------------------
 META May26th 705 Call sold 1k @ 0.02 live; stk ref 610.96 - opening
 
-META May26th 705 Call OI Change:
+META May26th 705 Call OI Change: 1238 / Volume = 1285
 ---------------------------------
 META May22nd 610 Call sold 2036 @ 2.15 live; stk ref 611.71
 
-META May22nd 610 Call OI Change:
+META May22nd 610 Call OI Change: 2299 / Volume = 48118
 ---------------------------------
 META Jun 540 Put 1k traded 1.85 - looks bought live; stk ref 610.34
 
-META Jun 540 Put OI Change:
+META Jun 540 Put OI Change: 310 / Volume = 1098
 ---------------------------------
 MSFT May22nd 410 Put bot 3k for 0.06 live; stk ref 418.01
 
-MSFT May22nd 410 Put OI Change:
+MSFT May22nd 410 Put OI Change: 351 / Volume = 6559
 ---------------------------------
 MSFT Jun 370/420 Puts Spread 1200 traded 11.40 vs 418.43 43d - looks sold
 
 ---------------------------------
 MU May29th 390 Put bought 9892 for 0.10 live; stk ref 770.73
 
-MU May29th 390 Put OI Change:
+MU May29th 390 Put OI Change: 9680 / Volume = 12072
 ---------------------------------
 MU May22nd 800/790 CS bought 1k for 0.10 live; stk ref 768.66
 
-MU May22nd 800 Call OI Change:
-MU May22nd 790 Call OI Change:
+MU May22nd 800 Call OI Change: 3109 / Volume = 46803
+MU May22nd 790 Call OI Change: 1280 / Volume = 23032
 ---------------------------------
 MU May29th 460 Put bot 8k for 0.25 live; stk ref 765.75
 
-MU May29th 460 Put OI Change:
+MU May29th 460 Put OI Change: 8802 / Volume = 9312
 ---------------------------------
 NOW Jul 130 Call 1500 traded 2.10 vs 100.74 27d - looks bought
 
-NOW Jul 130 Call OI Change:
+NOW Jul 130 Call OI Change: -1340 / Volume = 2121
 ---------------------------------
 NOW Jun27 90 Put 1025 traded 16.94 vs 100.23 29d - looks sold
 
-NOW Jun27 90 Put OI Change:
+NOW Jun27 90 Put OI Change: 1026 / Volume = 1026
 ---------------------------------
 NOW Aug 60 Put 1500 traded 0.60 - looks sold live; stk ref 101.46
 
-NOW Aug 60 Put OI Change:
+NOW Aug 60 Put OI Change: 1495 / Volume = 1508
 ---------------------------------
 NOW Jun 130 Call sold 2100 @ 0.70 live; stk ref 101.63
 
-NOW Jun 130 Call OI Change:
+NOW Jun 130 Call OI Change: -90 / Volume = 2795
 ---------------------------------
 SNDK May29th 830 Put 2200 traded up to 0.55 - looks bought live; stk ref 1507.85
 
-SNDK May29th 830 Put OI Change:
+SNDK May29th 830 Put OI Change: 2372 / Volume = 2430
 ---------------------------------
 SNDK May29th 1200 Put 1500 traded 4.99 - looks bought live; stk ref 1521.21
 
-SNDK May29th 1200 Put OI Change:
+SNDK May29th 1200 Put OI Change: 1803 / Volume = 2916
 ---------------------------------
 TMUS Dec 140 Put 2k traded 2.50 vs 191.00 10d - looks sold
 
-TMUS Dec 140 Put OI Change:
+TMUS Dec 140 Put OI Change: 2888 / Volume = 2900
 ---------------------------------
 WBD Nov 20 / Aug 30 RR paid 0.5475 to buy nov put 10k live; stk ref 27.09 - opening nov
 
-WBD Nov 20 Put OI Change:
-WBD Aug 30 Call OI Change:
+WBD Nov 20 Put OI Change: 17824 / Volume = 17826
+WBD Aug 30 Call OI Change: 7543 / Volume = 18342
 ---------------------------------
 WBD Nov 20 / Aug 30 RR paid 0.53 to buy nov put 5k live; stk ref 27.09 - opening nov - 15k OTD
 
-WBD Nov 20 Put OI Change:
-WBD Aug 30 Call OI Change:
+WBD Nov 20 Put OI Change: 17824 / Volume = 17826
+WBD Aug 30 Call OI Change: 7543 / Volume = 18342
 ---------------------------------
 WBD Nov 20 / Aug 30 RR paid 0.53 to buy nov put 1k live; stk ref 27.09 - opening nov - 16k OTD
 
-WBD Nov 20 Put OI Change:
-WBD Aug 30 Call OI Change:
+WBD Nov 20 Put OI Change: 17824 / Volume = 17826
+WBD Aug 30 Call OI Change: 7543 / Volume = 18342
 ---------------------------------
 WEN may29th 7.5 Put sold 1k @ 0.10 live; stk ref 7.68
 
-WEN may29th 7.5 Put OI Change:
+WEN may29th 7.5 Put OI Change: 1992 / Volume = 2028
 ---------------------------------
 WEN Jan 10 Call 1k traded 0.36 elec - looks bought live; stk ref 7.72 - 2.1k OTD
 
-WEN Jan 10 Call OI Change:
+WEN Jan 10 Call OI Change: 2269 / Volume = 2448
 ---------------------------------
 WIX Jan 50 Put 3593 traded 11.11 vs 54.0363 32d - looks bought
 
-WIX Jan 50 Put OI Change:
+WIX Jan 50 Put OI Change: 3606 / Volume = 3607
 ---------------------------------

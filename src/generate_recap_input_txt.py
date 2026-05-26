@@ -1,9 +1,9 @@
 import re
 import openpyxl
 
-TEMPLATE_FILE = 'template.txt'
-EXCEL_FILE = 'numbers.xlsx'
-OUTPUT_FILE = 'recap_input.txt'
+TEMPLATE_FILE = '../data/template.txt'
+EXCEL_FILE = '../data/numbers.xlsx'
+OUTPUT_FILE = '../data/recap_input.txt'
 
 
 def get_ticker(line):

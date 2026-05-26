@@ -31,7 +31,7 @@ def convert_to_bloomberg_format(input_string):
     month_year_to_date = {}
     month_to_first_date = {}
 
-    with open('dates.txt', 'r') as f:
+    with open('../data/dates.txt', 'r') as f:
         for line in f:
             date_str = line.strip()
             if not date_str:
@@ -98,12 +98,11 @@ def convert_to_bloomberg_format(input_string):
 
 
 def process_file_to_bloomberg(input_file, output_file):
-    bloomberg_lines = []
-
     with open(input_file, 'r') as f:
         lines = f.readlines()
 
     print(f"Processing {len(lines)} lines...")
+    bloomberg_lines = []
     for line_num, line in enumerate(lines, 1):
         line = line.strip()
         if not line:
@@ -114,30 +113,19 @@ def process_file_to_bloomberg(input_file, output_file):
             print(f"Error processing line {line_num}: {line}")
             print(f"  Error: {e}")
 
-    with open(output_file, 'w') as f:
-        for bloomberg_line in bloomberg_lines:
-            f.write(bloomberg_line + '\n')
+    print(f"Processed {len(bloomberg_lines)} lines successfully.")
 
-    print(f"\nProcessed {len(bloomberg_lines)} lines successfully.")
-    print(f"Output written to: {output_file}")
-
-
-def sort_and_group_by_ticker(input_file, output_file):
-    with open(input_file, 'r') as f:
-        lines = [line.strip() for line in f if line.strip()]
-
+    # Group consecutive lines by ticker and append occurrence counts
     output_lines = []
     current_ticker = None
     ticker_lines = []
 
-    for line in lines:
+    for line in bloomberg_lines:
         ticker = line.split()[0] if line.split() else ""
-
         if ticker != current_ticker:
             if current_ticker is not None:
                 output_lines.extend(ticker_lines)
                 output_lines.append(f"{len(ticker_lines)} occurrences of {current_ticker}")
-
             current_ticker = ticker
             ticker_lines = [line]
         else:
@@ -151,11 +139,9 @@ def sort_and_group_by_ticker(input_file, output_file):
         for output_line in output_lines:
             f.write(output_line + '\n')
 
-    print(f"\nSorted and grouped {len(lines)} lines by ticker.")
     print(f"Output written to: {output_file}")
 
 
 if __name__ == "__main__":
-    filter_oi_change_lines("template.txt", "filtered_input.txt")
-    process_file_to_bloomberg("filtered_input.txt", "output.txt")
-    sort_and_group_by_ticker("output.txt", "output_processed.txt")
+    filter_oi_change_lines("../data/template.txt", "../data/filtered_input.txt")
+    process_file_to_bloomberg("../data/filtered_input.txt", "../data/bloomberg_tickers.txt")

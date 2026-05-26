@@ -1,181 +1,48 @@
 
+10:25:12 Color - WBD Nov 20 / Aug 30 RR paid 0.5475 to buy nov put 10k live; stk ref 27.09 - opening nov
+11:43:34 Color - HON Jun 240/250 1x2 CS bot 1k for 0.55 live; stk ref 226.06
+11:44:13 *** This post was removed ***
+11:44:18 *** RAFAEL FERNANDES (WALLACHBETH CAPITAL LLC) removed a post from 11:44:13
 RAFAEL FERNANDES
-08:25:16 Hey good morning guys!
-STEPHAN CASESA
-08:27:03 Good morning!
+11:44:21 Color - WEN may29th 7.5 Put sold 1k @ 0.10 live; stk ref 7.68
+11:50:13  Color - WBD Nov 20 / Aug 30 RR paid 0.53 to buy nov put 5k live; stk ref 27.09 - opening nov - 15k OTD
+11:50:40  Color - WBD Nov 20 / Aug 30 RR paid 0.53 to buy nov put 1k live; stk ref 27.09 - opening nov - 16k OTD
+11:51:41 Color - MSFT May22nd 410 Put bot 3k for 0.06 live; stk ref 418.01
+11:52:20 Color - CORZ May29th 28 Calls 5k traded up to 0.15 elec - looks bought live; stk ref 24.77
+12:05:44 Color - AMZN Jan 220 Put sold 3k down to 8.70 live; stk ref 267.83
+12:10:23 Color - AMZN Sep 200 Put 2k traded 2.065 (looks sold), Sep 240 Put 1k traded 7.98 (looks bought) both legs traded 1/2 penny from mid, tough to tell exact direction
+12:42:46 Color - DDOG:
+Sep 120 Put 2015 traded 1.91 (looks sold)
+Sep 200 Call 2015 traded 43.00 (looks bought)
+Jan28 150 Put 2650 traded 26.70 (looks bought)
+Jan28 300 Call 2650 traded 45.70777 (looks sold)
+
+was crossed as cust to cust live; stk ref 219.16
+12:43:53 Color - AMZN Jul 300 Call bot 1k for 3.35 live; stk ref 269.13
+13:14:25 Color - NOW Jul 130 Call 1500 traded 2.10 vs 100.74 27d - looks bought
+13:16:27 Color - AMZN Aug 160 Put 5k traded 0.38 vs 269.12 - looks bought
+13:17:18 Color - AMZN Jun 245 Put 1k traded 1.39 vs 269.12 12d - looks bought
+13:21:39 Color - SNDK May29th 830 Put 2200 traded up to 0.55 - looks bought live; stk ref 1507.85
+13:22:52 *** This post was removed ***
+13:23:29 *** RAFAEL FERNANDES (WALLACHBETH CAPITAL LLC) removed a post from 13:22:52
 RAFAEL FERNANDES
-09:41:51 Color - MSFT Jun 420 Call sold 1120 @ 14.40 elec live; stk ref 418.49
-09:42:42 Color - AMZN May18th 270 Call bot 1k for 0.25 live; stk ref 265.13 - 6.7k traded OTD
-09:51:55 Color - AMZN Jun 270 Call bot 2k for 6.20 live; stk ref 265.86
-09:54:12 Color - IGV Aug 85 Put bot 40k, Aug 80 Put sold 25k paid $8.835 mil live; stk ref 92.02 - opening 85p
-09:55:21 Color - MSFT Jun 420 Call sold 1120 more @ 14.75 elec live; stk ref 419.33
-09:57:40 Color - AMZN Jun 290 Call 6k traded 2.25 elec - looks bought live; stk ref; stk ref 266.24
-09:58:23 Color - META May22nd 650 Call sold 1500 @ 1.20 live; stk ref 606.27
-JASON SHAVEL
-10:09:34 Morning team
-10:09:51 SOXX 5/22/26 480P can we buy 400x lets work $5.50 ob
-THOMAS HOGERTY
-10:09:54 See
-KAEGEN MORRIS
-10:09:55 see
-RAFAEL FERNANDES
-10:12:00 Nothing yet
-JASON SHAVEL
-10:12:05 Go to $6
-RAFAEL FERNANDES
-10:12:06 ok
-10:12:36 Connected just there, 5.999 avg
-KAEGEN MORRIS
-10:12:47 SOXX May 22, 2026 480.00 Put bot 400 for 5.9990 (10:12:25) Electronic
-Commission = $1
-JASON SHAVEL
-10:13:13 see
-10:13:41 JPM
-RAFAEL FERNANDES
-10:26:02 Color - MSFT Jun 420 Call sold 1120 more @ 15.10 elec live; stk ref 420.15 - 4.5k traded OTD
-10:33:45 Color - AMZN Jun 275 2k traded 6.20 elec - looks bought live; stk ref 266.52
-10:34:16 Color - AMZN Jun 325 Call 10,046 traded 0.18 - looks sold live; stk ref 266.61
-10:35:12 Color - MSFT Jun 350 Put 1100 traded 6.95 elec - looks bought live; stk ref 420.47
-10:36:09 Color - MSFT Jun 420 Call sold 1120 more @ 15.45 elec live; stk ref 420.82 - 5.7k traded OTD
-10:36:39 Color - MSFT Jun 420 Call sold 1120 more @ 16.15 elec live; stk ref 422.06 - 8.1k traded OTD
-10:40:09 Color - MU Oct 220 Put 3200 traded up to 3.40 elec - looks bought live; stk ref 725.99
-JASON SHAVEL
-10:41:13 Q Jun 190C can we work $1 top to buy 2k please
-RAFAEL FERNANDES
-10:41:16 see
-10:42:55 Q no luck yet 1.00
-JASON SHAVEL
-10:43:01 undestood
-RAFAEL FERNANDES
-10:48:06 Still no luck screens. Made some calls but so far no interest to sell this
-10:52:48 Found one offer @ 1.40 in case you're in a laughing mood this morning
-JASON SHAVEL
-10:52:59 ha
-10:53:00 tyty
-10:53:07 Good to stay where we are
-RAFAEL FERNANDES
-10:53:16 Ok gotcha
-10:57:22 Color - NOW May22nd 110 Calls 5k traded 0.95 elec - looks sold live; stk ref 101.06
-11:01:02 Color - WBD Jan 25 Call 1k traded 4.75 vs 27.08 100d - looks bought
-11:03:03 Color - MSFT Jun12th 365 Put 1330 traded 0.97 - looks bought live; stk ref 422.15
-11:12:43 Color - NOW May22nd 110 Calls 5k traded up to 1.58 elec - looks bought live; stk ref 103.00
-11:27:08 Q they're better bid now
-11:28:02 Color - MU May22nd 1000 Calls 2529 traded 0.64 - looks sold live; stk ref 714.66
-11:30:13 Color - AMZN Jun5th 285 Put 6945 traded 18.65 vs 267.695 - looks bought
-JASON SHAVEL
-11:30:57 See you Q
-11:31:09 Lets can for now if they come back in we can work again
-RAFAEL FERNANDES
-11:31:18 K sounds good
-11:32:53 Color - MU Oct 260 Calls 2800 traded up to 6.00 elec - looks bought live; stk ref 697.39
-11:35:20 Color - MU Dec 280 Put 2500 traded 11.65 elec - looks bought live; stk ref 702.49
-11:35:55 Color - MU Dec 200 Put 2k traded 4.85 elec - looks bought live; stk ref 702.42
-11:36:49 Color - MU Nov 260 Put 2600 traded 8.10 elec - looks bought live; stk ref 699.06
-11:38:02 Color - MSFT Aug 390 Call 7k traded 46.25 vs 417.90 - looks bought
-11:38:43 Color - MU Jul 1630 Call 1500 traded 5.00 - looks bought live; stk ref 699.59
-11:54:28 Color - MSFT Aug 480 Call 1500 traded 8.95 vs 418.00 24d - looks sold
-11:55:42 Color - SNOW Jan28 200 Call 1k traded 44.00 vs 161.87 60d - traded mid, tough to tell direction
-JASON SHAVEL
-12:05:16 Can we try to buy 8k of the WEN Aug 8C can pay 65c
-KAEGEN MORRIS
-12:05:19 see
-STEPHAN CASESA
-12:05:20 See
-RAFAEL FERNANDES
-12:07:54 902x so far
-JASON SHAVEL
-12:07:59 Great thank you
-STEPHAN CASESA
-12:13:18 1200x
-RAFAEL FERNANDES
-12:28:56 Q coming in pretty hard. It's at the low of the day now
-12:29:29 Color - META May 22nd 485 / Jun 5th 490 put spread sold 3,100 @ .23 LIVE; stk ref 607.66
-JASON SHAVEL
-12:36:41 Q can try 95c here but options not really moving with thes tock
-12:36:43 Where we on WEN now?
-STEPHAN CASESA
-12:36:45 See
-RAFAEL FERNANDES
-12:36:56 Yeah agreed. The bid was lower earlier, but it came back
-12:37:07 WEN 1205x
-JASON SHAVEL
-12:39:01 c
-RAFAEL FERNANDES
-12:47:54 Color - PANW Jan 155/220 Put Spread 1k traded 17.75 vs 245.65 21d - looks bought
-12:48:36 Color - PANW Jun 210 Put 1k traded 4.10 vs 246.45 16d - looks sold
-13:04:16 Color - MSFT May22nd 430 Call 2k traded up to 2.34 - looks bought live; stk ref 418.90
-13:04:55 Color - MSFT May18th 425 Call bot 1k for 0.16 live; sk ref 420.46
-13:07:02 Color - NOW May22nd 110 Calls 11.5k traded 1.30 elec - looks sold live; stk ref 102.95 - 46k OTD
-13:29:32 WEN spot just keeps going
-13:46:20 Color - CRM Sep 190 Call 1k traded 15.95 vs 178.80 49d - looks bought
-JASON SHAVEL
-13:50:30 Lets try 70c for the WEN 85c ref for the stock
-RAFAEL FERNANDES
-13:50:34 k
-KAEGEN MORRIS
-13:50:34 see
-RAFAEL FERNANDES
-13:54:52 No luck yet 70c
-14:05:15 Got small so far for 0.70
-14:05:19 1278x total OTD
-14:06:42 @Jason Shavel
-14:06:45 Check Q pls
-14:06:46 Spot is lower
-14:06:52 It's offered @ 0.95 now
-14:07:17 I bought 20x total for 0.95 fyi, but w/ spot lower I wasn't sure if you'd want to keep going
-JASON SHAVEL
-14:07:33 Good to keep going 95c with stock here
-14:07:36 Thanks for checking
-RAFAEL FERNANDES
-14:07:37 ok
-JASON SHAVEL
-14:07:38 And see you wen
-RAFAEL FERNANDES
-14:07:39 ofc
-14:21:05 Q is onde
-14:21:09 Done*
-KAEGEN MORRIS
-14:23:27 Q Jun 18, 2026 190.00 Call bot 2000 for 0.9438 (from 14:06:23 to 14:21:19) Electronic/AMEX
-Commission = $1
-JASON SHAVEL
-14:28:12 ty
-RAFAEL FERNANDES
-14:39:20 WEN we're up to 1769
-JASON SHAVEL
-14:43:57 great
-KAEGEN MORRIS
-14:23:27 KAEGEN MORRIS: Q Jun 18, 2026 190.00 Call bot 2000 for 0.9438 (from 14:06:23 to 14:21:19) Electronic/AMEX
-Commission = $1
-14:49:05 Lmk where you want this allocated tyty
-RAFAEL FERNANDES
-14:49:56 And closing Q right?
-JASON SHAVEL
-14:50:05 Q is closing yes and JPM
-14:50:06 thanks
-RAFAEL FERNANDES
-14:50:20 Ty sir
-14:57:13 Color - MSFT Jul 420 Put 1500 traded 17.44 vs 423.3191 47d - looks sold
-JASON SHAVEL
-14:57:40 Where do we stand WEN and wahts the average so far?
-RAFAEL FERNANDES
-14:58:05 WEN 1769x .6646 avg
-14:59:46 Color - MSFT May20th 435 Call 1800 traded up to 0.87 elec - looks bought live; stk ref 422.21 - 13.3k traded OTD
-15:09:13 Color - RTX Sep 190/220 CS sold 1k @ 4.95 live; stk ref 175.07
-15:10:43 Color - CORZ Jun 21 Put 4k traded up to 1.22 (looks bought) Jun 17 Put 4k traded down to 0.23 (looks sold) traded elec live; stk ref 22.76
-15:15:20 Color - MSFT Jul 420/390 1x1.5 Put Spread vs 423.40 10d, 1k traded 6.86 - looks sold
-16:00:21 WEN no more, 1769x is the final total
-STEPHAN CASESA
-16:00:43 WEN Aug 21, 2026 8.00 Call bot 1769 for 0.6646 (from 14:27:04 to 14:39:03) ELECTRONIC
-Commission = $1
-16:00:58 WEN lmk where to clear this one pls
-JASON SHAVEL
-16:01:03 sec
-STEPHAN CASESA
-16:01:07 Ty
-JASON SHAVEL
-16:01:31 JPM
-STEPHAN CASESA
-16:01:36 See ty!
-RAFAEL FERNANDES
-16:17:17 color- MSFT Jun 460 Calls, sold 4000 at 3.62 LIVE; stk ref 422.61
-16:18:04 Color - AMZN Jul 300 Call bot 2k up to 2.87 live; stk ref 264.89
+13:23:37 Color - WIX Jan 50 Put 3593 traded 11.11 vs 54.0363 32d - looks bought
+13:30:24 Color - NOW Jun27 90 Put 1025 traded 16.94 vs 100.23 29d - looks sold
+13:30:56 Color - META May29th 800 Call bot 7900 for 0.12 live; stk ref 607.76
+13:31:51 Color - MU May29th 390 Put bought 9892 for 0.10 live; stk ref 770.73
+13:41:24 Color - TMUS Dec 140 Put 2k traded 2.50 vs 191.00 10d - looks sold
+14:25:51 Color-- MU May 29th 420 Put Paid .16 for 11,810x Live; stk ref 775.31
+14:44:16 Color - SNDK May29th 1200 Put 1500 traded 4.99 - looks bought live; stk ref 1521.21
+14:54:17 Color - WEN Jan 10 Call 1k traded 0.36 elec - looks bought live; stk ref 7.72 - 2.1k OTD
+14:54:44 Color - META May26th 705 Call sold 1k @ 0.02 live; stk ref 610.96 - opening
+14:55:31 Color - MU May22nd 800/790 CS bought 1k for 0.10 live; stk ref 768.66
+15:00:07 Color - META May22nd 610 Call sold 2036 @ 2.15 live; stk ref 611.71
+15:15:53 Color - MU May29th 460 Put bot 8k for 0.25 live; stk ref 765.75
+15:16:44 Lots of downside put buying today again
+15:22:33 Color - HON Sep 290 Call 2500 traded 2.02 vs 228.4045 11d - looks bought
+15:23:08 Color - META Jun 540 Put 1k traded 1.85 - looks bought live; stk ref 610.34
+15:31:07 Color - AMZN Jan 250 Put 1k traded 18.17 (looks bought), Dec28 250 Put 1k traded 39.67 (looks sold) traded elec live; stk ref 267.26
+15:32:34 Color - AMZN May29th 275 Call 5k traded 1.11 (looks sold), May29th 300 Call 5k traded up to 0.04 (looks bought) elec live; stk ref 266.96
+15:43:06 Color - NOW Aug 60 Put 1500 traded 0.60 - looks sold live; stk ref 101.46
+16:06:17 Color - NOW Jun 130 Call sold 2100 @ 0.70 live; stk ref 101.63
+16:14:47 Color - MSFT Jun 370/420 Puts Spread 1200 traded 11.40 vs 418.43 43d - looks sold

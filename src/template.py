@@ -192,4 +192,4 @@ def template(input_file, output_file):
 
 
 if __name__ == "__main__":
-    template("original_input.txt", "template.txt")
+    template("../data/original_input.txt", "../data/template.txt")
