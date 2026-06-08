@@ -1,24 +1,21 @@
-Trade Recap 5/22/2026
+Color - BHF Jan 70 Call 1.6k traded .15 (looks bot) live; stk ref 62.83
+BHF Jan 70 Call OI Change: 1336
+Volume = 1600
 ---------------------------------
-Color - PEN Jan27 300 Put 1k traded 59.00 (looks bot) live; stk ref 328.77
-PEN Jan27 300 Put OI Change: 1397
-Volume = 1380
+Color - KVUE 5Jun 17.5 Call 1k traded .06 mid live; stk ref 17.21
+KVUE 5Jun 17.5 Call OI Change: -13
+Volume = 2621
 ---------------------------------
-Color - QRVO Dec 120 Call 1k traded 7.20 mid live; stk ref 102.79
-QRVO Dec 120 Call OI Change: 2598
-Volume = 2637
+Color - WBD 2Jul 28 Call 15k traded .60 (looks bot) live; stk ref 26.00
+WBD 2Jul 28 Call OI Change: 20309
+Volume = 20325
 ---------------------------------
-Color - TECK Sep 80 Call 1.5k traded 2.10 (looks sold) live; stk ref 62.95
-TECK Sep 80 Call OI Change: 1558
-Volume = 2135
+Color - WBD Aug 29 Call 10.83k traded .46 (looks sold) live; stk ref 26.25
+WBD Aug 29 Call OI Change: -4099
+Volume = 12829
 ---------------------------------
-Color - WBD Nov 20 / Aug 30 RR paid 0.53 to buy nov put 5k live; stk ref 27.09 - opening Nov
-WBD Nov 20 Put OI Change: 17828
-WBD Aug 30 Call OI Change: 23566
-Volume = 17826x18342
----------------------------------
-Color - WBD Nov 20 / Aug 30 RR paid 0.5475 to buy nov put 10k live; stk ref 27.09 - opening Nov
-WBD Nov 20 Put OI Change: 17828
-WBD Aug 30 Call OI Change: 23566
-Volume = 17826x18342
+Color - WBD Jul 27/Nov 26 PS traded .55 (looks sold) live; stk ref 26.95
+WBD Jul 27 Put OI Change: 5494
+WBD Nov 26 Put OI Change: -2676
+Volume = 8372x4991
 ---------------------------------

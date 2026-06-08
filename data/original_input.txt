@@ -1,48 +1,6 @@
-
-10:25:12 Color - WBD Nov 20 / Aug 30 RR paid 0.5475 to buy nov put 10k live; stk ref 27.09 - opening nov
-11:43:34 Color - HON Jun 240/250 1x2 CS bot 1k for 0.55 live; stk ref 226.06
-11:44:13 *** This post was removed ***
-11:44:18 *** RAFAEL FERNANDES (WALLACHBETH CAPITAL LLC) removed a post from 11:44:13
-RAFAEL FERNANDES
-11:44:21 Color - WEN may29th 7.5 Put sold 1k @ 0.10 live; stk ref 7.68
-11:50:13  Color - WBD Nov 20 / Aug 30 RR paid 0.53 to buy nov put 5k live; stk ref 27.09 - opening nov - 15k OTD
-11:50:40  Color - WBD Nov 20 / Aug 30 RR paid 0.53 to buy nov put 1k live; stk ref 27.09 - opening nov - 16k OTD
-11:51:41 Color - MSFT May22nd 410 Put bot 3k for 0.06 live; stk ref 418.01
-11:52:20 Color - CORZ May29th 28 Calls 5k traded up to 0.15 elec - looks bought live; stk ref 24.77
-12:05:44 Color - AMZN Jan 220 Put sold 3k down to 8.70 live; stk ref 267.83
-12:10:23 Color - AMZN Sep 200 Put 2k traded 2.065 (looks sold), Sep 240 Put 1k traded 7.98 (looks bought) both legs traded 1/2 penny from mid, tough to tell exact direction
-12:42:46 Color - DDOG:
-Sep 120 Put 2015 traded 1.91 (looks sold)
-Sep 200 Call 2015 traded 43.00 (looks bought)
-Jan28 150 Put 2650 traded 26.70 (looks bought)
-Jan28 300 Call 2650 traded 45.70777 (looks sold)
-
-was crossed as cust to cust live; stk ref 219.16
-12:43:53 Color - AMZN Jul 300 Call bot 1k for 3.35 live; stk ref 269.13
-13:14:25 Color - NOW Jul 130 Call 1500 traded 2.10 vs 100.74 27d - looks bought
-13:16:27 Color - AMZN Aug 160 Put 5k traded 0.38 vs 269.12 - looks bought
-13:17:18 Color - AMZN Jun 245 Put 1k traded 1.39 vs 269.12 12d - looks bought
-13:21:39 Color - SNDK May29th 830 Put 2200 traded up to 0.55 - looks bought live; stk ref 1507.85
-13:22:52 *** This post was removed ***
-13:23:29 *** RAFAEL FERNANDES (WALLACHBETH CAPITAL LLC) removed a post from 13:22:52
-RAFAEL FERNANDES
-13:23:37 Color - WIX Jan 50 Put 3593 traded 11.11 vs 54.0363 32d - looks bought
-13:30:24 Color - NOW Jun27 90 Put 1025 traded 16.94 vs 100.23 29d - looks sold
-13:30:56 Color - META May29th 800 Call bot 7900 for 0.12 live; stk ref 607.76
-13:31:51 Color - MU May29th 390 Put bought 9892 for 0.10 live; stk ref 770.73
-13:41:24 Color - TMUS Dec 140 Put 2k traded 2.50 vs 191.00 10d - looks sold
-14:25:51 Color-- MU May 29th 420 Put Paid .16 for 11,810x Live; stk ref 775.31
-14:44:16 Color - SNDK May29th 1200 Put 1500 traded 4.99 - looks bought live; stk ref 1521.21
-14:54:17 Color - WEN Jan 10 Call 1k traded 0.36 elec - looks bought live; stk ref 7.72 - 2.1k OTD
-14:54:44 Color - META May26th 705 Call sold 1k @ 0.02 live; stk ref 610.96 - opening
-14:55:31 Color - MU May22nd 800/790 CS bought 1k for 0.10 live; stk ref 768.66
-15:00:07 Color - META May22nd 610 Call sold 2036 @ 2.15 live; stk ref 611.71
-15:15:53 Color - MU May29th 460 Put bot 8k for 0.25 live; stk ref 765.75
-15:16:44 Lots of downside put buying today again
-15:22:33 Color - HON Sep 290 Call 2500 traded 2.02 vs 228.4045 11d - looks bought
-15:23:08 Color - META Jun 540 Put 1k traded 1.85 - looks bought live; stk ref 610.34
-15:31:07 Color - AMZN Jan 250 Put 1k traded 18.17 (looks bought), Dec28 250 Put 1k traded 39.67 (looks sold) traded elec live; stk ref 267.26
-15:32:34 Color - AMZN May29th 275 Call 5k traded 1.11 (looks sold), May29th 300 Call 5k traded up to 0.04 (looks bought) elec live; stk ref 266.96
-15:43:06 Color - NOW Aug 60 Put 1500 traded 0.60 - looks sold live; stk ref 101.46
-16:06:17 Color - NOW Jun 130 Call sold 2100 @ 0.70 live; stk ref 101.63
-16:14:47 Color - MSFT Jun 370/420 Puts Spread 1200 traded 11.40 vs 418.43 43d - looks sold
+Trade Recap 6/5/2026
+Color - WBD 2Jul 28 Call 15k traded .60 (looks bot) live; stk ref 26.00
+Color - WBD Aug 29 Call 10.83k traded .46 (looks sold) live; stk ref 26.25
+Color - WBD Jul 27/Nov 26 PS traded .55 (looks sold) live; stk ref 26.95
+Color - BHF Jan 70 Call 1.6k traded .15 (looks bot) live; stk ref 62.83
+Color - KVUE 5Jun 17.5 Call 1k traded .06 mid live; stk ref 17.21

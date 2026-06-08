@@ -6,7 +6,7 @@ EXPIRY_RE = rf'(?:\d{{1,2}})?{_MONTH}\w*'  # Apr, Apr24th, May1st, Dec27, 8May, 
 STRIKE_RE = r'\d+(?:\.\d+)?'         # 230, 12.5, 277.50, etc.
 OPT_RE    = r'(?:Ca[a-zA-Z]+|Puts?)' # Call/Calls/CAll/Cakk  or  Put/Puts
 RATIO_RE  = r'(?:\d[\d.]*x\d[\d.]*\s+)?'   # optional 1x2, 1x1.5, etc.
-SPREAD_KW = r'(?:(CS|PS|RR)|(Call\s+Spread|Put\s+Spread))'
+SPREAD_KW = r'(?:(CS|PS|RR)|(Call\s+Spread|Put\s+Spread|Strangle))'
 
 
 def _normalize(s):
@@ -48,7 +48,7 @@ def _parse_segment(seg, ticker):
         expiry, s1_str, s2_str = m.group(1), m.group(2), m.group(3)
         kind = _spread_type(m, 4, 5)
         s1, s2 = float(s1_str), float(s2_str)
-        if kind == 'RR':
+        if kind in ('RR', 'STRANGLE'):
             low, high = (s1_str, s2_str) if s1 <= s2 else (s2_str, s1_str)
             return [f"{ticker} {expiry} {low} Put",
                     f"{ticker} {expiry} {high} Call"]
@@ -64,7 +64,7 @@ def _parse_segment(seg, ticker):
     if m:
         exp1, s1, exp2, s2 = m.group(1), m.group(2), m.group(3), m.group(4)
         kind = _spread_type(m, 5, 6)
-        if kind == 'RR':
+        if kind in ('RR', 'STRANGLE'):
             return [f"{ticker} {exp1} {s1} Put",
                     f"{ticker} {exp2} {s2} Call"]
         opt = 'Call' if kind == 'CS' else 'Put'
@@ -79,12 +79,21 @@ def _parse_segment(seg, ticker):
     if m:
         exp1, exp2, strike = m.group(1), m.group(2), m.group(3)
         kind = _spread_type(m, 4, 5)
-        if kind == 'RR':
+        if kind in ('RR', 'STRANGLE'):
             return [f"{ticker} {exp1} {strike} Put",
                     f"{ticker} {exp2} {strike} Call"]
         opt = 'Call' if kind == 'CS' else 'Put'
         return [f"{ticker} {exp1} {strike} {opt}",
                 f"{ticker} {exp2} {strike} {opt}"]
+
+    # ── Pattern E: straddle (same expiry, same strike → Put + Call) ─────────
+    m = re.search(
+        rf'({EXPIRY_RE})\s+({STRIKE_RE})\s+Straddle',
+        seg, re.IGNORECASE
+    )
+    if m:
+        return [f"{ticker} {m.group(1)} {m.group(2)} Put",
+                f"{ticker} {m.group(1)} {m.group(2)} Call"]
 
     # ── Pattern C: single option ─────────────────────────────────────────────
     m = re.search(
@@ -129,22 +138,83 @@ def parse_line_options(line):
 _COLOR_RE = re.compile(r'Color\s*-\s+', re.IGNORECASE)
 _TIME_RE  = re.compile(r'^\d{2}:\d{2}:\d{2}\s+')
 
+# Matches "Color - TICKER:" with nothing meaningful after the colon (multi-line block header).
+_MULTILINE_HEADER_RE = re.compile(r'Color\s*-\s+([A-Za-z]+):\s*$', re.IGNORECASE)
+
+# Matches a line that starts with an expiry+strike+call/put (option detail line in a block).
+_OPTION_LINE_START_RE = re.compile(rf'^\s*{EXPIRY_RE}\s+{STRIKE_RE}\s+{OPT_RE}', re.IGNORECASE)
+
 
 def extract_color_lines(raw_lines):
     """
     From a raw chat log, return (timestamp, cleaned_trade_line) tuples.
     Finds every line containing 'Color -', captures any leading HH:MM:SS
     timestamp, and returns the text after 'Color - '.
+    Skips multi-line block headers (Color - TICKER:) — those are handled
+    by extract_multiline_color_blocks.
     """
     result = []
     for line in raw_lines:
         line = line.rstrip('\n')
         m = _COLOR_RE.search(line)
         if m:
+            if _MULTILINE_HEADER_RE.search(line):
+                continue
             cleaned = line[m.end():]
             ts_match = _TIME_RE.match(line)
             timestamp = ts_match.group(0).strip() if ts_match else ''
             result.append((timestamp, cleaned))
+    return result
+
+
+def extract_multiline_color_blocks(raw_lines):
+    """
+    From a raw chat log, detect 'Color - TICKER:' header lines followed by
+    option detail lines on subsequent lines.
+
+    Collects lines after the header until a blank line or a new 'Color -' line.
+    Lines matching EXPIRY STRIKE Call/Put are parsed as options; non-option
+    lines (e.g. 'elec live; stk ref 308.15') are included in the display text
+    but skipped for parsing.
+
+    Returns (timestamp, display_text, options) tuples where display_text is
+    the full block and options is the list of parsed option strings.
+    """
+    result = []
+    i = 0
+    while i < len(raw_lines):
+        line = raw_lines[i].rstrip('\n')
+        m = _MULTILINE_HEADER_RE.search(line)
+        if m:
+            ticker = m.group(1).upper()
+            ts_match = _TIME_RE.match(line)
+            timestamp = ts_match.group(0).strip() if ts_match else ''
+
+            block_lines = []
+            j = i + 1
+            while j < len(raw_lines):
+                next_line = raw_lines[j].rstrip('\n')
+                if not next_line.strip():
+                    break
+                if _COLOR_RE.search(next_line):
+                    break
+                block_lines.append(next_line)
+                j += 1
+
+            display_text = '\n'.join([f"{ticker}:"] + block_lines)
+
+            options, seen = [], set()
+            for bl in block_lines:
+                if _OPTION_LINE_START_RE.match(bl):
+                    for opt in parse_line_options(f"{ticker} {bl.strip()}"):
+                        if opt not in seen:
+                            seen.add(opt)
+                            options.append(opt)
+
+            result.append((timestamp, display_text, options))
+            i = j
+        else:
+            i += 1
     return result
 
 
@@ -164,26 +234,36 @@ def template(input_file, output_file):
         with open(input_file, 'r', encoding='utf-8') as f:
             raw_lines = f.readlines()
 
-        color_lines = extract_color_lines(raw_lines)
+        # Single-line entries: (timestamp, display_text, None) — options parsed at write time.
+        single_entries = [
+            (ts, line, None) for ts, line in extract_color_lines(raw_lines)
+        ]
+        # Multi-line block entries: (timestamp, display_text, options_list).
+        multi_entries = extract_multiline_color_blocks(raw_lines)
+
+        all_entries = single_entries + multi_entries
 
         def sort_key(item):
-            timestamp, line = item
-            tm = re.match(r'^([A-Z]+)\s+', line)
-            ticker = tm.group(1) if tm else ''
+            timestamp, display_text, _ = item
+            first_line = display_text.split('\n')[0]
+            tm = re.match(r'^([A-Za-z]+)', first_line)
+            ticker = tm.group(1).upper() if tm else ''
             return (ticker, timestamp)
 
-        color_lines.sort(key=sort_key)
+        all_entries.sort(key=sort_key)
 
         with open(output_file, 'w', encoding='utf-8') as f:
-            for _timestamp, line in color_lines:
-                f.write(line + '\n\n')
-                for opt in parse_line_options(line):
+            for _timestamp, display_text, options in all_entries:
+                f.write(display_text + '\n\n')
+                if options is None:
+                    options = parse_line_options(display_text)
+                for opt in options:
                     f.write(f"{opt} OI Change:\n")
                 f.write("---------------------------------\n")
 
-        print(f"Processed {len(color_lines)} color lines")
+        print(f"Processed {len(all_entries)} color lines")
         print(f"Output written to: {output_file}")
-        return len(color_lines)
+        return len(all_entries)
 
     except FileNotFoundError:
         raise FileNotFoundError(f"Input file not found: {input_file}")

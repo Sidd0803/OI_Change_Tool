@@ -1,138 +1,21 @@
-DDOG:
+BHF Jan 70 Call 1.6k traded .15 (looks bot) live; stk ref 62.83
 
+BHF Jan 70 Call OI Change:
 ---------------------------------
-AMZN Jan 220 Put sold 3k down to 8.70 live; stk ref 267.83
+KVUE 5Jun 17.5 Call 1k traded .06 mid live; stk ref 17.21
 
-AMZN Jan 220 Put OI Change:
+KVUE 5Jun 17.5 Call OI Change:
 ---------------------------------
-AMZN Sep 200 Put 2k traded 2.065 (looks sold), Sep 240 Put 1k traded 7.98 (looks bought) both legs traded 1/2 penny from mid, tough to tell exact direction
+WBD 2Jul 28 Call 15k traded .60 (looks bot) live; stk ref 26.00
 
-AMZN Sep 200 Put OI Change:
-AMZN Sep 240 Put OI Change:
+WBD 2Jul 28 Call OI Change:
 ---------------------------------
-AMZN Jul 300 Call bot 1k for 3.35 live; stk ref 269.13
+WBD Aug 29 Call 10.83k traded .46 (looks sold) live; stk ref 26.25
 
-AMZN Jul 300 Call OI Change:
+WBD Aug 29 Call OI Change:
 ---------------------------------
-AMZN Aug 160 Put 5k traded 0.38 vs 269.12 - looks bought
+WBD Jul 27/Nov 26 PS traded .55 (looks sold) live; stk ref 26.95
 
-AMZN Aug 160 Put OI Change:
----------------------------------
-AMZN Jun 245 Put 1k traded 1.39 vs 269.12 12d - looks bought
-
-AMZN Jun 245 Put OI Change:
----------------------------------
-AMZN Jan 250 Put 1k traded 18.17 (looks bought), Dec28 250 Put 1k traded 39.67 (looks sold) traded elec live; stk ref 267.26
-
-AMZN Jan 250 Put OI Change:
-AMZN Dec28 250 Put OI Change:
----------------------------------
-AMZN May29th 275 Call 5k traded 1.11 (looks sold), May29th 300 Call 5k traded up to 0.04 (looks bought) elec live; stk ref 266.96
-
-AMZN May29th 275 Call OI Change:
-AMZN May29th 300 Call OI Change:
----------------------------------
-CORZ May29th 28 Calls 5k traded up to 0.15 elec - looks bought live; stk ref 24.77
-
-CORZ May29th 28 Call OI Change:
----------------------------------
-HON Jun 240/250 1x2 CS bot 1k for 0.55 live; stk ref 226.06
-
-HON Jun 240 Call OI Change:
-HON Jun 250 Call OI Change:
----------------------------------
-HON Sep 290 Call 2500 traded 2.02 vs 228.4045 11d - looks bought
-
-HON Sep 290 Call OI Change:
----------------------------------
-META May29th 800 Call bot 7900 for 0.12 live; stk ref 607.76
-
-META May29th 800 Call OI Change:
----------------------------------
-META May26th 705 Call sold 1k @ 0.02 live; stk ref 610.96 - opening
-
-META May26th 705 Call OI Change:
----------------------------------
-META May22nd 610 Call sold 2036 @ 2.15 live; stk ref 611.71
-
-META May22nd 610 Call OI Change:
----------------------------------
-META Jun 540 Put 1k traded 1.85 - looks bought live; stk ref 610.34
-
-META Jun 540 Put OI Change:
----------------------------------
-MSFT May22nd 410 Put bot 3k for 0.06 live; stk ref 418.01
-
-MSFT May22nd 410 Put OI Change:
----------------------------------
-MSFT Jun 370/420 Puts Spread 1200 traded 11.40 vs 418.43 43d - looks sold
-
----------------------------------
-MU May29th 390 Put bought 9892 for 0.10 live; stk ref 770.73
-
-MU May29th 390 Put OI Change:
----------------------------------
-MU May22nd 800/790 CS bought 1k for 0.10 live; stk ref 768.66
-
-MU May22nd 800 Call OI Change:
-MU May22nd 790 Call OI Change:
----------------------------------
-MU May29th 460 Put bot 8k for 0.25 live; stk ref 765.75
-
-MU May29th 460 Put OI Change:
----------------------------------
-NOW Jul 130 Call 1500 traded 2.10 vs 100.74 27d - looks bought
-
-NOW Jul 130 Call OI Change:
----------------------------------
-NOW Jun27 90 Put 1025 traded 16.94 vs 100.23 29d - looks sold
-
-NOW Jun27 90 Put OI Change:
----------------------------------
-NOW Aug 60 Put 1500 traded 0.60 - looks sold live; stk ref 101.46
-
-NOW Aug 60 Put OI Change:
----------------------------------
-NOW Jun 130 Call sold 2100 @ 0.70 live; stk ref 101.63
-
-NOW Jun 130 Call OI Change:
----------------------------------
-SNDK May29th 830 Put 2200 traded up to 0.55 - looks bought live; stk ref 1507.85
-
-SNDK May29th 830 Put OI Change:
----------------------------------
-SNDK May29th 1200 Put 1500 traded 4.99 - looks bought live; stk ref 1521.21
-
-SNDK May29th 1200 Put OI Change:
----------------------------------
-TMUS Dec 140 Put 2k traded 2.50 vs 191.00 10d - looks sold
-
-TMUS Dec 140 Put OI Change:
----------------------------------
-WBD Nov 20 / Aug 30 RR paid 0.5475 to buy nov put 10k live; stk ref 27.09 - opening nov
-
-WBD Nov 20 Put OI Change:
-WBD Aug 30 Call OI Change:
----------------------------------
-WBD Nov 20 / Aug 30 RR paid 0.53 to buy nov put 5k live; stk ref 27.09 - opening nov - 15k OTD
-
-WBD Nov 20 Put OI Change:
-WBD Aug 30 Call OI Change:
----------------------------------
-WBD Nov 20 / Aug 30 RR paid 0.53 to buy nov put 1k live; stk ref 27.09 - opening nov - 16k OTD
-
-WBD Nov 20 Put OI Change:
-WBD Aug 30 Call OI Change:
----------------------------------
-WEN may29th 7.5 Put sold 1k @ 0.10 live; stk ref 7.68
-
-WEN may29th 7.5 Put OI Change:
----------------------------------
-WEN Jan 10 Call 1k traded 0.36 elec - looks bought live; stk ref 7.72 - 2.1k OTD
-
-WEN Jan 10 Call OI Change:
----------------------------------
-WIX Jan 50 Put 3593 traded 11.11 vs 54.0363 32d - looks bought
-
-WIX Jan 50 Put OI Change:
+WBD Jul 27 Put OI Change:
+WBD Nov 26 Put OI Change:
 ---------------------------------
