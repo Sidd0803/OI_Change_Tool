@@ -1,0 +1,10 @@
+WBD Oct 25 Put 20,000x @ 1.66 (mid); stk ref 26.12
+WBD Jan27 20 Put 20,000x @ 1.28 (mid); stk ref 26.12
+WBD Mar27 23 Put 20,000x @ 2.26 (mid); stk ref 26.12
+WBD Oct 20 Put 10,000x @ 0.51 (mid); stk ref 26.12
+WBD Jul 25 Put 7,000x @ 0.28 (mid); stk ref 26.12
+WBD Aug 25 Put 6,900x @ 0.79 (mid); stk ref 26.12
+WBD Dec 27 Put 2,500x @ 2.9 (mid); stk ref 26.12
+WBD Mar27 25 Put 2,500x @ 2.75 (mid); stk ref 26.12
+WBD Dec 23 Put 1,400x @ 1.85 (mid); stk ref 26.12
+WBD Sep 27 Put 644x @ 1.82 (mid); stk ref 26.12
