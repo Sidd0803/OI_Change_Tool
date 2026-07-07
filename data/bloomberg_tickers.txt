@@ -1,9 +1,11 @@
-BHF US 1/15/27 C70 Equity
-1 occurrences of BHF
-KVUE US 6/5/26 C17.5 Equity
-1 occurrences of KVUE
-WBD US 7/2/26 C28 Equity
-WBD US 8/21/26 C29 Equity
-WBD US 7/17/26 P27 Equity
-WBD US 11/20/26 P26 Equity
-4 occurrences of WBD
+CLF US 8/21/26 C11 Equity
+CLF US 8/21/26 C12 Equity
+2 occurrences of CLF
+QXO US 7/17/26 C17 Equity
+QXO US 7/17/26 C20 Equity
+2 occurrences of QXO
+RIVN US 1/15/27 P12 Equity
+1 occurrences of RIVN
+VERA US 8/21/26 P40 Equity
+VERA US 8/21/26 C45 Equity
+2 occurrences of VERA

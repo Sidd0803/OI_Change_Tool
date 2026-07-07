@@ -1,14 +1,36 @@
+import argparse
 import re
+from datetime import date, timedelta
+
 import openpyxl
+
+from bloomberg_fetch import fetch_blocks
+
+SEPARATOR = '-' * 33 + '\n'
 
 TEMPLATE_FILE = '../data/template.txt'
 EXCEL_FILE = '../data/numbers.xlsx'
+BLOOMBERG_TICKERS_FILE = '../data/bloomberg_tickers.txt'
 OUTPUT_FILE = '../data/recap_input.txt'
 
 
 def get_ticker(line):
     match = re.match(r'^([A-Z]+)\s+', line.strip())
     return match.group(1) if match else None
+
+
+def previous_business_day(ref=None):
+    """Return the most recent weekday before `ref` (default: today)."""
+    d = (ref or date.today()) - timedelta(days=1)
+    while d.weekday() >= 5:  # 5 = Saturday, 6 = Sunday
+        d -= timedelta(days=1)
+    return d
+
+
+def recap_header():
+    """Header line + separator that lead off recap_input.txt."""
+    d = previous_business_day()
+    return [f"Trade Recap {d.month}/{d.day}/{d.year}\n", SEPARATOR]
 
 
 def parse_excel_file(filepath):
@@ -39,7 +61,7 @@ def parse_excel_file(filepath):
     return blocks
 
 
-def main():
+def main(from_excel=False):
     with open(TEMPLATE_FILE, 'r') as f:
         template_lines = f.readlines()
 
@@ -61,7 +83,12 @@ def main():
             if ticker in ticker_oi_indices:
                 ticker_oi_indices[ticker].append(i)
 
-    data_blocks = parse_excel_file(EXCEL_FILE)
+    if from_excel:
+        print(f"Reading OI/volume data from Excel: {EXCEL_FILE}")
+        data_blocks = parse_excel_file(EXCEL_FILE)
+    else:
+        print(f"Fetching OI/volume data from Bloomberg for {BLOOMBERG_TICKERS_FILE}")
+        data_blocks = fetch_blocks(BLOOMBERG_TICKERS_FILE)
 
     # Validate ticker count
     n_tickers = len(tickers_ordered)
@@ -116,7 +143,7 @@ def main():
                 output_lines.append(line)
 
     with open(OUTPUT_FILE, 'w') as f:
-        f.writelines(output_lines)
+        f.writelines(recap_header() + output_lines)
 
     filled = len(substitutions)
     total_oi = sum(len(v) for v in ticker_oi_indices.values())
@@ -125,4 +152,11 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    parser = argparse.ArgumentParser(
+        description="Generate recap_input.txt from template.txt, sourcing OI "
+                    "change + volume from Bloomberg (default) or numbers.xlsx.")
+    parser.add_argument(
+        '--from-excel', action='store_true',
+        help="Read OI/volume from numbers.xlsx instead of querying Bloomberg.")
+    args = parser.parse_args()
+    main(from_excel=args.from_excel)

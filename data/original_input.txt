@@ -1,6 +1,4 @@
-Trade Recap 6/5/2026
-Color - WBD 2Jul 28 Call 15k traded .60 (looks bot) live; stk ref 26.00
-Color - WBD Aug 29 Call 10.83k traded .46 (looks sold) live; stk ref 26.25
-Color - WBD Jul 27/Nov 26 PS traded .55 (looks sold) live; stk ref 26.95
-Color - BHF Jan 70 Call 1.6k traded .15 (looks bot) live; stk ref 62.83
-Color - KVUE 5Jun 17.5 Call 1k traded .06 mid live; stk ref 17.21
+Color - RIVN Jan 12 Put bot 3100x FOR 1.11 vs 17.45 
+Color - CLF Aug 11/12 CS bot 10k for.21 
+Color - QXO Jul 17/20 CS bot .21k for 2k
+Color - VERA Aug 40/45 strangle sold 5k for 8.30

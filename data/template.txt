@@ -1,21 +1,19 @@
-BHF Jan 70 Call 1.6k traded .15 (looks bot) live; stk ref 62.83
+CLF Aug 11/12 CS bot 10k for.21 
 
-BHF Jan 70 Call OI Change:
+CLF Aug 11 Call OI Change:
+CLF Aug 12 Call OI Change:
 ---------------------------------
-KVUE 5Jun 17.5 Call 1k traded .06 mid live; stk ref 17.21
+QXO Jul 17/20 CS bot .21k for 2k
 
-KVUE 5Jun 17.5 Call OI Change:
+QXO Jul 17 Call OI Change:
+QXO Jul 20 Call OI Change:
 ---------------------------------
-WBD 2Jul 28 Call 15k traded .60 (looks bot) live; stk ref 26.00
+RIVN Jan 12 Put bot 3100x FOR 1.11 vs 17.45 
 
-WBD 2Jul 28 Call OI Change:
+RIVN Jan 12 Put OI Change:
 ---------------------------------
-WBD Aug 29 Call 10.83k traded .46 (looks sold) live; stk ref 26.25
+VERA Aug 40/45 strangle sold 5k for 8.30
 
-WBD Aug 29 Call OI Change:
----------------------------------
-WBD Jul 27/Nov 26 PS traded .55 (looks sold) live; stk ref 26.95
-
-WBD Jul 27 Put OI Change:
-WBD Nov 26 Put OI Change:
+VERA Aug 40 Put OI Change:
+VERA Aug 45 Call OI Change:
 ---------------------------------

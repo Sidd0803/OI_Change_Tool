@@ -1,6 +1,7 @@
-BHF Jan 70 Call OI Change:
-KVUE 5Jun 17.5 Call OI Change:
-WBD 2Jul 28 Call OI Change:
-WBD Aug 29 Call OI Change:
-WBD Jul 27 Put OI Change:
-WBD Nov 26 Put OI Change:
+CLF Aug 11 Call OI Change:
+CLF Aug 12 Call OI Change:
+QXO Jul 17 Call OI Change:
+QXO Jul 20 Call OI Change:
+RIVN Jan 12 Put OI Change:
+VERA Aug 40 Put OI Change:
+VERA Aug 45 Call OI Change:
