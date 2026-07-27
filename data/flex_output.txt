@@ -1,0 +1,34 @@
+Color - SNDK Flex:
+07/31/2026 1500.01 Amer PM Put 3,000x traded 198.59, vs 1313.40 stk 65d OI Change: -971 / Volume = 3000
+---------------------------------
+Color - NBIS Flex:
+07/31/2026 180.01 Amer PM Put 285x traded 9.25 OI Change: 0 / Volume = 3985
+07/31/2026 180.01 Amer PM Put 3,700x traded 9.26 OI Change: 0 / Volume = 3985
+---------------------------------
+Color - SMH Flex:
+08/21/2026 635.00 Euro PM Call 3,126x traded 6.00 OI Change: 0 / Volume = 3126
+09/18/2026 690.00 Euro PM Call 3,126x traded 6.94 OI Change: 0 / Volume = 3126
+---------------------------------
+Color - SNDK Flex:
+07/31/2026 1400.01 Amer PM Put 5,000x traded 160.08, vs 1276.50 stk 68d - looks sold OI Change: 0 / Volume = 10000
+---------------------------------
+Color - SNDK Flex:
+07/31/2026 1400.01 Amer PM Put 5,000x traded 163.86, vs 1271.00 stk 68d - looks sold OI Change: 0 / Volume = 10000
+---------------------------------
+Color - MU Flex:
+07/31/2026 750.01 Amer PM Put 2,027x traded 9.43 OI Change: 0 / Volume = 2027
+07/31/2026 790.01 Amer PM Put 1,217x traded 15.43 OI Change: 0 / Volume = 1217
+07/31/2026 800.01 Amer PM Put 2,581x traded 17.57 OI Change: 0 / Volume = 2581
+07/31/2026 805.01 Amer PM Put 391x traded 18.58 OI Change: 0 / Volume = 391
+07/31/2026 815.01 Amer PM Put 3,307x traded 21.02 OI Change: 0 / Volume = 3307
+07/31/2026 820.01 Amer PM Put 2,928x traded 22.42 OI Change: 0 / Volume = 2928
+07/31/2026 850.01 Amer PM Put 900x traded 31.48 OI Change: 0 / Volume = 900
+07/31/2026 885.01 Amer PM Put 151x traded 46.38 OI Change: 0 / Volume = 151
+---------------------------------
+Color - TSM Flex:
+07/31/2026 280.01 Amer PM Call 378x traded 117.99 OI Change: 0 / Volume = 378
+07/31/2026 320.01 Amer PM Call 3,150x traded 76.28 OI Change: 0 / Volume = 3150
+07/31/2026 350.01 Amer PM Call 465x traded 47.02 OI Change: 0 / Volume = 465
+07/31/2026 380.01 Amer PM Call 1,260x traded 21.01 OI Change: 0 / Volume = 1260
+07/31/2026 400.01 Amer PM Call 1,560x traded 8.00 OI Change: 0 / Volume = 1560
+---------------------------------
