@@ -1,9 +1,57 @@
+import argparse
+import os
 import re
+
+# Ensure the '../data/...' relative paths used here and by every step we call
+# into (template.py, bloomberg_tickers.py) resolve regardless of where this
+# script is launched from.
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
+
 import openpyxl
 
+import bloomberg_tickers
+import template as template_mod
+from bloomberg_fetch import fetch_blocks
+
+INPUT_FILE = '../data/original_input.txt'
 TEMPLATE_FILE = '../data/template.txt'
+FILTERED_FILE = '../data/filtered_input.txt'
 EXCEL_FILE = '../data/numbers.xlsx'
+BLOOMBERG_TICKERS_FILE = '../data/bloomberg_tickers.txt'
 OUTPUT_FILE = '../data/final_output.txt'
+
+
+def _is_stale(derived, source):
+    """True if `derived` is missing or older than `source`."""
+    if not os.path.exists(derived):
+        return True
+    return os.path.getmtime(source) > os.path.getmtime(derived)
+
+
+def refresh_derived_files():
+    """
+    Rebuild the derived files whose ultimate source is original_input.txt:
+
+        original_input.txt -> template.txt -> filtered_input.txt -> bloomberg_tickers.txt
+
+    Each step runs only when its input is newer than its output, so a hand-edit
+    to template.txt is preserved until original_input.txt changes again.
+    """
+    if not os.path.exists(INPUT_FILE):
+        print(f"WARNING: {INPUT_FILE} not found — using {TEMPLATE_FILE} as-is.")
+        return
+
+    if _is_stale(TEMPLATE_FILE, INPUT_FILE):
+        print(f"{TEMPLATE_FILE} is out of date — rebuilding from {INPUT_FILE}")
+        template_mod.template(INPUT_FILE, TEMPLATE_FILE)
+    else:
+        print(f"{TEMPLATE_FILE} is up to date with {INPUT_FILE}")
+
+    if _is_stale(FILTERED_FILE, TEMPLATE_FILE):
+        bloomberg_tickers.filter_oi_change_lines(TEMPLATE_FILE, FILTERED_FILE)
+
+    if _is_stale(BLOOMBERG_TICKERS_FILE, FILTERED_FILE):
+        bloomberg_tickers.process_file_to_bloomberg(FILTERED_FILE, BLOOMBERG_TICKERS_FILE)
 
 
 def get_ticker(line):
@@ -39,7 +87,10 @@ def parse_excel_file(filepath):
     return blocks
 
 
-def main():
+def main(from_excel=False, refresh=True):
+    if refresh:
+        refresh_derived_files()
+
     with open(TEMPLATE_FILE, 'r') as f:
         template_lines = f.readlines()
 
@@ -61,14 +112,26 @@ def main():
             if ticker in ticker_oi_indices:
                 ticker_oi_indices[ticker].append(i)
 
-    data_blocks = parse_excel_file(EXCEL_FILE)
+    if not tickers_ordered:
+        print(f"No OI Change lines in {TEMPLATE_FILE} — nothing to fill.")
+        with open(OUTPUT_FILE, 'w') as f:
+            f.writelines(template_lines)
+        print(f"Output written to {OUTPUT_FILE}")
+        return
+
+    if from_excel:
+        print(f"Reading OI/volume data from Excel: {EXCEL_FILE}")
+        data_blocks = parse_excel_file(EXCEL_FILE)
+    else:
+        print(f"Fetching OI/volume data from Bloomberg for {BLOOMBERG_TICKERS_FILE}")
+        data_blocks = fetch_blocks(BLOOMBERG_TICKERS_FILE)
 
     # Validate ticker count
     n_tickers = len(tickers_ordered)
     n_blocks = len(data_blocks)
     if n_tickers != n_blocks:
         print(f"ERROR: Ticker count mismatch — template has {n_tickers} tickers, "
-              f"Excel has {n_blocks} blocks.")
+              f"data source has {n_blocks} blocks.")
         print(f"  Template tickers: {tickers_ordered}")
         print(f"  Processing first {min(n_tickers, n_blocks)} matching pairs.")
     else:
@@ -111,4 +174,16 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    parser = argparse.ArgumentParser(
+        description="Generate final_output.txt (OI Change report for Element "
+                    "Chat) from template.txt, sourcing OI change + volume from "
+                    "Bloomberg (default) or numbers.xlsx.")
+    parser.add_argument(
+        '--from-excel', action='store_true',
+        help="Read OI/volume from numbers.xlsx instead of querying Bloomberg.")
+    parser.add_argument(
+        '--no-refresh', action='store_true',
+        help="Use template.txt as-is instead of rebuilding it from "
+             "original_input.txt when that file is newer.")
+    args = parser.parse_args()
+    main(from_excel=args.from_excel, refresh=not args.no_refresh)

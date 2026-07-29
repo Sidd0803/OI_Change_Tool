@@ -1,0 +1,8 @@
+# Third-party dependencies for the OI change / trade recap tool.
+# All other imports (re, os, sys, argparse, datetime, unittest) are stdlib.
+
+openpyxl>=3.1
+
+# Bloomberg API. Not on the default PyPI index — install from Bloomberg's index:
+#   pip install --index-url https://blpapi.bloomberg.com/repository/releases/python/simple/ blpapi
+blpapi>=3.20
