@@ -5,7 +5,7 @@
 ```
 OI_Change_tool/
 ├── src/                        # Python scripts
-│   ├── run_pipeline.py         # Run the recap chain end-to-end (steps 1→2→3b)
+│   ├── run_pipeline.py         # Menu-driven runner: trade recap, flex color, or both
 │   ├── template.py             # Step 1: parse Bloomberg chat log → template
 │   ├── bloomberg_tickers.py    # Step 2: filter OI Change lines → bloomberg_tickers.txt
 │   ├── bloomberg_fetch.py      # Fetch OI change + volume from Bloomberg (blpapi)
@@ -36,16 +36,31 @@ OI_Change_tool/
 
 Put the previous day's chat log from the Enrique Bloomberg chat into `data/original_input.txt`, then either run the whole recap chain at once or step through it manually.
 
-### Run it all at once (recap chain)
+### Run it all at once
 
 ```
 python src/run_pipeline.py
 ```
 
-Runs `template.py` → `bloomberg_tickers.py` → `generate_recap_input_txt.py` → `generate_trade_recap.py`, producing `data/recap_input.txt` and the branded `data/trade_recap.html`, fetching OI change + volume from Bloomberg. Requires a logged-in Bloomberg Terminal. Flags:
+Asks which report(s) you want, then runs them off the same `data/original_input.txt`:
 
-- `--from-excel` — use `data/numbers.xlsx` instead of querying Bloomberg
+```
+  1) Trade recap  - listed color, OI change from Bloomberg
+  2) Flex color   - flex trades, OI change from OCC reports
+  3) Both
+```
+
+- **Trade recap** runs `template.py` → `bloomberg_tickers.py` → `generate_recap_input_txt.py` → `generate_trade_recap.py`, producing `data/recap_input.txt` and the branded `data/trade_recap.html`. Requires a logged-in Bloomberg Terminal (or `--from-excel`).
+- **Flex color** runs `occ_flex.py`, producing `data/flex_output.txt`. Needs no Terminal — see the Flex Color section below.
+
+Flags:
+
+- `--reports recap|flex|both` — skip the menu
+- `--from-excel` — use `data/numbers.xlsx` instead of querying Bloomberg (trade recap only)
+- `--date M/D/YYYY` — trade date for the flex report (default: previous business day)
 - `--input <path>` — start from a different chat log (default `data/original_input.txt`)
+
+When running both, a flex failure (OCC hasn't published yet, no network) is reported as a warning and leaves the completed trade recap intact.
 
 `generate_final_output.py` (step 5a below) is not part of `run_pipeline.py` yet — run it separately.
 
@@ -105,7 +120,7 @@ Renders `data/recap_input.txt` into the branded `data/trade_recap.html` (the fin
 
 ## Flex Color (`src/occ_flex.py`)
 
-FLEX trades don't have usable open interest on Bloomberg, so this is a separate pipeline that sources OI from OCC's daily Flex Open Interest reports instead.
+FLEX trades don't have usable open interest on Bloomberg, so this pipeline sources OI from OCC's daily Flex Open Interest reports instead. It reads the same `data/original_input.txt` as the trade recap and runs as option 2 (or 3) of `run_pipeline.py`; to run it on its own:
 
 ```
 python src/occ_flex.py --input ../data/original_input.txt --date 7/24/2026

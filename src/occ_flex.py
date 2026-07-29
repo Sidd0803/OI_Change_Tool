@@ -218,6 +218,36 @@ def write_output(blocks, path=OUTPUT_FILE):
     print(f"Output written to {path}")
 
 
+def resolve_input_path(path):
+    """Let a relative --input resolve against the caller's original cwd."""
+    if not os.path.isabs(path) and not os.path.exists(path):
+        return os.path.join(_ORIG_CWD, path)
+    return path
+
+
+def run(input_file, trade_date=None, output=OUTPUT_FILE):
+    """
+    Full flex flow: chat log -> OCC diff -> flex_output.txt.
+    Returns the parsed blocks (empty list when the log has no flex color).
+    """
+    trade_date = trade_date or previous_business_day()
+    print(f"Trade date: {trade_date} (baseline: "
+          f"{previous_business_day(trade_date)})")
+
+    blocks = parse_chat(resolve_input_path(input_file))
+    if not blocks:
+        print("No flex color blocks found in input — nothing to do.")
+        return blocks
+
+    n_trades = sum(len(b['trades']) for b in blocks)
+    print(f"Found {len(blocks)} flex block(s), {n_trades} trade line(s): "
+          + ', '.join(b['ticker'] for b in blocks))
+
+    compute_oi_changes(blocks, trade_date)
+    write_output(blocks, output)
+    return blocks
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="Extract flex color from a Bloomberg chat log and fill "
@@ -232,24 +262,8 @@ def main():
     args = parser.parse_args()
 
     trade_date = (datetime.strptime(args.date, '%m/%d/%Y').date()
-                  if args.date else previous_business_day())
-    print(f"Trade date: {trade_date} (baseline: "
-          f"{previous_business_day(trade_date)})")
-
-    input_path = args.input
-    if not os.path.isabs(input_path) and not os.path.exists(input_path):
-        input_path = os.path.join(_ORIG_CWD, args.input)
-
-    blocks = parse_chat(input_path)
-    if not blocks:
-        print("No flex color blocks found in input.")
-        return
-    n_trades = sum(len(b['trades']) for b in blocks)
-    print(f"Found {len(blocks)} flex block(s), {n_trades} trade line(s): "
-          + ', '.join(b['ticker'] for b in blocks))
-
-    compute_oi_changes(blocks, trade_date)
-    write_output(blocks, args.output)
+                  if args.date else None)
+    run(args.input, trade_date=trade_date, output=args.output)
 
 
 if __name__ == '__main__':
