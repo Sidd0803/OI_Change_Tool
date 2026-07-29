@@ -1,21 +1,18 @@
-Trade Recap 7/6/2026
+Trade Recap 7/28/2026
 ---------------------------------
-Color - CLF Aug 11/12 CS bot 10k for.21 
-CLF Aug 11 Call OI Change: 9
-CLF Aug 12 Call OI Change: 21
-Volume = 11286x20720
+Color - AES Aug 14 Put 300x traded .04 (looks sold); stk ref 14.85
+AES Aug 14 Put OI Change: 572
+Volume = 928
 ---------------------------------
-Color - QXO Jul 17/20 CS bot .21k for 2k
-QXO Jul 17 Call OI Change: -86
-QXO Jul 20 Call OI Change: -2
-Volume = 6856x6604
+Color - CZR Sep 30 Call 2.5k traded .75 (looks sold); stk ref 30.075
+CZR Sep 30 Call OI Change: 9378
+Volume = 5718
 ---------------------------------
-Color - RIVN Jan 12 Put bot 3100x FOR 1.11 vs 17.45 
-RIVN Jan 12 Put OI Change: -1160
-Volume = 4492
+Color - EQH Dec 55 Call 330x traded 1.50 (looks sold); stk ref 48.61
+EQH Dec 55 Call OI Change: 650
+Volume = 651
 ---------------------------------
-Color - VERA Aug 40/45 strangle sold 5k for 8.30
-VERA Aug 40 Put OI Change: 18
-VERA Aug 45 Call OI Change: 4953
-Volume = 5101x5678
+Color - GSAT Jan28 90 Call 1240x traded 4.85 (looks bot); stk ref 79.01
+GSAT Jan28 90 Call OI Change: 1171
+Volume = 1246
 ---------------------------------

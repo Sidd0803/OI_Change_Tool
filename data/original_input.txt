@@ -1,4 +1,199 @@
-Color - RIVN Jan 12 Put bot 3100x FOR 1.11 vs 17.45 
-Color - CLF Aug 11/12 CS bot 10k for.21 
-Color - QXO Jul 17/20 CS bot .21k for 2k
-Color - VERA Aug 40/45 strangle sold 5k for 8.30
+KAEGEN MORRIS
+09:33:24 Color - NVDA Jul31st 192.5 Put 2k traded 2.93 (looks bot), Jul31st 190 Put 2k traded 2.07 (looks sold), elec live; stk ref 195.40
+09:34:13 Color - NVDA Aug7th 192.5 Put 2k traded 4.72 (looks sold), Aug7th 190 Put 2k traded 3.81 (looks bot), elec live; stk ref 195.29
+09:37:44 Color - NVDA Aug7th 185 Put 1,634x traded 2.33 elec live; stk ref 195.01 - looks sold
+09:38:02 Color - AAPL Sep 600 Call 1,028x traded 0.03 elec live; stk ref 341.40 - looks bot
+09:41:01 Color - MSFT Jul31st 390 Call 1.2k traded 17.60 (looks bot), Jul31st 395 Call 1.2k traded 14.95 (traded mid), elec live; stk ref 396.62
+09:41:37 Color - IGV Aug14th 86 Put 4,946x traded 1.25 live; stk ref 90.96 - looks bot
+09:42:21 Color - NVDA Oct 250 Call 3k traded 1.89 (looks sold), Oct 260 Call 3k traded 1.30 (looks bot), elec live; stk ref 194.15
+09:43:20 Color - NVDA Aug28th 210 Call 2,450x traded 4.70 (looks sold), Nov 245 Call 2,450x traded 4.70 (looks sold), live; stk ref 194.38
+09:45:32 Color - NVDA Aug7th 195 Call 4,756x traded 6.00 elec live; stk ref 195.00 - looks sold
+09:46:08 Color - WULF Sep 20 Put 3k traded 4.85 live; stk ref 16.42 - looks sold
+09:47:40 Color - NVDA Jul31st 195 Put 1.8k traded 4.81 vs 193.41 stk 54d - looks bot
+09:48:46 Color - NVDA Aug 190 Put 1k traded 6.61 vs 193.48 stk 38d - looks bot
+09:49:08 Color - WULF Aug 15 Put 2,724x traded 1.29 elec live; stk ref 16.27 - looks bot
+09:49:29 Color - AAPL Jul31st 295 Put 1k traded 0.13 elec live; stk ref 338.04 - looks bot
+09:54:43 Color - WULF Jan 34 Call 1k traded 1.17 elec live; stk ref 16.31 - looks bot
+09:58:41 Color - NVDA Aug7th 180 Put 3,339x traded 1.43 elec live; stk ref 194.34 - looks sold
+09:59:30 Color - MSFT Sep 350 Put 1k traded 6.40 vs 394.80 stk 18d - looks bot
+10:00:46 Color - NVDA Jul31st 212.5 Call 7.5k traded 0.14 (looks bot), Jul31st 220 Call 7.5k traded 0.04 (looks sold), elec live; stk ref 193.70
+10:01:25 Color - NVDA Jul31st 212.5 Call 7.5k traded 0.14 (looks bot), Jul31st 220 Call 7.5k traded 0.04 (looks sold), live; stk ref 193.74
+10:02:10 Color - NVDA Dec27 210 Call 4,737x traded 37.15 elec live; stk ref 193.34 - traded mid
+10:18:21 Color - NVDA Aug7th 180 Put 3.6k traded 1.53 elec live; stk ref 193.69, 27.7k OTD - looks bot
+10:19:33 Color - TMUS Aug 195 Call 2k traded 2.95 vs 185.45 stk 30d - looks sold
+10:24:18 Color - MSFT Jul31st 400 Call 1k traded 10.76 (looks bot), Jul31st 370 Put 1k traded 5.34 (looks bot), vs 393.77 stk 22d
+10:28:10 Color - NVDA Oct 180 Put 3k traded 8.94 vs 194.26 stk 31d - looks bot
+10:29:00 Color - NVDA Jun 120 Put 3k traded 4.22 vs 193.40 stk 8d - looks sold
+10:29:24 Color - NVDA Aug7th 180 Put 1.1k traded 1.36 elec live; stk ref 194.81, 44.2k OTD - looks sold
+10:30:25 Color - AMZN Dec28 175 Put 1k traded 18.75 vs 230.10 stk 19d - looks bot
+10:31:02 Color - SNDK Jan 1200 Put 1k traded 406.60 (looks sold), Jan 1000 Put 1k traded 285.60 (looks bot), live; stk ref 1,079.89
+10:33:35 Color - WULF Aug7th 17 Put 5,201x traded 1.73 (looks sold), Aug7th 15.5 Put 5,201x traded 1.00 (looks bot), elec live; stk ref 16.37
+10:34:42 Color - NVDA Dec 220 Call 1k traded 11.90 vs 193.76 stk 38d - looks bot
+10:35:35 Color - NVDA Feb 160 Put 2k traded 9.20 vs 194.00 stk 21d - looks sold
+10:40:59 Color - NVDA Jun 150 Put 1.2k traded 10.30 vs 194.30 stk 19d - looks sold
+10:42:25 Color - MSFT Aug28th 415 Call 3.2k traded 11.62 (looks sold), Aug28th 375 Put 3.2k traded 10.60 (looks sold), live; stk ref 394.85
+10:43:43 Color - IGV Aug 80 Put 1k traded 0.50 elec live; stk ref 89.97 - looks sold
+10:44:46 Color - NVDA Jun 170 Put 1.5k traded 17.07 (looks sold), Feb 180 Put 1.5k traded 16.12 (looks sold), elec live; stk ref 193.60
+10:45:13 Color - NVDA Aug7th 180 Put 2k traded 1.54 elec live; stk ref 193.69, 56.3k OTD - looks sold
+11:19:36 Color - WULF Aug 15 Put 14k traded 1.28 (looks sold), Aug 14 Put 14k traded 0.90 (looks bot), elec live; stk ref 16.14
+11:20:02 Color - NVDA Aug7th 180 Put 1.8k traded 1.59 elec live; stk ref 193.44 - looks sold
+11:21:38 Color - IGV Aug 80 Put 1k traded 0.50 elec live; stk ref 90.41 - looks sold
+11:26:36 Color - NOW Jul31st 112 Call 1.5k traded 2.30 (looks sold), Jul31st 114 Call 1.5k traded 1.64 (looks bot), elec live; stk ref 109.96
+11:36:19 Color - WULF:
+Aug 18 Call 10k traded 1.27 - looks bot
+Aug 19 Call 5k traded 0.96 - traded mid
+Aug 23 Call 10k traded 0.29 - traded mid
+Aug 25 Call 5k traded 0.17 - looks bot
+live; stk ref 16.25
+11:50:48 Color - MSFT Aug7th 390 Call 1,172x traded 18.94 (looks sold), Aug7th 400 Call 1,172x traded 14.11 (looks bot), elec live; stk ref 395.59
+11:51:19 Color - NVDA Jul31st 190 Put 1k traded 1.60 (looks sold), Jul31st 180 Put 1k traded 0.33 (looks bot), elec live; stk ref 196.06
+11:52:33 Color - WULF Jan 18 Call 2.5k traded 4.07 (looks sold), Jan 30 Call 5k traded 1.61 (traded mid), live; stk ref 16.57
+11:53:16 Color - IGV Jul31st 87.5 Put 2k traded 0.45 live; stk ref 91.29 - looks bot
+11:56:13 Color - NVDA Oct 150 Put 2k traded 2.34 vs 196.11 stk 9d - looks bot
+12:50:04 Color - NOW Jan28 110 Put 1.4k traded 27.35 vs 110.66 stk 34d - looks sold
+12:50:27 Color - MU Jul31st 700 Put 1,999x traded 6.35 elec live; stk ref 812.80 - looks sold
+12:51:40 Color - BSX Aug7th 44 Put 3k traded 1.08 (looks sold), Aug7th 43.5 Put 3k traded 0.90 (traded mid), elec live; stk ref 46.78
+12:52:10 Color - NOW Dec 60 Put 9,095x traded 0.94 elec live; stk ref 111.30 - looks sold
+12:52:32 Color - MSFT Sep4th 430 Call 1k traded 10.40 elec live; stk ref 398.50 - looks sold
+12:53:53 Color - MSFT Aug 430 Call 1k traded 8.45 (looks sold), Aug 500 Call 1k traded 1.05 (looks bot), vs 398.80 stk 23d
+12:54:28 Color - WULF Jan 18 Call 2.5k traded 4.10 (traded mid), Jan 30 Call 5k traded 1.61 (looks sold), live; stk ref 16.62
+12:55:21 Color - NVDA Oct 220 Call 1k traded 7.67 (looks bot), Oct 230 Call 1k traded 5.17 (looks sold), elec live; stk ref 197.75
+13:07:54 Color - MSFT Sep 440 Call 1k traded 10.40 elec live; stk ref 400.00 - looks sold
+13:11:16 Color - NVDA Sep 200 Call 2.5k traded 11.90 (looks bot), Aug 200 Call 2.5k traded 6.95 (looks sold), vs 198.80 stk 6d
+13:11:56 Color - NOW Sep 110 Call 1k traded 10.70 elec live; stk ref 111.52 - looks sold
+13:12:50 Color - WULF Dec 20 Call 3,750x traded 3.14 (looks bot), Dec 29 Call 7.5k traded 1.47 (looks sold), elec live; stk ref 16.52
+13:13:23 Color - SNOW Mar 180 Put 2,795x traded 14.30 elec live; stk ref 276.10 - looks bot
+RAFAEL FERNANDES
+13:13:28 Color - GOOG Sep 350/380 CS bot 5300 for 6.31 vs 332.70
+13:14:20 Color - NVDA Jan 180 Put sold 2100 @ 13.65 vs 196.83 31d
+KAEGEN MORRIS
+13:14:25 Color - BSX:
+Jul31st 51 Call 1.4k traded 0.53 - looks sold
+Jul31st 43 Put 1.4k traded 0.50 - looks sold
+Jul31st 46 Put 1.4k traded 1.51 - looks bot
+live; stk ref 46.77
+13:15:18 Color - MU Jul31st 830 Put 1k traded 36.70 elec live; stk ref 830.00 - looks sold
+RAFAEL FERNANDES
+13:19:13 Color - NVDA Jul31st 202.50 Call 1500 traded 1.93 (looks sold), Jul 207.5 Call 1500 traded 0.78 (looks sold) live; stk ref 198.11
+13:23:32 Color - NVDA Sep 360 Call bot 2k up to 0.09 live; stk ref 198.30
+13:27:20 Color - NOW Jun 85 Put 2027x traded 10.45 elec live; stk ref 109.52 - looks bot
+KAEGEN MORRIS
+13:27:56 Color - WULF:
+Sep 12 Put 1k traded 0.77 - traded mid
+Sep 14 Put 1k traded 1.40 - traded mid
+Sep 16 Put 1k traded 2.32 - looks sold
+Sep 19 Put 1k traded 4.10 - looks sold
+elec live; stk ref 16.64
+RAFAEL FERNANDES
+13:28:00 Color - NOW Aug 85 Put 2k traded 0.40 elec live stk ref 110.19 - looks bot
+KAEGEN MORRIS
+13:30:06 Color - NVDA Sep 360 Call 1k traded 0.08 elec live; stk ref 197.88 - looks bot
+13:36:28 Color - AMZN Aug 225 Put 10k traded 7.40 (looks bot), Oct 205 Put 5k traded 5.00 (looks sold), live; stk ref 231.45
+13:37:32 Color - NVDA Jan 180 Put 2.1k traded 13.65 vs 196.83 stk 31d - looks sold
+13:38:52 Color - NOW Aug 100 Put 3k traded 2.31 vs 111.02 stk 23d - looks sold
+13:51:17 Color - MU Flex:
+
+07/31/2026 750.01 Amer PM Put 1,577x traded 11.97 (OI = 4,729)
+07/31/2026 790.01 Amer PM Put 734x traded 27.77 (OI = 2,840)
+07/31/2026 800.01 Amer PM Put 2,008x traded 28.00 (OI = 6,023)
+07/31/2026 805.01 Amer PM Put 303x traded 27.09 (OI = 911)
+07/31/2026 815.01 Amer PM Put 2,559x traded 40.09 (OI = 7,715)
+07/31/2026 820.01 Amer PM Put 2,284x traded 30.91 (OI = 6,832)
+07/31/2026 850.01 Amer PM Put 700x traded 56.87 (OI = 2,100)
+07/31/2026 885.01 Amer PM Put 100x traded 78.95 (OI = 353)
+07/31/2026 885.01 Amer PM Put 18x traded 78.96 (OI = 353)
+JASON SHAVEL
+13:51:26 WOW
+RAFAEL FERNANDES
+13:51:57 Guessing these are closing
+JASON SHAVEL
+13:52:06 ahh
+13:52:07 ok
+KAEGEN MORRIS
+13:53:30 Color - META Sep 550 Put 1k traded 19.70 vs 594.04 stk 28d - looks sold
+13:58:31 Color - GOOG Jan 300 Put 3.5k traded 13.40 vs 333.62 stk 26d - looks bot
+13:59:30 Color - AMZN Jul31st 200 Put 2k traded 0.57 elec live; stk ref 231.63 - looks bot
+14:02:16 Color - WULF Dec 20 Put 12.5k traded 6.30 vs 16.68 stk 48d - looks bot
+14:04:05 Color - NVDA Sep 195 Put 1.5k traded 11.26 vs 197.62 stk 41d - looks bot
+14:05:05 Color - AAPL Aug7th 325 Put 5,725x traded 3.01 elec live; stk ref 338.99 - looks bot
+14:19:55 Color - META Aug 700 Call 1.5k traded 5.15 vs 594.27 stk 13d - looks sold
+14:20:36 Color - AAPL Aug7th 325 Put 1,756x traded 3.05 elec live; stk ref 339.07, 14.1k OTD - looks bot
+14:22:16 Color - NVDA Mar 170 Put 2k traded 12.80 (looks bot), Mar 270 Call 2k traded 8.11 (looks bot), live; stk ref 197.98
+14:24:57 Color - WULF Sep 17 Put 5,940x traded 2.88 (looks sold), Aug 15 Put 5,940x traded 1.20 (looks bot), elec live; stk ref 16.54
+14:26:39 Color - AMZN Jul31st 250 Call 2,850x traded 2.04 (looks bot), Jul31st 255 Call 2,850x traded 1.25 (looks sold), elec live; stk ref 231.26
+14:30:39 Color - SKHY Dec 140 Call 12,073x traded 32.50 (looks bot), Dec 210 Call 24,146x traded 16.45 (looks sold), vs 133.50 stk 181k shares
+14:31:48 Color - AAPL Aug 290 Call 1,223x traded 51.10 (looks bot), Sep 295 Call 1,223x traded 48.80 (looks bot), elec live; stk ref 339.82
+14:32:36 Color - NOW Jan 90 Put 1,750x traded 7.09 (looks bot), Jan 70 Put 1,750x traded 2.29 (looks sold), elec live; stk ref 111.62
+14:34:23 Color - AAPL:
+Jul31st 310 Put 2.4k traded 0.37 - traded mid
+Jul31st 315 Put 4.2k traded 0.58 - traded mid
+Jul31st 320 Put 4.2k traded 0.99 - traded mid
+Jul31st 325 Put 6k traded 1.68 - looks bot
+elec live; stk ref 339.52
+14:39:58 Color - NBIS Flex:
+
+07/31/2026 170.01 Amer PM Put 11,000x traded 13.00 (OI = 31,929)
+08/21/2026 130.01 Amer PM Put 25,000x traded 11.70 (OI = 0)
+vs 166.00 30k shares
+14:42:49 Color - MSFT Sep 400 Put 1.3k traded 24.07 (looks bot), Sep 350 Put 1.3k traded 5.82 (looks sold), vs 397.26 stk 31d
+14:43:26 Color - BSX Jul31st 49 Call 2,780x traded 1.00 elec live; stk ref 46.55 - looks bot
+14:44:11 Color - BSX Jul31st 55 Call 1,233x traded 0.10 elec live; stk ref 46.59 - looks sold
+14:56:30 Color - NVDA Mar 110 Put 1k traded 1.82 vs 197.00 stk 5d - looks sold
+15:05:27 Color - WULF Apr 17 Put 2,990x traded 5.40 (looks bot), Jan 18 Put 2,990x traded 5.28 (looks sold), elec live; stk ref 16.51
+15:06:23 Color - NVDA Aug 215 Call 1.6k traded 2.30 live; stk ref 197.09 - looks bot
+15:18:17 Color - BE Flex:
+
+07/31/2026 197.51 Amer PM Put 2,551x traded 38.39, vs 165.00 stk 72d (OI = 22,320) - looks sold
+15:19:13 Color - SKHY Dec 220 Call 5k traded 14.50 vs 131.00 stk 34d - looks sold
+15:19:50 Color - NVDA Jul31st 175 Put 5k traded 0.14 elec live; stk ref 196.92 - looks bot
+15:22:54 Color - META Aug 620 Call 1k traded 22.40 elec live; stk ref 594.17 - looks sold
+15:24:41 *** This post was removed ***
+15:26:41 *** KAEGEN MORRIS (WALLACHBETH CAPITAL LLC) removed a post from 15:24:41
+KAEGEN MORRIS
+15:27:51 Color - NVDA Nov 135 Put 1,250x traded 1.95 vs 197.01 stk 7d - looks sold
+15:50:03 Color - SNDK Flex:
+
+07/31/2026 1000.01 Amer PM Put 406x traded 22.08 (OI = 1,218)
+07/31/2026 1100.01 Amer PM Put 2,000x traded 60.13 (OI = 6,000)
+07/31/2026 1310.01 Amer PM Put 895x traded 208.33 (OI = 2,685)
+07/31/2026 1350.01 Amer PM Put 154x traded 239.98 (OI = 558)
+07/31/2026 1350.01 Amer PM Put 32x traded 239.97 (OI = 558)
+07/31/2026 1390.01 Amer PM Put 2,446x traded 277.41 (OI = 7,335)
+15:55:29 Color - NBIS Flex:
+
+08/21/2026 120.01 Amer PM Put 15,000x traded 8.17, vs 169.38 stk 16d (OI = 0) - looks bot
+RAFAEL FERNANDES
+15:57:58 Color - IGV Jul31st 88 Call sold 100k @ 3.46 vs 91.00
+KAEGEN MORRIS
+16:09:21 Color - NBIS Flex:
+
+07/31/2026 130.01 Amer PM Put 1,240x traded 0.94 (OI = 7,440)
+07/31/2026 150.01 Amer PM Put 2,500x traded 3.57 (OI = 15,000)
+07/31/2026 165.01 Amer PM Put 1,947x traded 8.90 (OI = 11,677)
+07/31/2026 170.01 Amer PM Put 5,322x traded 10.54 (OI = 31,929)
+07/31/2026 172.51 Amer PM Put 1,911x traded 12.22 (OI = 11,470)
+07/31/2026 180.01 Amer PM Put 1,250x traded 16.50 (OI = 7,504)
+07/31/2026 190.01 Amer PM Call 1,103x traded 2.81 (OI = 6,614)
+07/31/2026 200.01 Amer PM Call 345x traded 1.32 (OI = 2,066)
+07/31/2026 220.01 Amer PM Call 64x traded 0.07 (OI = 467)
+07/31/2026 220.01 Amer PM Call 14x traded 0.08 (OI = 467)
+16:10:18 Color - META Aug 625 Put 1k traded 50.30 live; stk ref 594.93 - looks bot
+16:10:55 Color - NVDA Sep 290 Call 1k traded 0.28 elec live; stk ref 197.68 - traded mid
+16:11:18 Color - NVDA Aug 215 Call 3.2k traded 2.39 live; stk ref 197.51 - looks bot
+16:11:45 Color - NVDA Sep4th 195 Call 1k traded 13.30 elec live; stk ref 197.42 - looks sold
+16:12:52 Color - KLAC Jun 165 Put 1k traded 38.00 live; stk ref 193.15 - looks bot
+16:13:13 Color - MU Jul31st 520 Put 3.9k traded 0.25 live; stk ref 825.80 - looks sold
+16:13:36 Color - AAPL Aug 310 Put 3.5k traded 2.22 elec live; stk ref 339.30 - looks bot
+16:23:04 Color - META Jan 750 Call 16k traded 25.58 vs 595.00 stk 28d - looks sold
+16:24:12 Color - MSFT Mar 300 Put 1k traded 8.28 vs 395.00 stk 12d - looks sold
+16:25:10 Color - SKHY Dec 95 Put 1.2k traded 13.50 vs 134.08 stk 20d - looks bot
+16:25:37 Color - SKHY Aug7th 75 Put 10k traded 0.25 live; stk ref 132.63 - looks bot
+16:26:34 Color - BSX Sep 50 Call 2.5k traded 2.07 vs 46.40 stk 39d - looks sold
+16:27:20 Color - SKHY Jul31st 140 Call 3k traded 4.93 (looks bot), Jul31st 155 Call 3k traded 1.65 (looks sold), elec live; stk ref 132.06
+16:27:48 Color - NVDA Aug 215 Call 4k traded 2.31 live; stk ref 197.16 - looks bot
+16:28:12 Color - WIX Aug 55 Put 1k traded 4.00 live; stk ref 57.95 - looks sold
+16:29:38 Color - NVDA Mar 145 Put 2k traded 6.15 vs 197.50 stk 14d - looks sold
+16:30:59 Color - NVDA Jul31st 215 Call 1k traded 0.15 (looks bot), Jul31st 222.5 Call 2k traded 0.03 (looks sold), elec live; stk ref 197.68
+16:32:05 Color - SNDK Jun 1020 Call 2.5k traded 498.00 vs 1,116.57 stk 74d - looks sold
+16:32:39 Color - NVDA Jul29th 202.5 Call 2.5k traded 0.39 elec live; stk ref 197.29 - looks bot
+16:34:35 Color - NVDA Aug 215 Call 2k traded 2.40 elec live; stk ref 197.50 - traded mid
