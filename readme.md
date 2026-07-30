@@ -45,24 +45,30 @@ python src/run_pipeline.py
 Asks which report(s) you want, then runs them off the same `data/original_input.txt`:
 
 ```
-  1) Trade recap  - listed color, OI change from Bloomberg
-  2) Flex color   - flex trades, OI change from OCC reports
-  3) Both
+  1) Trade recap    - branded HTML recap  (trade_recap.html)
+  2) Flex color     - OI change from OCC  (flex_output.txt)
+  3) OI / Volume    - for Element Chat    (final_output.txt)
+  4) All three
 ```
 
-- **Trade recap** runs `template.py` → `bloomberg_tickers.py` → `generate_recap_input_txt.py` → `generate_trade_recap.py`, producing `data/recap_input.txt` and the branded `data/trade_recap.html`. Requires a logged-in Bloomberg Terminal (or `--from-excel`).
-- **Flex color** runs `occ_flex.py`, producing `data/flex_output.txt`. Needs no Terminal — see the Flex Color section below.
+Pick one, several (`1,3`), or `4` for all.
+
+| # | Report | Runs | Output | Needs |
+|---|---|---|---|---|
+| 1 | Trade recap | `generate_recap_input_txt.py` → `generate_trade_recap.py` | `recap_input.txt`, `trade_recap.html` | Bloomberg |
+| 2 | Flex color | `occ_flex.py` | `flex_output.txt` | OCC (no Terminal) |
+| 3 | OI / Volume | `generate_final_output.py` | `final_output.txt` | Bloomberg |
+
+Reports 1 and 3 share a prep step (`template.py` → `bloomberg_tickers.py`), which runs once even when both are selected. Report 2 doesn't need it and skips it.
 
 Flags:
 
-- `--reports recap|flex|both` — skip the menu
-- `--from-excel` — use `data/numbers.xlsx` instead of querying Bloomberg (trade recap only)
+- `--reports recap,flex,oi` (or `all`) — skip the menu
+- `--from-excel` — use `data/numbers.xlsx` instead of querying Bloomberg (reports 1 and 3)
 - `--date M/D/YYYY` — trade date for the flex report (default: previous business day)
 - `--input <path>` — start from a different chat log (default `data/original_input.txt`)
 
-When running both, a flex failure (OCC hasn't published yet, no network) is reported as a warning and leaves the completed trade recap intact.
-
-`generate_final_output.py` (step 5a below) is not part of `run_pipeline.py` yet — run it separately.
+When you ask for more than one report, a failure in any single one is reported as a warning and leaves the others intact; the summary lists what succeeded and what failed. Asking for one report only lets the error surface normally.
 
 ### Or step through it manually
 
@@ -136,7 +142,7 @@ Color - SNDK Flex:
 Notes:
 
 - No Bloomberg Terminal or credentials needed — the reports come from OCC's public batch endpoint (`marketdata.theocc.com/flex-reports`). Reports are cached under `data/occ/` and reused on re-runs.
-- `--date` defaults to the previous business day. OCC publishes the report for a given activity date the next morning, so this matches the normal next-morning recap cadence.
+- `--date` defaults to the previous business day. OCC publishes the report for a given activity date the next morning, so this matches the normal next-morning recap cadence. A date OCC has no report for (weekend, holiday, not published yet) fails with a clear error rather than reporting zeros.
 - Any hand-filled `(OI = n)` annotation in the chat line is stripped and replaced by the OCC figure.
 - Volume is the total quantity traded in that series across the day's flex lines — the OCC report has no volume field.
 - OCC's symbol prefix encodes exercise and settlement style (`1`/`2` equity American/European, `3`/`4` index-style, which is where ETF flex like SMH lands). The script tries both prefixes for a line's exercise style and warns on stderr if the series is in neither report.

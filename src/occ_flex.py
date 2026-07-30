@@ -33,6 +33,12 @@ OCC_URL = ('https://marketdata.theocc.com/flex-reports'
 OCC_CACHE_DIR = '../data/occ'
 OUTPUT_FILE = '../data/flex_output.txt'
 
+# OCC answers an unavailable date with HTTP 200 and the body "File requested
+# does not exist.", so the status code proves nothing — the report header is
+# what tells us we actually got a report. Without this check a bad date parses
+# to zero rows and every OI change silently reads as 0.
+REPORT_MARKER = 'FLEX OPEN INTEREST REPORT'
+
 # `1AAL     C   09 02 2026  00021 960      0.0450     52850`
 # Leading digit is the OCC flex prefix: 1 = American equity (a.m. settled for
 # index), 2 = European equity, 3 = American index p.m., 4 = European index p.m.
@@ -67,14 +73,21 @@ def previous_business_day(ref=None):
     return d
 
 
+def _is_report(text):
+    return REPORT_MARKER in text
+
+
 def download_flex_oi(report_date):
     """Download (or reuse cached) OCC equity flex OI report; return its path."""
     os.makedirs(OCC_CACHE_DIR, exist_ok=True)
     path = os.path.join(OCC_CACHE_DIR,
                         f"flex_oi_{report_date.strftime('%Y%m%d')}.txt")
     if os.path.exists(path) and os.path.getsize(path) > 0:
-        print(f"Using cached OCC report {path}")
-        return path
+        with open(path, 'r') as f:
+            if _is_report(f.read(4096)):
+                print(f"Using cached OCC report {path}")
+                return path
+        print(f"Cached {path} isn't a valid report — re-downloading.")
 
     url = OCC_URL.format(yyyymmdd=report_date.strftime('%Y%m%d'))
     print(f"Downloading OCC flex OI report for {report_date} ...")
@@ -83,10 +96,12 @@ def download_flex_oi(report_date):
         data = resp.read()
 
     text = data.decode('utf-8', errors='replace')
-    if not text.strip() or text.lstrip().lower().startswith(('<!doctype', '<html')):
+    if not _is_report(text):
+        detail = ' '.join(text.split())[:120] or '(empty response)'
         raise RuntimeError(
-            f"OCC returned no report for {report_date} (holiday or not yet "
-            f"published). URL: {url}")
+            f"OCC has no flex OI report for {report_date} — it may be a "
+            f"weekend/holiday, or not published yet (reports appear the "
+            f"morning after the activity date). OCC said: {detail!r}")
 
     with open(path, 'w') as f:
         f.write(text)

@@ -7,7 +7,7 @@ from datetime import date
 os.chdir(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
 sys.path.insert(0, 'src')
 from occ_flex import (parse_chat, parse_flex_oi_report, series_keys,
-                      resolve_key, previous_business_day)
+                      resolve_key, previous_business_day, _is_report)
 
 REPORT_SNIPPET = """\
  THE OPTIONS CLEARING CORPORATION - CHICAGO, ILLINOIS                             SYSTEM DATE 07/25/26    TIME 01:51:39    PAGE     1
@@ -153,6 +153,20 @@ class TestResolveKey(unittest.TestCase):
         trade = {'ticker': 'ZZZZ', 'right': 'Put', 'exercise': 'Amer',
                  'expiry': date(2026, 9, 2), 'strike': 10.0}
         self.assertEqual(resolve_key(trade, self.oi, {})[0], '1ZZZZ')
+
+
+class TestReportValidation(unittest.TestCase):
+    """OCC answers an unavailable date with HTTP 200 and a plain-text excuse."""
+
+    def test_real_report_accepted(self):
+        self.assertTrue(_is_report(REPORT_SNIPPET))
+
+    def test_missing_file_message_rejected(self):
+        self.assertFalse(_is_report('File requested does not exist.'))
+
+    def test_empty_and_html_rejected(self):
+        self.assertFalse(_is_report(''))
+        self.assertFalse(_is_report('<!doctype html><html><body>x</body></html>'))
 
 
 class TestPreviousBusinessDay(unittest.TestCase):

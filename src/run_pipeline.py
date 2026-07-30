@@ -1,27 +1,33 @@
 """
-Run the reports end-to-end from a single chat log.
+Run any combination of the three reports from a single chat log.
 
-Both reports read the same original_input.txt:
+All three read the same original_input.txt:
 
-    Trade recap (Bloomberg OI change)
+    Shared prep (needed by the recap and OI/volume reports)
         original_input.txt
             --(template.py)-->          template.txt
             --(bloomberg_tickers.py)--> bloomberg_tickers.txt
-            --(generate_recap_input_txt.py + Bloomberg)--> recap_input.txt
-            --(generate_trade_recap.py)--> trade_recap.html
 
-    Flex color (OCC OI change)
-        original_input.txt
-            --(occ_flex.py + OCC flex reports)--> flex_output.txt
+    recap  Trade recap HTML
+            --(generate_recap_input_txt.py + Bloomberg)--> recap_input.txt
+            --(generate_trade_recap.py)-->                 trade_recap.html
+
+    oi     OI change / Volume report (Element Chat)
+            --(generate_final_output.py + Bloomberg)-->    final_output.txt
+
+    flex   Flex color (no Bloomberg, no shared prep)
+            --(occ_flex.py + OCC flex reports)-->          flex_output.txt
 
 Each step is still runnable on its own (each script keeps its own __main__);
 this just chains them.
 
 Usage:
-    python run_pipeline.py                  # menu: recap, flex, or both
-    python run_pipeline.py --reports both   # skip the menu
+    python run_pipeline.py                    # menu
+    python run_pipeline.py --reports all
+    python run_pipeline.py --reports recap,flex
+    python run_pipeline.py --reports oi
     python run_pipeline.py --reports flex --date 7/24/2026
-    python run_pipeline.py --from-excel     # use numbers.xlsx instead of Bloomberg
+    python run_pipeline.py --from-excel       # numbers.xlsx instead of Bloomberg
     python run_pipeline.py --input ../data/other_input.txt
 """
 import argparse
@@ -36,6 +42,7 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)))
 import template
 import bloomberg_tickers
 import generate_recap_input_txt
+import generate_final_output
 import generate_trade_recap
 import occ_flex
 
@@ -45,17 +52,20 @@ FILTERED_FILE = '../data/filtered_input.txt'
 TICKERS_FILE = '../data/bloomberg_tickers.txt'
 RECAP_INPUT_FILE = '../data/recap_input.txt'
 RECAP_HTML_FILE = '../data/trade_recap.html'
+FINAL_OUTPUT_FILE = '../data/final_output.txt'
 FLEX_OUTPUT_FILE = '../data/flex_output.txt'
 
-REPORT_CHOICES = ('recap', 'flex', 'both')
+# Menu order; also the order reports run in.
+REPORTS = ('recap', 'flex', 'oi')
 
 MENU = """
 ============================================================
  Which report(s) do you want?
 ============================================================
-  1) Trade recap  - listed color, OI change from Bloomberg
-  2) Flex color   - flex trades, OI change from OCC reports
-  3) Both
+  1) Trade recap    - branded HTML recap  (trade_recap.html)
+  2) Flex color     - OI change from OCC  (flex_output.txt)
+  3) OI / Volume    - for Element Chat    (final_output.txt)
+  4) All three
 """
 
 
@@ -63,97 +73,159 @@ def _banner(step, title):
     print(f"\n{'=' * 60}\n[Step {step}] {title}\n{'=' * 60}")
 
 
+def parse_reports(value):
+    """'all' / 'recap,flex' / '1,3' -> ordered list of report names."""
+    if value.strip().lower() in ('all', '4'):
+        return list(REPORTS)
+
+    chosen = []
+    for token in value.replace(' ', '').split(','):
+        if not token:
+            continue
+        if token.isdigit():
+            idx = int(token) - 1
+            if not 0 <= idx < len(REPORTS):
+                raise ValueError(f"'{token}' is not one of 1-4")
+            name = REPORTS[idx]
+        elif token.lower() in REPORTS:
+            name = token.lower()
+        else:
+            raise ValueError(f"'{token}' is not a known report")
+        if name not in chosen:
+            chosen.append(name)
+
+    if not chosen:
+        raise ValueError("no reports selected")
+    return [r for r in REPORTS if r in chosen]
+
+
 def prompt_for_reports():
-    """Ask which reports to run. Falls back to 'both' when not interactive."""
+    """Ask which reports to run. Falls back to all when not interactive."""
     if not sys.stdin.isatty():
-        print("Non-interactive shell — defaulting to both reports.")
-        return 'both'
+        print("Non-interactive shell — defaulting to all reports.")
+        return list(REPORTS)
 
     print(MENU)
     while True:
-        choice = input("Enter 1, 2 or 3 [3]: ").strip() or '3'
-        if choice in ('1', '2', '3'):
-            return REPORT_CHOICES[int(choice) - 1]
-        print("  Please enter 1, 2 or 3.")
+        raw = input("Enter numbers (e.g. 1,3) or 4 for all [4]: ").strip() or '4'
+        try:
+            return parse_reports(raw)
+        except ValueError as exc:
+            print(f"  {exc} — try again.")
 
 
-def run_recap(input_file, from_excel=False, step=1):
+def run_prep(input_file, step):
+    """template.txt + bloomberg_tickers.txt — shared by the recap and OI reports."""
     _banner(step, "Parse chat log -> template.txt")
     template.template(input_file, TEMPLATE_FILE)
 
     _banner(step + 1, "Build Bloomberg tickers -> bloomberg_tickers.txt")
     bloomberg_tickers.filter_oi_change_lines(TEMPLATE_FILE, FILTERED_FILE)
     bloomberg_tickers.process_file_to_bloomberg(FILTERED_FILE, TICKERS_FILE)
+    return step + 2
 
+
+def run_recap(from_excel, step):
     source = "numbers.xlsx" if from_excel else "Bloomberg"
-    _banner(step + 2, f"Fill OI change + volume ({source}) -> recap_input.txt")
+    _banner(step, f"Fill OI change + volume ({source}) -> recap_input.txt")
     generate_recap_input_txt.main(from_excel=from_excel)
 
-    _banner(step + 3, "Render recap -> trade_recap.html")
+    _banner(step + 1, "Render recap -> trade_recap.html")
     date_str, trades = generate_trade_recap.parse_file(RECAP_INPUT_FILE)
     html = generate_trade_recap.build_html(date_str, trades)
     with open(RECAP_HTML_FILE, 'w', encoding='utf-8') as f:
         f.write(html)
     print(f"  -> date: {date_str}, {len(trades)} trades")
     print(f"Output written to {RECAP_HTML_FILE}")
-    return step + 4
+    return step + 2
 
 
-def run_flex(input_file, trade_date=None, step=1):
+def run_oi(from_excel, step):
+    source = "numbers.xlsx" if from_excel else "Bloomberg"
+    _banner(step, f"OI change / Volume ({source}) -> final_output.txt")
+    # refresh=False: run_prep already rebuilt template.txt and the ticker list.
+    generate_final_output.main(from_excel=from_excel, refresh=False)
+    return step + 1
+
+
+def run_flex(input_file, trade_date, step):
     _banner(step, "Flex color: OCC open interest -> flex_output.txt")
     occ_flex.run(input_file, trade_date=trade_date, output=FLEX_OUTPUT_FILE)
     return step + 1
 
 
-def run(input_file=INPUT_FILE, from_excel=False, reports='both', trade_date=None):
+def run(input_file=INPUT_FILE, from_excel=False, reports=None, trade_date=None):
+    reports = reports or list(REPORTS)
     outputs = []
+    failures = []
     step = 1
 
-    if reports in ('recap', 'both'):
-        step = run_recap(input_file, from_excel=from_excel, step=step)
-        outputs += [RECAP_INPUT_FILE, RECAP_HTML_FILE]
+    # Only the Bloomberg-backed reports need the template/ticker chain.
+    if {'recap', 'oi'} & set(reports):
+        step = run_prep(input_file, step)
 
-    if reports in ('flex', 'both'):
-        if reports == 'both':
-            # A flex failure (no OCC report yet, network down) shouldn't throw
-            # away the recap that already succeeded.
-            try:
-                step = run_flex(input_file, trade_date=trade_date, step=step)
-                outputs.append(FLEX_OUTPUT_FILE)
-            except Exception as exc:
-                print(f"\nWARNING: flex report failed: {exc}", file=sys.stderr)
-                print("The trade recap above is still valid.", file=sys.stderr)
-        else:
-            step = run_flex(input_file, trade_date=trade_date, step=step)
-            outputs.append(FLEX_OUTPUT_FILE)
+    # A report that blows up shouldn't discard the ones that already succeeded,
+    # so each is isolated when more than one was requested.
+    def _attempt(name, fn, produced):
+        nonlocal step
+        try:
+            step = fn(step)
+            outputs.extend(produced)
+        except Exception as exc:
+            if len(reports) == 1:
+                raise
+            failures.append((name, exc))
+            print(f"\nWARNING: {name} report failed: {exc}", file=sys.stderr)
 
-    print(f"\n{'=' * 60}\nDone. Ready: {', '.join(os.path.basename(o) for o in outputs)}"
-          f"\n{'=' * 60}")
+    if 'recap' in reports:
+        _attempt('trade recap', lambda s: run_recap(from_excel, s),
+                 [RECAP_INPUT_FILE, RECAP_HTML_FILE])
+
+    if 'flex' in reports:
+        _attempt('flex color', lambda s: run_flex(input_file, trade_date, s),
+                 [FLEX_OUTPUT_FILE])
+
+    if 'oi' in reports:
+        _attempt('OI / volume', lambda s: run_oi(from_excel, s),
+                 [FINAL_OUTPUT_FILE])
+
+    print(f"\n{'=' * 60}")
+    if outputs:
+        print("Done. Ready: "
+              + ', '.join(os.path.basename(o) for o in outputs))
+    if failures:
+        print("Failed: " + ', '.join(name for name, _ in failures))
+    print('=' * 60)
 
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
-        description="Run the trade recap and/or flex color reports from "
-                    "original_input.txt.")
+        description="Run the trade recap, flex color and/or OI-volume reports "
+                    "from original_input.txt.")
     parser.add_argument(
         '--input', default=INPUT_FILE,
         help=f"Raw chat log to start from (default: {INPUT_FILE}).")
     parser.add_argument(
-        '--reports', choices=REPORT_CHOICES,
-        help="Which report(s) to run. Omit to be asked.")
+        '--reports',
+        help="Comma-separated: recap, flex, oi — or 'all'. Omit to be asked.")
     parser.add_argument(
         '--from-excel', action='store_true',
         help="Read OI/volume from numbers.xlsx instead of querying Bloomberg "
-             "(trade recap only).")
+             "(does not affect the flex report).")
     parser.add_argument(
         '--date',
         help="Trade date M/D/YYYY for the flex report (default: previous "
              "business day).")
     args = parser.parse_args()
 
+    try:
+        reports = parse_reports(args.reports) if args.reports else prompt_for_reports()
+    except ValueError as exc:
+        parser.error(f"--reports: {exc}")
+
     trade_date = (datetime.strptime(args.date, '%m/%d/%Y').date()
                   if args.date else None)
     run(input_file=args.input,
         from_excel=args.from_excel,
-        reports=args.reports or prompt_for_reports(),
+        reports=reports,
         trade_date=trade_date)
