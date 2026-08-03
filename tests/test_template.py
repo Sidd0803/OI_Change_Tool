@@ -3,7 +3,7 @@ import os
 import unittest
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'src'))
-from template import parse_line_options
+from template import parse_line_options, extract_color_lines
 
 
 class TestPatternA(unittest.TestCase):
@@ -128,6 +128,39 @@ class TestEdgeCases(unittest.TestCase):
         # If a line somehow produces the same option twice, it should only appear once
         result = parse_line_options("AAPL Jun 150 Call 1k and Jun 150 Call 2k live")
         self.assertEqual(result, ["AAPL Jun 150 Call"])
+
+
+class TestFlexHeadersExcluded(unittest.TestCase):
+    """
+    Flex belongs to the flex report. Its block headers used to slip through
+    as color lines and land in template.txt as a description with no legs,
+    which then showed up as an empty stub in the OI/volume report.
+    """
+
+    def test_flex_header_dropped(self):
+        lines = ["15:45:43 Color - MU Flex:\n"]
+        self.assertEqual(extract_color_lines(lines), [])
+
+    def test_listed_vs_flex_header_dropped(self):
+        lines = ["14:26:53 Color - BE Listed vs Flex:\n"]
+        self.assertEqual(extract_color_lines(lines), [])
+
+    def test_ordinary_color_still_kept(self):
+        lines = ["09:31:30 Color - AAPL Jul31st 287.5 Put 4,695x traded 0.03 live\n"]
+        result = extract_color_lines(lines)
+        self.assertEqual(len(result), 1)
+        self.assertEqual(result[0][0], '09:31:30')
+        self.assertTrue(result[0][1].startswith('AAPL Jul31st'))
+
+    def test_ticker_containing_flex_not_dropped(self):
+        # Only a trailing "Flex:" header is a flex block — a normal trade line
+        # that happens to mention flex must survive.
+        lines = ["10:00:00 Color - FLEX Aug 20 Call 1k traded 1.00 live\n"]
+        self.assertEqual(len(extract_color_lines(lines)), 1)
+
+    def test_multiline_block_header_still_dropped(self):
+        lines = ["09:40:41 Color - AMZN:\n"]
+        self.assertEqual(extract_color_lines(lines), [])
 
 
 if __name__ == '__main__':

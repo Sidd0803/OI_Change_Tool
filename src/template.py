@@ -141,6 +141,13 @@ _TIME_RE  = re.compile(r'^\d{2}:\d{2}:\d{2}\s+')
 # Matches "Color - TICKER:" with nothing meaningful after the colon (multi-line block header).
 _MULTILINE_HEADER_RE = re.compile(r'Color\s*-\s+([A-Za-z]+):\s*$', re.IGNORECASE)
 
+# Flex block headers: "Color - MU Flex:" / "Color - BE Listed vs Flex:".
+# Flex belongs to occ_flex.py and its own report, so these are dropped here
+# rather than becoming a block with a description and no legs. They slip past
+# _MULTILINE_HEADER_RE because that only allows a single word before the colon.
+_FLEX_HEADER_RE = re.compile(r'Color\s*-\s+\S+\s+(?:Listed\s+vs\s+)?Flex:\s*$',
+                             re.IGNORECASE)
+
 # Matches a line that starts with an expiry+strike+call/put (option detail line in a block).
 _OPTION_LINE_START_RE = re.compile(rf'^\s*{EXPIRY_RE}\s+{STRIKE_RE}\s+{OPT_RE}', re.IGNORECASE)
 
@@ -151,14 +158,15 @@ def extract_color_lines(raw_lines):
     Finds every line containing 'Color -', captures any leading HH:MM:SS
     timestamp, and returns the text after 'Color - '.
     Skips multi-line block headers (Color - TICKER:) — those are handled
-    by extract_multiline_color_blocks.
+    by extract_multiline_color_blocks — and flex headers, which belong to
+    the flex report instead.
     """
     result = []
     for line in raw_lines:
         line = line.rstrip('\n')
         m = _COLOR_RE.search(line)
         if m:
-            if _MULTILINE_HEADER_RE.search(line):
+            if _MULTILINE_HEADER_RE.search(line) or _FLEX_HEADER_RE.search(line):
                 continue
             cleaned = line[m.end():]
             ts_match = _TIME_RE.match(line)
