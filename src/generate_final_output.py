@@ -1,57 +1,25 @@
-import argparse
 import os
 import re
 
-# Ensure the '../data/...' relative paths used here and by every step we call
-# into (template.py, bloomberg_tickers.py) resolve regardless of where this
-# script is launched from.
+# Ensure the '../data/...' relative paths used here resolve regardless of where
+# this module is imported from.
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 import openpyxl
 
-import bloomberg_tickers
-import template as template_mod
 from bloomberg_fetch import fetch_blocks
 
-INPUT_FILE = '../data/original_input.txt'
 TEMPLATE_FILE = '../data/template.txt'
-FILTERED_FILE = '../data/filtered_input.txt'
 EXCEL_FILE = '../data/numbers.xlsx'
 BLOOMBERG_TICKERS_FILE = '../data/bloomberg_tickers.txt'
 OUTPUT_FILE = '../data/final_output.txt'
 
-
-def _is_stale(derived, source):
-    """True if `derived` is missing or older than `source`."""
-    if not os.path.exists(derived):
-        return True
-    return os.path.getmtime(source) > os.path.getmtime(derived)
-
-
-def refresh_derived_files():
-    """
-    Rebuild the derived files whose ultimate source is original_input.txt:
-
-        original_input.txt -> template.txt -> filtered_input.txt -> bloomberg_tickers.txt
-
-    Each step runs only when its input is newer than its output, so a hand-edit
-    to template.txt is preserved until original_input.txt changes again.
-    """
-    if not os.path.exists(INPUT_FILE):
-        print(f"WARNING: {INPUT_FILE} not found — using {TEMPLATE_FILE} as-is.")
-        return
-
-    if _is_stale(TEMPLATE_FILE, INPUT_FILE):
-        print(f"{TEMPLATE_FILE} is out of date — rebuilding from {INPUT_FILE}")
-        template_mod.template(INPUT_FILE, TEMPLATE_FILE)
-    else:
-        print(f"{TEMPLATE_FILE} is up to date with {INPUT_FILE}")
-
-    if _is_stale(FILTERED_FILE, TEMPLATE_FILE):
-        bloomberg_tickers.filter_oi_change_lines(TEMPLATE_FILE, FILTERED_FILE)
-
-    if _is_stale(BLOOMBERG_TICKERS_FILE, FILTERED_FILE):
-        bloomberg_tickers.process_file_to_bloomberg(FILTERED_FILE, BLOOMBERG_TICKERS_FILE)
+# This module used to rebuild its own derived files when original_input.txt
+# looked newer by mtime. That check has been removed: run_pipeline.py now
+# rebuilds the whole chain from original_input.txt unconditionally, and mtime
+# comparison was unreliable here anyway — the repo lives in OneDrive, whose
+# sync can land a fresh input with an mtime older than the derived files, in
+# which case the check silently reused stale data.
 
 
 def get_ticker(line):
@@ -87,10 +55,7 @@ def parse_excel_file(filepath):
     return blocks
 
 
-def main(from_excel=False, refresh=True):
-    if refresh:
-        refresh_derived_files()
-
+def main(from_excel=False):
     with open(TEMPLATE_FILE, 'r') as f:
         template_lines = f.readlines()
 
@@ -174,16 +139,5 @@ def main(from_excel=False, refresh=True):
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(
-        description="Generate final_output.txt (OI Change report for Element "
-                    "Chat) from template.txt, sourcing OI change + volume from "
-                    "Bloomberg (default) or numbers.xlsx.")
-    parser.add_argument(
-        '--from-excel', action='store_true',
-        help="Read OI/volume from numbers.xlsx instead of querying Bloomberg.")
-    parser.add_argument(
-        '--no-refresh', action='store_true',
-        help="Use template.txt as-is instead of rebuilding it from "
-             "original_input.txt when that file is newer.")
-    args = parser.parse_args()
-    main(from_excel=args.from_excel, refresh=not args.no_refresh)
+    import entrypoint
+    entrypoint.refuse('generate_final_output.py')

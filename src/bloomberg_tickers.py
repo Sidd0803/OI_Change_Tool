@@ -143,5 +143,5 @@ def process_file_to_bloomberg(input_file, output_file):
 
 
 if __name__ == "__main__":
-    filter_oi_change_lines("../data/template.txt", "../data/filtered_input.txt")
-    process_file_to_bloomberg("../data/filtered_input.txt", "../data/bloomberg_tickers.txt")
+    import entrypoint
+    entrypoint.refuse("bloomberg_tickers.py")

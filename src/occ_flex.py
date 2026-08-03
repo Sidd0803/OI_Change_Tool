@@ -16,7 +16,6 @@ Usage:
     python occ_flex.py --input <chat.txt> [--date M/D/YYYY] [--output <path>]
 """
 
-import argparse
 import os
 import re
 import sys
@@ -263,23 +262,6 @@ def run(input_file, trade_date=None, output=OUTPUT_FILE):
     return blocks
 
 
-def main():
-    parser = argparse.ArgumentParser(
-        description="Extract flex color from a Bloomberg chat log and fill "
-                    "OI change from OCC flex open interest reports.")
-    parser.add_argument('--input', required=True,
-                        help="Path to the day's chat log text file.")
-    parser.add_argument('--date',
-                        help="Trade date M/D/YYYY (default: previous "
-                             "business day).")
-    parser.add_argument('--output', default=OUTPUT_FILE,
-                        help=f"Output path (default: {OUTPUT_FILE}).")
-    args = parser.parse_args()
-
-    trade_date = (datetime.strptime(args.date, '%m/%d/%Y').date()
-                  if args.date else None)
-    run(args.input, trade_date=trade_date, output=args.output)
-
-
 if __name__ == '__main__':
-    main()
+    import entrypoint
+    entrypoint.refuse('occ_flex.py')

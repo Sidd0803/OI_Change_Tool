@@ -272,4 +272,5 @@ def template(input_file, output_file):
 
 
 if __name__ == "__main__":
-    template("../data/original_input.txt", "../data/template.txt")
+    import entrypoint
+    entrypoint.refuse("template.py")

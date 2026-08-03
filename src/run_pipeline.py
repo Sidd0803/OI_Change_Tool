@@ -39,6 +39,7 @@ from datetime import datetime
 # of where this script is launched from.
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
+import entrypoint
 import template
 import bloomberg_tickers
 import generate_recap_input_txt
@@ -143,8 +144,7 @@ def run_recap(from_excel, step):
 def run_oi(from_excel, step):
     source = "numbers.xlsx" if from_excel else "Bloomberg"
     _banner(step, f"OI change / Volume ({source}) -> final_output.txt")
-    # refresh=False: run_prep already rebuilt template.txt and the ticker list.
-    generate_final_output.main(from_excel=from_excel, refresh=False)
+    generate_final_output.main(from_excel=from_excel)
     return step + 1
 
 
@@ -160,7 +160,14 @@ def run(input_file=INPUT_FILE, from_excel=False, reports=None, trade_date=None):
     failures = []
     step = 1
 
-    # Only the Bloomberg-backed reports need the template/ticker chain.
+    # Every report starts here — no report may be built from anything else.
+    entrypoint.require_input(input_file)
+    print(f"Source: {input_file}")
+
+    # Only the Bloomberg-backed reports need the template/ticker chain; the
+    # flex report reads the chat log directly. Either way the chain is rebuilt
+    # from the input on every run, so a report can never reuse stale
+    # intermediates.
     if {'recap', 'oi'} & set(reports):
         step = run_prep(input_file, step)
 

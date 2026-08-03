@@ -1,4 +1,3 @@
-import argparse
 import re
 from datetime import date, timedelta
 
@@ -152,11 +151,5 @@ def main(from_excel=False):
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(
-        description="Generate recap_input.txt from template.txt, sourcing OI "
-                    "change + volume from Bloomberg (default) or numbers.xlsx.")
-    parser.add_argument(
-        '--from-excel', action='store_true',
-        help="Read OI/volume from numbers.xlsx instead of querying Bloomberg.")
-    args = parser.parse_args()
-    main(from_excel=args.from_excel)
+    import entrypoint
+    entrypoint.refuse('generate_recap_input_txt.py')

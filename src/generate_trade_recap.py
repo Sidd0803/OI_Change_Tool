@@ -227,4 +227,5 @@ def main():
     print(f"HTML written to {out}")
 
 if __name__ == "__main__":
-    main()
+    import entrypoint
+    entrypoint.refuse("generate_trade_recap.py")
