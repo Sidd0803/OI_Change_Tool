@@ -40,6 +40,7 @@ from datetime import datetime
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 import entrypoint
+from occ_flex import previous_business_day
 import template
 import bloomberg_tickers
 import generate_recap_input_txt
@@ -74,6 +75,16 @@ def _banner(step, title):
     print(f"\n{'=' * 60}\n[Step {step}] {title}\n{'=' * 60}")
 
 
+def parse_trade_date(value):
+    """Accept M/D/YYYY or M/D/YY, with or without leading zeros."""
+    for fmt in ('%m/%d/%Y', '%m/%d/%y'):
+        try:
+            return datetime.strptime(value.strip(), fmt).date()
+        except ValueError:
+            continue
+    raise ValueError(f"'{value}' is not a date — use M/D/YYYY, e.g. 7/31/2026")
+
+
 def parse_reports(value):
     """'all' / 'recap,flex' / '1,3' -> ordered list of report names."""
     if value.strip().lower() in ('all', '4'):
@@ -98,6 +109,29 @@ def parse_reports(value):
     if not chosen:
         raise ValueError("no reports selected")
     return [r for r in REPORTS if r in chosen]
+
+
+def prompt_for_trade_date():
+    """
+    Ask which day's OCC report to pull. OCC publishes a day's report the
+    following morning, so the previous business day is the usual answer, but
+    the desk often wants an older day — hence the prompt rather than a flag
+    you have to remember.
+    """
+    default = previous_business_day()
+    if not sys.stdin.isatty():
+        return default
+
+    prompt = (f"\nWhich trading day's OCC flex report? "
+              f"[{default.month}/{default.day}/{default.year}]: ")
+    while True:
+        raw = input(prompt).strip()
+        if not raw:
+            return default
+        try:
+            return parse_trade_date(raw)
+        except ValueError:
+            print("  Enter a date as M/D/YYYY (e.g. 7/31/2026).")
 
 
 def prompt_for_reports():
@@ -149,7 +183,9 @@ def run_oi(from_excel, step):
 
 
 def run_flex(input_file, trade_date, step):
-    _banner(step, "Flex color: OCC open interest -> flex_output.txt")
+    day = trade_date or previous_business_day()
+    _banner(step, f"Flex color: OCC report for {day.month}/{day.day}/{day.year} "
+                  f"-> flex_output.txt")
     occ_flex.run(input_file, trade_date=trade_date, output=FLEX_OUTPUT_FILE)
     return step + 1
 
@@ -230,8 +266,16 @@ if __name__ == '__main__':
     except ValueError as exc:
         parser.error(f"--reports: {exc}")
 
-    trade_date = (datetime.strptime(args.date, '%m/%d/%Y').date()
-                  if args.date else None)
+    if args.date:
+        try:
+            trade_date = parse_trade_date(args.date)
+        except ValueError as exc:
+            parser.error(f"--date: {exc}")
+    elif 'flex' in reports:
+        trade_date = prompt_for_trade_date()
+    else:
+        trade_date = None
+
     run(input_file=args.input,
         from_excel=args.from_excel,
         reports=reports,

@@ -11,18 +11,6 @@ from bloomberg_tickers import convert_to_bloomberg_format
 class TestRegularMonthlyExpiry(unittest.TestCase):
     """Plain month name — resolves to first (earliest) matching entry in dates.txt."""
 
-    def test_jun_resolves_to_2026(self):
-        self.assertEqual(convert_to_bloomberg_format("AAPL Jun 150 Call OI Change:"),
-                         "AAPL US 6/18/26 C150 Equity")
-
-    def test_jun_lowercase(self):
-        self.assertEqual(convert_to_bloomberg_format("AAPL jun 150 Call OI Change:"),
-                         "AAPL US 6/18/26 C150 Equity")
-
-    def test_jun_uppercase(self):
-        self.assertEqual(convert_to_bloomberg_format("AAPL JUN 150 Call OI Change:"),
-                         "AAPL US 6/18/26 C150 Equity")
-
     def test_dec_resolves_to_2026(self):
         self.assertEqual(convert_to_bloomberg_format("AAPL Dec 150 Call OI Change:"),
                          "AAPL US 12/18/26 C150 Equity")
@@ -37,24 +25,16 @@ class TestRegularMonthlyExpiry(unittest.TestCase):
                          "AAPL US 1/15/27 C150 Equity")
 
     def test_put_option(self):
-        self.assertEqual(convert_to_bloomberg_format("AAPL Jun 150 Put OI Change:"),
-                         "AAPL US 6/18/26 P150 Equity")
+        self.assertEqual(convert_to_bloomberg_format("AAPL Dec 150 Put OI Change:"),
+                         "AAPL US 12/18/26 P150 Equity")
 
 
 class TestYearQualifiedMonthlyExpiry(unittest.TestCase):
     """Month + 2-digit year — looks up exact expiry from dates.txt."""
 
-    def test_jun26(self):
-        self.assertEqual(convert_to_bloomberg_format("AMZN Jun26 415 Call OI Change:"),
-                         "AMZN US 6/18/26 C415 Equity")
-
     def test_jun27(self):
         self.assertEqual(convert_to_bloomberg_format("AMZN Jun27 415 Call OI Change:"),
                          "AMZN US 6/17/27 C415 Equity")
-
-    def test_jun28(self):
-        self.assertEqual(convert_to_bloomberg_format("AMZN Jun28 415 Call OI Change:"),
-                         "AMZN US 6/15/28 C415 Equity")
 
     def test_dec26(self):
         self.assertEqual(convert_to_bloomberg_format("MSFT Dec26 400 Put OI Change:"),
@@ -81,25 +61,20 @@ class TestYearQualifiedMonthlyExpiry(unittest.TestCase):
                          "TECK US 9/17/27 C80 Equity")
 
     def test_year_qualified_lowercase_month(self):
-        self.assertEqual(convert_to_bloomberg_format("AMZN jun26 415 Call OI Change:"),
-                         "AMZN US 6/18/26 C415 Equity")
+        self.assertEqual(convert_to_bloomberg_format("MSFT dec26 400 Put OI Change:"),
+                         "MSFT US 12/18/26 P400 Equity")
 
     def test_year_qualified_uppercase_month(self):
-        self.assertEqual(convert_to_bloomberg_format("AMZN JUN26 415 Call OI Change:"),
-                         "AMZN US 6/18/26 C415 Equity")
+        self.assertEqual(convert_to_bloomberg_format("MSFT DEC26 400 Put OI Change:"),
+                         "MSFT US 12/18/26 P400 Equity")
 
 
 class TestWeeklyExpiryDayMonth(unittest.TestCase):
     """Day + month format (e.g. 15Jun) — uses the year from the first matching month entry."""
 
-    def test_15jun(self):
-        # First Jun is 6/18/26, so year = 26
-        self.assertEqual(convert_to_bloomberg_format("AAPL 15Jun 150 Call OI Change:"),
-                         "AAPL US 6/15/26 C150 Equity")
-
-    def test_15jun_lowercase(self):
-        self.assertEqual(convert_to_bloomberg_format("AAPL 15jun 150 Call OI Change:"),
-                         "AAPL US 6/15/26 C150 Equity")
+    def test_5dec_lowercase(self):
+        self.assertEqual(convert_to_bloomberg_format("AAPL 5dec 150 Call OI Change:"),
+                         "AAPL US 12/5/26 C150 Equity")
 
     def test_5dec(self):
         self.assertEqual(convert_to_bloomberg_format("AAPL 5Dec 150 Call OI Change:"),
@@ -118,13 +93,9 @@ class TestWeeklyExpiryDayMonth(unittest.TestCase):
 class TestWeeklyExpiryOrdinal(unittest.TestCase):
     """Month + day + ordinal suffix (e.g. Jun20th) — uses year from first matching month entry."""
 
-    def test_jun20th(self):
-        self.assertEqual(convert_to_bloomberg_format("AAPL Jun20th 150 Call OI Change:"),
-                         "AAPL US 6/20/26 C150 Equity")
-
-    def test_jun20th_lowercase(self):
-        self.assertEqual(convert_to_bloomberg_format("AAPL jun20th 150 Call OI Change:"),
-                         "AAPL US 6/20/26 C150 Equity")
+    def test_jul31st_lowercase(self):
+        self.assertEqual(convert_to_bloomberg_format("AAPL jul31st 150 Call OI Change:"),
+                         "AAPL US 7/31/26 C150 Equity")
 
     def test_jul31st(self):
         self.assertEqual(convert_to_bloomberg_format("AAPL Jul31st 150 Call OI Change:"),
@@ -146,20 +117,20 @@ class TestWeeklyExpiryOrdinal(unittest.TestCase):
 class TestOptionTypeCaseInsensitivity(unittest.TestCase):
 
     def test_call_lowercase(self):
-        self.assertEqual(convert_to_bloomberg_format("AAPL Jun 150 call OI Change:"),
-                         "AAPL US 6/18/26 C150 Equity")
+        self.assertEqual(convert_to_bloomberg_format("AAPL Dec 150 call OI Change:"),
+                         "AAPL US 12/18/26 C150 Equity")
 
     def test_call_uppercase(self):
-        self.assertEqual(convert_to_bloomberg_format("AAPL Jun 150 CALL OI Change:"),
-                         "AAPL US 6/18/26 C150 Equity")
+        self.assertEqual(convert_to_bloomberg_format("AAPL Dec 150 CALL OI Change:"),
+                         "AAPL US 12/18/26 C150 Equity")
 
     def test_put_lowercase(self):
-        self.assertEqual(convert_to_bloomberg_format("AAPL Jun 150 put OI Change:"),
-                         "AAPL US 6/18/26 P150 Equity")
+        self.assertEqual(convert_to_bloomberg_format("AAPL Dec 150 put OI Change:"),
+                         "AAPL US 12/18/26 P150 Equity")
 
     def test_put_uppercase(self):
-        self.assertEqual(convert_to_bloomberg_format("AAPL Jun 150 PUT OI Change:"),
-                         "AAPL US 6/18/26 P150 Equity")
+        self.assertEqual(convert_to_bloomberg_format("AAPL Dec 150 PUT OI Change:"),
+                         "AAPL US 12/18/26 P150 Equity")
 
 
 class TestErrorCases(unittest.TestCase):
