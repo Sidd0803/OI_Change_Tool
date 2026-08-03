@@ -8,7 +8,8 @@ os.chdir(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
 sys.path.insert(0, 'src')
 from occ_flex import (parse_chat, parse_flex_oi_report, series_keys,
                       resolve_key, previous_business_day, _is_report,
-                      report_date_for, annotate_oi, write_output)
+                      report_date_for, write_output, summary_line,
+                      format_expiry, format_strike)
 
 REPORT_SNIPPET = """\
  THE OPTIONS CLEARING CORPORATION - CHICAGO, ILLINOIS                             SYSTEM DATE 07/25/26    TIME 01:51:39    PAGE     1
@@ -170,62 +171,78 @@ class TestReportValidation(unittest.TestCase):
         self.assertFalse(_is_report('<!doctype html><html><body>x</body></html>'))
 
 
-class TestOpenInterestIsALevel(unittest.TestCase):
-    """
-    Pinned to a real cross-check: on 7/31/2026 the desk hand-wrote
-    "(OI = 18,717)" for BE 197.51 Put and "(OI = 2,100)" for MU 850.01 Put.
-    Both equal the level in the 7/30 report — the latest one published when
-    the color was written. Reporting a day-over-day change instead gave 0 and
-    -2,100, the second being the expiry zeroing rather than the trade.
-    """
+class TestExpiryAndStrikeLabels(unittest.TestCase):
+
+    def test_weekly_uses_ordinal(self):
+        self.assertEqual(format_expiry(date(2026, 7, 27)), 'Jul27th')
+        self.assertEqual(format_expiry(date(2026, 8, 1)), 'Aug1st')
+        self.assertEqual(format_expiry(date(2026, 8, 2)), 'Aug2nd')
+        self.assertEqual(format_expiry(date(2026, 8, 3)), 'Aug3rd')
+
+    def test_teens_are_th_not_st(self):
+        self.assertEqual(format_expiry(date(2026, 8, 11)), 'Aug11th')
+        self.assertEqual(format_expiry(date(2026, 8, 12)), 'Aug12th')
+        self.assertEqual(format_expiry(date(2026, 8, 13)), 'Aug13th')
+
+    def test_third_friday_collapses_to_month(self):
+        # 8/21/2026 is the third Friday.
+        self.assertEqual(format_expiry(date(2026, 8, 21)), 'Aug')
+
+    def test_strike_drops_trailing_zeros(self):
+        self.assertEqual(format_strike(1395.0), '1395')
+        self.assertEqual(format_strike(197.51), '197.51')
+        self.assertEqual(format_strike(850.01), '850.01')
+
+
+class TestOutputFormat(unittest.TestCase):
+    """The trade lines come through verbatim, then one OI Change line each."""
 
     CHAT = (
-        "12:38:28 Color - BE Listed vs Flex:\n"
+        "10:11:39 Color - SNDK Flex:\n"
         "\n"
-        "BE Jul31st 197.5 Put 14k traded 1.90 elec live; stk ref 212.31 (OI = 14,426) - looks bot\n"
-        "07/31/2026 197.51 Amer PM Put 14,000x traded 1.91 (OI = 18,717) - looks bot\n"
-        "14:31:32 Color - MU Listed vs Flex:\n"
-        "\n"
-        "07/31/2026 850.01 Amer PM Put 1,050x traded 14.77 (OI = 2,100) - looks sold\n"
-    )
-
-    # The 7/30 report rows the desk's numbers came from.
-    REPORT = (
-        " EQUITY FLEX OPEN INTEREST REPORT   ACTIVITY DATE 07/30/26\n"
-        "      1BE      P   07 31 2026  00197 510      4.1847     18717\n"
-        "      1MU      P   07 31 2026  00850 010     13.6535      2100\n"
+        "07/27/2026 1395.00 Euro PM Call 1,223x traded 123.45\n"
+        "07/27/2026 1215.00 Euro PM Put 5,022x traded 55.30\n"
     )
 
     def setUp(self):
         self.chat_path = _write_temp(self.CHAT)
-        self.report_path = _write_temp(self.REPORT)
         self.blocks = parse_chat(self.chat_path)
+        for t, change in zip(self.blocks[0]['trades'], (1223, 5022)):
+            t['oi_change'] = change
 
     def tearDown(self):
         os.unlink(self.chat_path)
-        os.unlink(self.report_path)
 
-    def test_reads_the_prior_business_day_report(self):
-        # Friday 7/31 trades read against Thursday 7/30.
-        self.assertEqual(report_date_for(date(2026, 7, 31)), date(2026, 7, 30))
-        # Monday reads against Friday, not Sunday.
-        self.assertEqual(report_date_for(date(2026, 8, 3)), date(2026, 7, 31))
+    def test_summary_line(self):
+        self.assertEqual(
+            summary_line(self.blocks[0]['trades'][0]),
+            'SNDK Jul27th 1395 Euro PM Call OI Change: 1223')
+        self.assertEqual(
+            summary_line(self.blocks[0]['trades'][1]),
+            'SNDK Jul27th 1215 Euro PM Put OI Change: 5022')
 
-    def test_levels_match_the_desk(self):
-        oi = parse_flex_oi_report(self.report_path)
-        be = self.blocks[0]['trades'][0]
-        mu = self.blocks[1]['trades'][0]
-        self.assertEqual(oi[resolve_key(be, oi)], 18717)
-        self.assertEqual(oi[resolve_key(mu, oi)], 2100)
+    def test_block_layout(self):
+        out = _write_temp('')
+        try:
+            write_output(self.blocks, out)
+            with open(out) as f:
+                lines = f.read().split('\n')
+        finally:
+            os.unlink(out)
 
-    def test_output_line_format(self):
-        oi = parse_flex_oi_report(self.report_path)
-        for block in self.blocks:
-            for t in block['trades']:
-                t['key'] = resolve_key(t, oi)
-                t['oi'] = oi[t['key']]
-                t['volume'] = t['qty']
+        self.assertEqual(lines[0], 'Color - SNDK Flex:')
+        self.assertEqual(lines[1], '')
+        self.assertEqual(lines[2],
+                         '07/27/2026 1395.00 Euro PM Call 1,223x traded 123.45')
+        self.assertEqual(lines[3],
+                         '07/27/2026 1215.00 Euro PM Put 5,022x traded 55.30')
+        self.assertEqual(lines[4], '')
+        self.assertEqual(lines[5],
+                         'SNDK Jul27th 1395 Euro PM Call OI Change: 1223')
+        self.assertEqual(lines[6],
+                         'SNDK Jul27th 1215 Euro PM Put OI Change: 5022')
 
+    def test_one_summary_line_per_trade_line(self):
         out = _write_temp('')
         try:
             write_output(self.blocks, out)
@@ -233,10 +250,18 @@ class TestOpenInterestIsALevel(unittest.TestCase):
                 text = f.read()
         finally:
             os.unlink(out)
+        self.assertEqual(text.count('OI Change:'), 2)
 
-        self.assertIn('OI = 18,717 / Volume = 14,000', text)
-        self.assertIn('OI = 2,100 / Volume = 1,050', text)
-        self.assertNotIn('OI Change', text)
+
+class TestReportDates(unittest.TestCase):
+
+    def test_change_is_trade_date_minus_prior_business_day(self):
+        self.assertEqual(report_date_for(date(2026, 7, 31)),
+                         (date(2026, 7, 31), date(2026, 7, 30)))
+
+    def test_monday_baselines_against_friday(self):
+        self.assertEqual(report_date_for(date(2026, 8, 3)),
+                         (date(2026, 8, 3), date(2026, 7, 31)))
 
 
 class TestPreviousBusinessDay(unittest.TestCase):

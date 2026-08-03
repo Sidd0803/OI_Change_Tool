@@ -193,52 +193,76 @@ def parse_chat(path):
 
 def report_date_for(trade_date):
     """
-    Which OCC report a trade date's open interest comes from.
-
-    The desk quotes the OI standing when the color is written, which is the
-    most recently published report — OCC publishes activity date T on the
-    morning of T+1, so a trade on T reads against the T-1 report.
+    OCC publishes activity date T on the morning of T+1, so the open interest
+    a trade on T moved is the difference between the T and T-1 reports.
+    Returns (current, baseline).
     """
-    return previous_business_day(trade_date)
+    return trade_date, previous_business_day(trade_date)
+
+
+def _ordinal(day):
+    if 11 <= day <= 13:
+        return f"{day}th"
+    return f"{day}{ {1: 'st', 2: 'nd', 3: 'rd'}.get(day % 10, 'th') }"
+
+
+def format_expiry(d):
+    """
+    Weeklies read as the chat writes them ('Jul27th'); standard monthly
+    expiries (third Friday) collapse to just the month ('Aug').
+    """
+    mon = d.strftime('%b')
+    is_third_friday = d.weekday() == 4 and 15 <= d.day <= 21
+    return mon if is_third_friday else f"{mon}{_ordinal(d.day)}"
+
+
+def format_strike(strike):
+    """1395.0 -> '1395', 197.51 -> '197.51'."""
+    return f"{strike:g}"
 
 
 def annotate_oi(blocks, trade_date):
     """
-    Annotate every trade with `oi` (the OCC open interest level) and `volume`
-    (total chat qty traded in that series across all blocks).
-
-    This reports the level rather than a day-over-day change. A change is
-    actively misleading for flex: same-day-expiry trades are common, and OCC
-    zeroes an expiring series in that evening's report, so the diff reports
-    the expiry wiping out instead of the trade.
+    Annotate every trade with `oi_change`, the day-over-day move in OCC open
+    interest for its series: level on the trade date minus level the previous
+    business day.
     """
-    oi_levels = parse_flex_oi_report(download_flex_oi(report_date_for(trade_date)))
+    current_date, baseline_date = report_date_for(trade_date)
+    current = parse_flex_oi_report(download_flex_oi(current_date))
+    baseline = parse_flex_oi_report(download_flex_oi(baseline_date))
 
-    volume = {}
     for block in blocks:
         for t in block['trades']:
-            t['key'] = resolve_key(t, oi_levels)
-            volume[t['key']] = volume.get(t['key'], 0) + t['qty']
+            t['key'] = resolve_key(t, current, baseline)
 
     for block in blocks:
         for t in block['trades']:
             key = t['key']
-            if key not in oi_levels:
+            if key not in current and key not in baseline:
                 print(f"WARNING: {t['ticker']} {t['right']} {t['expiry']} "
-                      f"{t['strike']} {t['exercise']} not found in the OCC "
+                      f"{t['strike']} {t['exercise']} not found in either OCC "
                       f"report (tried {[k[0] for k in series_keys(t)]}) — "
-                      f"reporting OI = 0.", file=sys.stderr)
-            t['oi'] = oi_levels.get(key, 0)
-            t['volume'] = volume[key]
+                      f"reporting OI Change: 0.", file=sys.stderr)
+            t['oi_change'] = current.get(key, 0) - baseline.get(key, 0)
+
+
+def summary_line(t):
+    """'SNDK Jul27th 1395 Euro PM Call OI Change: 1223'"""
+    return (f"{t['ticker']} {format_expiry(t['expiry'])} "
+            f"{format_strike(t['strike'])} {t['exercise']} {t['ampm']} "
+            f"{t['right']} OI Change: {t['oi_change']}")
 
 
 def write_output(blocks, path=OUTPUT_FILE):
     lines = []
     for block in blocks:
         lines.append(f"Color - {block['ticker']} Flex:\n")
+        lines.append("\n")
         for t in block['trades']:
-            lines.append(f"{t['text']} OI = {t['oi']:,} "
-                         f"/ Volume = {t['volume']:,}\n")
+            lines.append(f"{t['text']}\n")
+        lines.append("\n")
+        for t in block['trades']:
+            lines.append(f"{summary_line(t)}\n")
         lines.append(SEPARATOR)
 
     with open(path, 'w') as f:
@@ -259,8 +283,9 @@ def run(input_file, trade_date=None, output=OUTPUT_FILE):
     Returns the parsed blocks (empty list when the log has no flex color).
     """
     trade_date = trade_date or previous_business_day()
-    print(f"Trades from {trade_date} — reading OI from the OCC report for "
-          f"{report_date_for(trade_date)} (the latest published that day).")
+    current_date, baseline_date = report_date_for(trade_date)
+    print(f"Trades from {trade_date} — OI change = OCC report {current_date} "
+          f"minus {baseline_date}.")
 
     blocks = parse_chat(resolve_input_path(input_file))
     if not blocks:

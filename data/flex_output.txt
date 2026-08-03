@@ -1,7 +1,14 @@
 Color - BE Flex:
-07/31/2026 197.51 Amer PM Put 14,000x traded 1.91 - looks bot OI = 18,717 / Volume = 14,000
+
+07/31/2026 197.51 Amer PM Put 14,000x traded 1.91 - looks bot
+
+BE Jul31st 197.51 Amer PM Put OI Change: 0
 ---------------------------------
 Color - MU Flex:
-07/31/2026 850.01 Amer PM Put 1,050x traded 14.77 - looks sold OI = 2,100 / Volume = 2,100
-07/31/2026 850.01 Amer PM Put 1,050x traded 14.46 - looks sold OI = 2,100 / Volume = 2,100
+
+07/31/2026 850.01 Amer PM Put 1,050x traded 14.77 - looks sold
+07/31/2026 850.01 Amer PM Put 1,050x traded 14.46 - looks sold
+
+MU Jul31st 850.01 Amer PM Put OI Change: -2100
+MU Jul31st 850.01 Amer PM Put OI Change: -2100
 ---------------------------------
