@@ -7,7 +7,8 @@ from datetime import date
 os.chdir(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
 sys.path.insert(0, 'src')
 from occ_flex import (parse_chat, parse_flex_oi_report, series_keys,
-                      resolve_key, previous_business_day, _is_report)
+                      resolve_key, previous_business_day, _is_report,
+                      report_date_for, annotate_oi, write_output)
 
 REPORT_SNIPPET = """\
  THE OPTIONS CLEARING CORPORATION - CHICAGO, ILLINOIS                             SYSTEM DATE 07/25/26    TIME 01:51:39    PAGE     1
@@ -167,6 +168,75 @@ class TestReportValidation(unittest.TestCase):
     def test_empty_and_html_rejected(self):
         self.assertFalse(_is_report(''))
         self.assertFalse(_is_report('<!doctype html><html><body>x</body></html>'))
+
+
+class TestOpenInterestIsALevel(unittest.TestCase):
+    """
+    Pinned to a real cross-check: on 7/31/2026 the desk hand-wrote
+    "(OI = 18,717)" for BE 197.51 Put and "(OI = 2,100)" for MU 850.01 Put.
+    Both equal the level in the 7/30 report — the latest one published when
+    the color was written. Reporting a day-over-day change instead gave 0 and
+    -2,100, the second being the expiry zeroing rather than the trade.
+    """
+
+    CHAT = (
+        "12:38:28 Color - BE Listed vs Flex:\n"
+        "\n"
+        "BE Jul31st 197.5 Put 14k traded 1.90 elec live; stk ref 212.31 (OI = 14,426) - looks bot\n"
+        "07/31/2026 197.51 Amer PM Put 14,000x traded 1.91 (OI = 18,717) - looks bot\n"
+        "14:31:32 Color - MU Listed vs Flex:\n"
+        "\n"
+        "07/31/2026 850.01 Amer PM Put 1,050x traded 14.77 (OI = 2,100) - looks sold\n"
+    )
+
+    # The 7/30 report rows the desk's numbers came from.
+    REPORT = (
+        " EQUITY FLEX OPEN INTEREST REPORT   ACTIVITY DATE 07/30/26\n"
+        "      1BE      P   07 31 2026  00197 510      4.1847     18717\n"
+        "      1MU      P   07 31 2026  00850 010     13.6535      2100\n"
+    )
+
+    def setUp(self):
+        self.chat_path = _write_temp(self.CHAT)
+        self.report_path = _write_temp(self.REPORT)
+        self.blocks = parse_chat(self.chat_path)
+
+    def tearDown(self):
+        os.unlink(self.chat_path)
+        os.unlink(self.report_path)
+
+    def test_reads_the_prior_business_day_report(self):
+        # Friday 7/31 trades read against Thursday 7/30.
+        self.assertEqual(report_date_for(date(2026, 7, 31)), date(2026, 7, 30))
+        # Monday reads against Friday, not Sunday.
+        self.assertEqual(report_date_for(date(2026, 8, 3)), date(2026, 7, 31))
+
+    def test_levels_match_the_desk(self):
+        oi = parse_flex_oi_report(self.report_path)
+        be = self.blocks[0]['trades'][0]
+        mu = self.blocks[1]['trades'][0]
+        self.assertEqual(oi[resolve_key(be, oi)], 18717)
+        self.assertEqual(oi[resolve_key(mu, oi)], 2100)
+
+    def test_output_line_format(self):
+        oi = parse_flex_oi_report(self.report_path)
+        for block in self.blocks:
+            for t in block['trades']:
+                t['key'] = resolve_key(t, oi)
+                t['oi'] = oi[t['key']]
+                t['volume'] = t['qty']
+
+        out = _write_temp('')
+        try:
+            write_output(self.blocks, out)
+            with open(out) as f:
+                text = f.read()
+        finally:
+            os.unlink(out)
+
+        self.assertIn('OI = 18,717 / Volume = 14,000', text)
+        self.assertIn('OI = 2,100 / Volume = 1,050', text)
+        self.assertNotIn('OI Change', text)
 
 
 class TestPreviousBusinessDay(unittest.TestCase):

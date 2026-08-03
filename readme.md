@@ -101,17 +101,18 @@ FLEX trades don't have usable open interest on Bloomberg, so this pipeline sourc
 python src/run_pipeline.py --reports flex --date 7/24/2026
 ```
 
-It pulls the flex color blocks out of the day's chat log (`Color - TICKER Flex:`, including the flex legs of `Color - TICKER Listed vs Flex:` blocks), ignoring regular color and chat noise. It then downloads the OCC equity flex OI report for the trade date and the prior business day, diffs them per series, and writes `data/flex_output.txt` in the same shape as the regular pipeline:
+It pulls the flex color blocks out of the day's chat log (`Color - TICKER Flex:`, including the flex legs of `Color - TICKER Listed vs Flex:` blocks), ignoring regular color and chat noise. It then downloads the OCC equity flex OI report, looks up each series, and writes `data/flex_output.txt`:
 
 ```
-Color - SNDK Flex:
-07/31/2026 1500.01 Amer PM Put 3,000x traded 198.59, vs 1313.40 stk 65d OI Change: -971 / Volume = 3000
+Color - BE Flex:
+07/31/2026 197.51 Amer PM Put 14,000x traded 1.91 - looks bot OI = 18,717 / Volume = 14,000
 ```
 
 Notes:
 
 - No Bloomberg Terminal or credentials needed — the reports come from OCC's public batch endpoint (`marketdata.theocc.com/flex-reports`). Reports are cached under `data/occ/` and reused on re-runs.
-- `--date` defaults to the previous business day. OCC publishes the report for a given activity date the next morning, so this matches the normal next-morning recap cadence. A date OCC has no report for (weekend, holiday, not published yet) fails with a clear error rather than reporting zeros.
+- The pipeline asks which trading day the flex trades are from, defaulting to the previous business day; `--date M/D/YYYY` answers it up front. A date OCC has no report for (weekend, holiday, not published yet) fails with a clear error rather than reporting zeros.
+- **OI is a level, not a day-over-day change**, and it comes from the report for the business day *before* the trade date — the most recently published one when the color gets written, which is what the desk quotes. This was verified against hand-filled color from 7/31/2026: BE 197.51 Put and MU 850.01 Put reproduce the desk's 18,717 and 2,100 exactly. A change would be actively wrong here, since same-day-expiry flex is common and OCC zeroes an expiring series that evening, making the diff report the expiry rather than the trade.
 - Any hand-filled `(OI = n)` annotation in the chat line is stripped and replaced by the OCC figure.
 - Volume is the total quantity traded in that series across the day's flex lines — the OCC report has no volume field.
 - OCC's symbol prefix encodes exercise and settlement style (`1`/`2` equity American/European, `3`/`4` index-style, which is where ETF flex like SMH lands). The script tries both prefixes for a line's exercise style and warns on stderr if the series is in neither report.

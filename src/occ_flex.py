@@ -191,30 +191,44 @@ def parse_chat(path):
     return [b for b in blocks if b['trades']]
 
 
-def compute_oi_changes(blocks, trade_date):
+def report_date_for(trade_date):
     """
-    Annotate every trade with `oi_change` (OCC day-over-day diff) and
-    `volume` (total chat qty traded in that series across all blocks).
+    Which OCC report a trade date's open interest comes from.
+
+    The desk quotes the OI standing when the color is written, which is the
+    most recently published report — OCC publishes activity date T on the
+    morning of T+1, so a trade on T reads against the T-1 report.
     """
-    today_oi = parse_flex_oi_report(download_flex_oi(trade_date))
-    prev_oi = parse_flex_oi_report(
-        download_flex_oi(previous_business_day(trade_date)))
+    return previous_business_day(trade_date)
+
+
+def annotate_oi(blocks, trade_date):
+    """
+    Annotate every trade with `oi` (the OCC open interest level) and `volume`
+    (total chat qty traded in that series across all blocks).
+
+    This reports the level rather than a day-over-day change. A change is
+    actively misleading for flex: same-day-expiry trades are common, and OCC
+    zeroes an expiring series in that evening's report, so the diff reports
+    the expiry wiping out instead of the trade.
+    """
+    oi_levels = parse_flex_oi_report(download_flex_oi(report_date_for(trade_date)))
 
     volume = {}
     for block in blocks:
         for t in block['trades']:
-            t['key'] = resolve_key(t, today_oi, prev_oi)
+            t['key'] = resolve_key(t, oi_levels)
             volume[t['key']] = volume.get(t['key'], 0) + t['qty']
 
     for block in blocks:
         for t in block['trades']:
             key = t['key']
-            if key not in today_oi and key not in prev_oi:
+            if key not in oi_levels:
                 print(f"WARNING: {t['ticker']} {t['right']} {t['expiry']} "
-                      f"{t['strike']} {t['exercise']} not found in either OCC "
-                      f"report (tried {[k[0] for k in series_keys(t)]}).",
-                      file=sys.stderr)
-            t['oi_change'] = today_oi.get(key, 0) - prev_oi.get(key, 0)
+                      f"{t['strike']} {t['exercise']} not found in the OCC "
+                      f"report (tried {[k[0] for k in series_keys(t)]}) — "
+                      f"reporting OI = 0.", file=sys.stderr)
+            t['oi'] = oi_levels.get(key, 0)
             t['volume'] = volume[key]
 
 
@@ -223,8 +237,8 @@ def write_output(blocks, path=OUTPUT_FILE):
     for block in blocks:
         lines.append(f"Color - {block['ticker']} Flex:\n")
         for t in block['trades']:
-            lines.append(f"{t['text']} OI Change: {t['oi_change']} "
-                         f"/ Volume = {t['volume']}\n")
+            lines.append(f"{t['text']} OI = {t['oi']:,} "
+                         f"/ Volume = {t['volume']:,}\n")
         lines.append(SEPARATOR)
 
     with open(path, 'w') as f:
@@ -241,12 +255,12 @@ def resolve_input_path(path):
 
 def run(input_file, trade_date=None, output=OUTPUT_FILE):
     """
-    Full flex flow: chat log -> OCC diff -> flex_output.txt.
+    Full flex flow: chat log -> OCC open interest -> flex_output.txt.
     Returns the parsed blocks (empty list when the log has no flex color).
     """
     trade_date = trade_date or previous_business_day()
-    print(f"Trade date: {trade_date} (baseline: "
-          f"{previous_business_day(trade_date)})")
+    print(f"Trades from {trade_date} — reading OI from the OCC report for "
+          f"{report_date_for(trade_date)} (the latest published that day).")
 
     blocks = parse_chat(resolve_input_path(input_file))
     if not blocks:
@@ -257,7 +271,7 @@ def run(input_file, trade_date=None, output=OUTPUT_FILE):
     print(f"Found {len(blocks)} flex block(s), {n_trades} trade line(s): "
           + ', '.join(b['ticker'] for b in blocks))
 
-    compute_oi_changes(blocks, trade_date)
+    annotate_oi(blocks, trade_date)
     write_output(blocks, output)
     return blocks
 

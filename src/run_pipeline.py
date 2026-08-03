@@ -122,7 +122,7 @@ def prompt_for_trade_date():
     if not sys.stdin.isatty():
         return default
 
-    prompt = (f"\nWhich trading day's OCC flex report? "
+    prompt = (f"\nWhich trading day are the flex trades from? "
               f"[{default.month}/{default.day}/{default.year}]: ")
     while True:
         raw = input(prompt).strip()
@@ -184,7 +184,7 @@ def run_oi(from_excel, step):
 
 def run_flex(input_file, trade_date, step):
     day = trade_date or previous_business_day()
-    _banner(step, f"Flex color: OCC report for {day.month}/{day.day}/{day.year} "
+    _banner(step, f"Flex color: {day.month}/{day.day}/{day.year} trades "
                   f"-> flex_output.txt")
     occ_flex.run(input_file, trade_date=trade_date, output=FLEX_OUTPUT_FILE)
     return step + 1

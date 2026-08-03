@@ -1,41 +1,7 @@
-Color - MU Flex:
-07/31/2026 750.01 Amer PM Put 1,577x traded 11.97 OI Change: 0 / Volume = 1577
-07/31/2026 790.01 Amer PM Put 734x traded 27.77 OI Change: 0 / Volume = 734
-07/31/2026 800.01 Amer PM Put 2,008x traded 28.00 OI Change: 0 / Volume = 2008
-07/31/2026 805.01 Amer PM Put 303x traded 27.09 OI Change: 0 / Volume = 303
-07/31/2026 815.01 Amer PM Put 2,559x traded 40.09 OI Change: 0 / Volume = 2559
-07/31/2026 820.01 Amer PM Put 2,284x traded 30.91 OI Change: 0 / Volume = 2284
-07/31/2026 850.01 Amer PM Put 700x traded 56.87 OI Change: 0 / Volume = 700
-07/31/2026 885.01 Amer PM Put 100x traded 78.95 OI Change: 0 / Volume = 118
-07/31/2026 885.01 Amer PM Put 18x traded 78.96 OI Change: 0 / Volume = 118
----------------------------------
-Color - NBIS Flex:
-07/31/2026 170.01 Amer PM Put 11,000x traded 13.00 OI Change: 0 / Volume = 16322
-08/21/2026 130.01 Amer PM Put 25,000x traded 11.70 OI Change: 0 / Volume = 25000
----------------------------------
 Color - BE Flex:
-07/31/2026 197.51 Amer PM Put 2,551x traded 38.39, vs 165.00 stk 72d - looks sold OI Change: 0 / Volume = 2551
+07/31/2026 197.51 Amer PM Put 14,000x traded 1.91 - looks bot OI = 18,717 / Volume = 14,000
 ---------------------------------
-Color - SNDK Flex:
-07/31/2026 1000.01 Amer PM Put 406x traded 22.08 OI Change: 0 / Volume = 406
-07/31/2026 1100.01 Amer PM Put 2,000x traded 60.13 OI Change: 0 / Volume = 2000
-07/31/2026 1310.01 Amer PM Put 895x traded 208.33 OI Change: 0 / Volume = 895
-07/31/2026 1350.01 Amer PM Put 154x traded 239.98 OI Change: 0 / Volume = 186
-07/31/2026 1350.01 Amer PM Put 32x traded 239.97 OI Change: 0 / Volume = 186
-07/31/2026 1390.01 Amer PM Put 2,446x traded 277.41 OI Change: 0 / Volume = 2446
----------------------------------
-Color - NBIS Flex:
-08/21/2026 120.01 Amer PM Put 15,000x traded 8.17, vs 169.38 stk 16d - looks bot OI Change: 0 / Volume = 15000
----------------------------------
-Color - NBIS Flex:
-07/31/2026 130.01 Amer PM Put 1,240x traded 0.94 OI Change: 0 / Volume = 1240
-07/31/2026 150.01 Amer PM Put 2,500x traded 3.57 OI Change: 0 / Volume = 2500
-07/31/2026 165.01 Amer PM Put 1,947x traded 8.90 OI Change: 0 / Volume = 1947
-07/31/2026 170.01 Amer PM Put 5,322x traded 10.54 OI Change: 0 / Volume = 16322
-07/31/2026 172.51 Amer PM Put 1,911x traded 12.22 OI Change: 0 / Volume = 1911
-07/31/2026 180.01 Amer PM Put 1,250x traded 16.50 OI Change: 0 / Volume = 1250
-07/31/2026 190.01 Amer PM Call 1,103x traded 2.81 OI Change: 0 / Volume = 1103
-07/31/2026 200.01 Amer PM Call 345x traded 1.32 OI Change: 0 / Volume = 345
-07/31/2026 220.01 Amer PM Call 64x traded 0.07 OI Change: 0 / Volume = 78
-07/31/2026 220.01 Amer PM Call 14x traded 0.08 OI Change: 0 / Volume = 78
+Color - MU Flex:
+07/31/2026 850.01 Amer PM Put 1,050x traded 14.77 - looks sold OI = 2,100 / Volume = 2,100
+07/31/2026 850.01 Amer PM Put 1,050x traded 14.46 - looks sold OI = 2,100 / Volume = 2,100
 ---------------------------------
