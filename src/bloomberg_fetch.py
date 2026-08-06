@@ -17,6 +17,19 @@ VOL_FIELD = 'VOLUME'
 
 _OCCURRENCES_RE = re.compile(r'^\d+\s+occurrences\s+of\b', re.IGNORECASE)
 
+def all_oi_zero(results):
+    """
+    True when every security in a response came back with OPEN_INT_CHANGE of
+    exactly 0.
+
+    Open interest is disseminated overnight, so a report run after the close
+    asks for a session whose OI has not been published yet and gets 0 across
+    the board. That is indistinguishable from a real result in the output —
+    a row of zeros — so it is worth saying out loud.
+    """
+    oi_values = [oi for oi, _ in results.values()]
+    return len(oi_values) >= 2 and all(v == '0' for v in oi_values)
+
 
 def parse_ticker_blocks(filepath):
     """
@@ -63,8 +76,9 @@ def fetch_fields(securities):
     """
     Query OPEN_INT_CHANGE and VOLUME for the given securities via blpapi.
 
-    Returns {security: (oi_change, volume)}. A missing field or a security
-    error yields None for that value and prints a warning.
+    Returns {security: (oi_change, volume)} exactly as Bloomberg reported it.
+    A missing field or a security error yields None for that value and prints
+    a warning. Expired contracts are zeroed downstream by expiry.py.
     """
     if not securities:
         return {}
@@ -121,6 +135,10 @@ def fetch_fields(securities):
                             fld = fx.getValueAsElement(k).getElementAsString('fieldId')
                             print(f"WARNING: field '{fld}' unavailable for {sec_name}.")
 
+                    # Expired contracts are zeroed downstream by expiry.py,
+                    # which owns that rule for every report. Values here are
+                    # left exactly as Bloomberg returned them so the
+                    # all-zero check below sees the source data.
                     if oi is None or vol is None:
                         print(f"WARNING: missing data for {sec_name} "
                               f"(OI={oi}, VOL={vol}).")
@@ -129,6 +147,13 @@ def fetch_fields(securities):
 
             if event.eventType() == blpapi.Event.RESPONSE:
                 done = True
+
+        if all_oi_zero(results):
+            print(f"\nWARNING: OPEN_INT_CHANGE came back 0 for all "
+                  f"{len(results)} securities, while volume did not. Open "
+                  f"interest is published overnight, so a report run after "
+                  f"the close asks for a session whose OI does not exist yet. "
+                  f"Re-run in the morning before trusting these numbers.")
 
         return results
     finally:
