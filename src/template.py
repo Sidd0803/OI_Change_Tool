@@ -280,5 +280,22 @@ def template(input_file, output_file):
 
 
 if __name__ == "__main__":
+    import argparse
+    import os
+
+    os.chdir(os.path.dirname(os.path.abspath(__file__)))
     import entrypoint
-    entrypoint.refuse("template.py")
+
+    parser = argparse.ArgumentParser(
+        description="Step 1: parse the chat log into template.txt. This is the "
+                    "step that (re)builds template.txt from original_input.txt, "
+                    "so any edits made to template.txt are replaced. Run "
+                    "run_pipeline.py to do the whole chain instead.")
+    parser.add_argument('--input', default='../data/original_input.txt',
+                        help="Raw chat log (default: ../data/original_input.txt).")
+    parser.add_argument('--output', default='../data/template.txt',
+                        help="Where to write the template (default: ../data/template.txt).")
+    args = parser.parse_args()
+
+    entrypoint.require_input(args.input)
+    template(args.input, args.output)

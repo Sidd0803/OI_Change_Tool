@@ -1,7 +1,7 @@
 """
-original_input.txt is the single starting point for every report. These tests
-lock that in: the step modules must refuse to run on their own, because doing
-so would build a correct-looking report from stale intermediate files.
+The pipeline can be run two ways: run_pipeline.py end to end, or each step on
+its own so the clerk can edit template.txt in between. These tests cover the
+guards that keep the second mode safe.
 """
 import os
 import subprocess
@@ -13,55 +13,65 @@ ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
 os.chdir(ROOT)
 SRC = os.path.join(ROOT, 'src')
 sys.path.insert(0, 'src')
-from entrypoint import require_input
+from entrypoint import require_input, check_alignment
 
-# Every module that sits partway down the chain.
+# Every module the clerk may invoke directly.
 STEP_SCRIPTS = [
     'template.py',
     'bloomberg_tickers.py',
     'generate_recap_input_txt.py',
     'generate_final_output.py',
-    'generate_trade_recap.py',
     'occ_flex.py',
+    'run_pipeline.py',
 ]
 
 
-class TestStepScriptsRefuseStandalone(unittest.TestCase):
+class TestStepScriptsAreCallable(unittest.TestCase):
+    """Each step must be runnable on its own, not refuse."""
 
-    def _run(self, script):
-        return subprocess.run([sys.executable, script], cwd=SRC,
-                              capture_output=True, text=True)
-
-    def test_each_step_script_exits_nonzero(self):
+    def test_each_step_script_has_a_working_cli(self):
         for script in STEP_SCRIPTS:
             with self.subTest(script=script):
-                result = self._run(script)
-                self.assertNotEqual(
-                    result.returncode, 0,
-                    f"{script} ran standalone instead of refusing")
+                result = subprocess.run([sys.executable, script, '--help'],
+                                        cwd=SRC, capture_output=True, text=True)
+                self.assertEqual(result.returncode, 0,
+                                 f"{script} --help failed: {result.stderr[:400]}")
+                self.assertIn('usage', result.stdout.lower())
 
-    def test_each_step_script_points_at_run_pipeline(self):
-        for script in STEP_SCRIPTS:
+    def test_downstream_steps_do_not_rebuild_the_template(self):
+        # The clerk's edits to template.txt must survive a standalone step, so
+        # no downstream script may regenerate it.
+        for script in ('bloomberg_tickers.py', 'generate_recap_input_txt.py',
+                       'generate_final_output.py'):
             with self.subTest(script=script):
-                result = self._run(script)
-                self.assertIn('run_pipeline.py', result.stderr)
-
-    def test_no_step_script_writes_output_when_refused(self):
-        # A refusal must be inert — nothing regenerated, nothing touched.
-        recap = os.path.join(ROOT, 'data', 'recap_input.txt')
-        before = os.path.getmtime(recap)
-        self._run('generate_recap_input_txt.py')
-        self.assertEqual(os.path.getmtime(recap), before)
+                with open(os.path.join(SRC, script)) as f:
+                    source = f.read()
+                self.assertNotIn('template.template(', source)
 
 
-class TestRunPipelineStillRuns(unittest.TestCase):
-    """The one supported entry point must not be caught by the guard."""
+class TestAlignmentGuard(unittest.TestCase):
+    """
+    OI values are positional. If template.txt is reordered without rebuilding
+    bloomberg_tickers.txt, values would land on the wrong trades.
+    """
 
-    def test_run_pipeline_help_works(self):
-        result = subprocess.run([sys.executable, 'run_pipeline.py', '--help'],
-                                cwd=SRC, capture_output=True, text=True)
-        self.assertEqual(result.returncode, 0)
-        self.assertIn('--reports', result.stdout)
+    def test_matching_order_passes(self):
+        pairs = [('AAPL', 2), ('MSFT', 1)]
+        check_alignment(pairs, list(pairs), 'x.txt')  # must not raise
+
+    def test_reordered_tickers_abort(self):
+        with self.assertRaises(SystemExit) as ctx:
+            check_alignment([('AAPL', 2), ('MSFT', 1)],
+                            [('MSFT', 1), ('AAPL', 2)], 'x.txt')
+        self.assertEqual(ctx.exception.code, 3)
+
+    def test_changed_counts_abort(self):
+        with self.assertRaises(SystemExit):
+            check_alignment([('AAPL', 3)], [('AAPL', 2)], 'x.txt')
+
+    def test_extra_ticker_aborts(self):
+        with self.assertRaises(SystemExit):
+            check_alignment([('AAPL', 1)], [('AAPL', 1), ('MSFT', 1)], 'x.txt')
 
 
 class TestRequireInput(unittest.TestCase):

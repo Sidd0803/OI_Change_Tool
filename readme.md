@@ -5,8 +5,9 @@
 ```
 OI_Change_tool/
 ├── src/                        # Python scripts
-│   ├── run_pipeline.py         # THE entry point: menu of the three reports
-│   ├── entrypoint.py           # Guard: step modules refuse to run standalone
+│   ├── run_pipeline.py         # Menu entry point: runs the three reports end to end
+│   ├── entrypoint.py           # Shared guards: input present, ticker order aligned
+│   ├── expiry.py               # Expired options report OI Change: 0
 │   ├── template.py             # Step 1: parse Bloomberg chat log → template
 │   ├── bloomberg_tickers.py    # Step 2: filter OI Change lines → bloomberg_tickers.txt
 │   ├── bloomberg_fetch.py      # Fetch OI change + volume from Bloomberg (blpapi)
@@ -17,6 +18,7 @@ OI_Change_tool/
 ├── tests/                      # Test suite
 │   ├── test_bloomberg_tickers.py
 │   ├── test_entrypoint.py
+│   ├── test_expiry.py
 │   ├── test_occ_flex.py
 │   └── test_template.py
 ├── data/                       # Input and output files
@@ -38,7 +40,9 @@ OI_Change_tool/
 
 **`data/original_input.txt` is the starting point for all three reports.** Paste the day's chat log from the Enrique Bloomberg chat into it, then run the pipeline. Every derived file — `template.txt`, `filtered_input.txt`, `bloomberg_tickers.txt` — is rebuilt from that file on every run, so a report can never be built from a leftover intermediate.
 
-Because of that, `run_pipeline.py` is the **only** way to run the reports. The individual step scripts refuse to run on their own: starting partway down the chain doesn't error, it quietly produces a correct-looking report from yesterday's data, which is worse than failing. Note that this means hand-edits to `template.txt` do not survive a run — fix problems in `original_input.txt` instead.
+There are two ways to run it: `run_pipeline.py` for the whole chain at once, or each step on its own when you want to edit an intermediate file along the way. See [Running the steps individually](#running-the-steps-individually).
+
+Note that `run_pipeline.py` always rebuilds `template.txt`, so hand-edits to it don't survive the menu route. Use the step-by-step route when you need them to.
 
 ### Running it
 
@@ -76,8 +80,6 @@ When you ask for more than one report, a failure in any single one is reported a
 
 ### What runs inside
 
-The step modules are library code, not commands — running one directly exits with an error pointing back here.
-
 | Step | Module | Does |
 |---|---|---|
 | Prep | `template.py` | Parses the chat log into `template.txt`. Handles single options, call/put spreads, risk reversals, cross-expiry. |
@@ -89,7 +91,33 @@ The step modules are library code, not commands — running one directly exits w
 
 OI change (`OPEN_INT_CHANGE`) and volume (`VOLUME`) come from Bloomberg via the Desktop API (`blpapi`), which needs a logged-in Terminal on the machine running the pipeline. Without one, paste the OI change and volume columns into `data/numbers.xlsx` and pass `--from-excel`.
 
-Trades that `template.py` can't parse won't appear in the reports. Fix those in `data/original_input.txt` and re-run — don't patch `template.txt`, since it's regenerated on every run.
+---
+
+## Running the steps individually
+
+Each step can also be run on its own, for when you want to change an intermediate file — reorder trades, drop a line, fix something `template.py` misparsed. Run them in order:
+
+```
+python src/template.py                        # original_input.txt -> template.txt
+                                              #   (edit template.txt here)
+python src/bloomberg_tickers.py               # template.txt -> bloomberg_tickers.txt
+python src/generate_final_output.py           # -> final_output.txt        (report 3)
+python src/generate_recap_input_txt.py        # -> recap_input.txt         (report 1)
+python src/generate_trade_recap.py ../data/recap_input.txt ../data/trade_recap.html
+python src/occ_flex.py --date 7/31/2026       # -> flex_output.txt         (report 2)
+```
+
+Each takes `--help`. Only `template.py` rebuilds `template.txt`; everything downstream reads it as-is, so **your edits survive** as long as you don't re-run step 1. `occ_flex.py` reads `original_input.txt` directly and needs no intermediates.
+
+**If you reorder `template.txt`, re-run `bloomberg_tickers.py` before the fill steps.** OI values are matched to trades by position, so a reordered template against a stale ticker list would put values on the wrong trades. The fill steps check for this and stop with an explanation rather than producing a plausible-looking wrong report. Keep each ticker's lines grouped together — the ticker list groups consecutive lines, so the same ticker split across two places in the file won't line up.
+
+---
+
+## Open Interest Convention
+
+**An option whose expiry has passed is reported as `OI Change: 0`**, overriding whatever Bloomberg or the OCC report returns. This applies uniformly to all three reports. Volume is not affected.
+
+"Passed" is measured against today's date, so re-running an older recap will zero out anything that has expired since. Trades on an option's expiry day are still live and keep their real value.
 
 ---
 

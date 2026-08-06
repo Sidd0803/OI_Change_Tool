@@ -22,6 +22,8 @@ import sys
 import urllib.request
 from datetime import date, datetime, timedelta
 
+import expiry
+
 _ORIG_CWD = os.getcwd()
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
@@ -243,7 +245,13 @@ def annotate_oi(blocks, trade_date):
                       f"{t['strike']} {t['exercise']} not found in either OCC "
                       f"report (tried {[k[0] for k in series_keys(t)]}) — "
                       f"reporting OI Change: 0.", file=sys.stderr)
-            t['oi_change'] = current.get(key, 0) - baseline.get(key, 0)
+            if expiry.has_expired(t['expiry']):
+                # Same convention as the listed reports: an expired option has
+                # no open interest, so the diff is overridden rather than
+                # reporting the expiry wiping the series out.
+                t['oi_change'] = 0
+            else:
+                t['oi_change'] = current.get(key, 0) - baseline.get(key, 0)
 
 
 def summary_line(t):
@@ -302,5 +310,21 @@ def run(input_file, trade_date=None, output=OUTPUT_FILE):
 
 
 if __name__ == '__main__':
-    import entrypoint
-    entrypoint.refuse('occ_flex.py')
+    import argparse
+
+    parser = argparse.ArgumentParser(
+        description="Flex color: read the chat log's flex blocks and fill OI "
+                    "change from the OCC flex open interest reports. Reads "
+                    "original_input.txt directly, so it needs no intermediate "
+                    "files. Run run_pipeline.py for the menu instead.")
+    parser.add_argument('--input', default='../data/original_input.txt',
+                        help="Chat log (default: ../data/original_input.txt).")
+    parser.add_argument('--date',
+                        help="Trade date M/D/YYYY (default: previous business day).")
+    parser.add_argument('--output', default=OUTPUT_FILE,
+                        help=f"Output path (default: {OUTPUT_FILE}).")
+    args = parser.parse_args()
+
+    trade_date = (datetime.strptime(args.date, '%m/%d/%Y').date()
+                  if args.date else None)
+    run(args.input, trade_date=trade_date, output=args.output)

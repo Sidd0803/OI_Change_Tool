@@ -3,6 +3,9 @@ from datetime import date, timedelta
 
 import openpyxl
 
+import bloomberg_tickers
+import entrypoint
+import expiry
 from bloomberg_fetch import fetch_blocks
 
 SEPARATOR = '-' * 33 + '\n'
@@ -60,7 +63,7 @@ def parse_excel_file(filepath):
     return blocks
 
 
-def main(from_excel=False):
+def main(from_excel=False, as_of=None):
     with open(TEMPLATE_FILE, 'r') as f:
         template_lines = f.readlines()
 
@@ -86,6 +89,10 @@ def main(from_excel=False):
         print(f"Reading OI/volume data from Excel: {EXCEL_FILE}")
         data_blocks = parse_excel_file(EXCEL_FILE)
     else:
+        entrypoint.check_alignment(
+            [(t, len(ticker_oi_indices[t])) for t in tickers_ordered],
+            bloomberg_tickers.ticker_order(BLOOMBERG_TICKERS_FILE),
+            BLOOMBERG_TICKERS_FILE)
         print(f"Fetching OI/volume data from Bloomberg for {BLOOMBERG_TICKERS_FILE}")
         data_blocks = fetch_blocks(BLOOMBERG_TICKERS_FILE)
 
@@ -116,6 +123,11 @@ def main(from_excel=False):
                 substitutions[idx] = rows[j]
             else:
                 print(f"  Skipping {ticker} OI Change line {j + 1} (line {idx + 1}): no data provided.")
+
+    # Expired options have no open interest — override to 0.
+    zeroed = expiry.zero_expired(substitutions, template_lines, as_of)
+    if zeroed:
+        print(f"Overrode {zeroed} expired option(s) to OI Change: 0.")
 
     # Write output
     output_lines = []
@@ -151,5 +163,15 @@ def main(from_excel=False):
 
 
 if __name__ == '__main__':
-    import entrypoint
-    entrypoint.refuse('generate_recap_input_txt.py')
+    import argparse
+
+    parser = argparse.ArgumentParser(
+        description="Fill OI change + volume into template.txt -> "
+                    "recap_input.txt. Reads template.txt as-is, so edits made "
+                    "to it are preserved. Run run_pipeline.py to do the whole "
+                    "chain instead.")
+    parser.add_argument(
+        '--from-excel', action='store_true',
+        help="Read OI/volume from numbers.xlsx instead of querying Bloomberg.")
+    args = parser.parse_args()
+    main(from_excel=args.from_excel)

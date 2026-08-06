@@ -97,6 +97,28 @@ def convert_to_bloomberg_format(input_string):
     return f"{ticker} US {expiration_date} {option_letter}{strike} Equity"
 
 
+_OCCURRENCES_RE = re.compile(r'^(\d+)\s+occurrences of\s+(\S+)$')
+
+
+def ticker_order(path):
+    """
+    The [(ticker, count), ...] sequence recorded in a bloomberg_tickers.txt,
+    read from its 'N occurrences of TICKER' group terminators.
+
+    Callers use this to confirm the ticker list still lines up with
+    template.txt: OI values are matched to trades by position, so if
+    template.txt is reordered without rebuilding this file, values would land
+    on the wrong trades.
+    """
+    order = []
+    with open(path, 'r') as f:
+        for line in f:
+            m = _OCCURRENCES_RE.match(line.strip())
+            if m:
+                order.append((m.group(2), int(m.group(1))))
+    return order
+
+
 def process_file_to_bloomberg(input_file, output_file):
     with open(input_file, 'r') as f:
         lines = f.readlines()
@@ -143,5 +165,21 @@ def process_file_to_bloomberg(input_file, output_file):
 
 
 if __name__ == "__main__":
-    import entrypoint
-    entrypoint.refuse("bloomberg_tickers.py")
+    import argparse
+    import os
+
+    os.chdir(os.path.dirname(os.path.abspath(__file__)))
+
+    parser = argparse.ArgumentParser(
+        description="Step 2: turn the OI Change lines in template.txt into "
+                    "Bloomberg securities. Reads template.txt as-is, so run "
+                    "this after editing it — the OI values are matched to "
+                    "trades by position, so template.txt and "
+                    "bloomberg_tickers.txt must be in the same order.")
+    parser.add_argument('--template', default='../data/template.txt')
+    parser.add_argument('--filtered', default='../data/filtered_input.txt')
+    parser.add_argument('--output', default='../data/bloomberg_tickers.txt')
+    args = parser.parse_args()
+
+    filter_oi_change_lines(args.template, args.filtered)
+    process_file_to_bloomberg(args.filtered, args.output)
