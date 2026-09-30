@@ -3,12 +3,18 @@ Fetch OI change + volume for the option securities in bloomberg_tickers.txt
 directly from Bloomberg via the Desktop API (blpapi), replacing the manual
 Excel/BDP copy-paste step.
 
-Requires a logged-in Bloomberg Terminal on the machine running this script.
-Replicates the two BDP fields the Excel used: OPEN_INT_CHANGE and VOLUME.
+Fetching requires a logged-in Bloomberg Terminal on the machine running this
+script. Replicates the two BDP fields the Excel used: OPEN_INT_CHANGE and
+VOLUME.
+
+blpapi is imported lazily, inside fetch_fields, rather than at module level.
+It installs only from Bloomberg's private index, so a top-level import made
+this module — and everything importing it, which is most of the pipeline —
+unimportable anywhere without a Terminal. That took the whole test suite down
+with it on any other machine. Parsing and the report logic need no Terminal,
+so they no longer pay for one.
 """
 import re
-
-import blpapi
 
 TICKERS_FILE = '../data/bloomberg_tickers.txt'
 
@@ -16,6 +22,23 @@ OI_FIELD = 'OPEN_INT_CHANGE'
 VOL_FIELD = 'VOLUME'
 
 _OCCURRENCES_RE = re.compile(r'^\d+\s+occurrences\s+of\b', re.IGNORECASE)
+
+
+def _import_blpapi():
+    """Import blpapi on demand, with a message that says how to install it."""
+    try:
+        import blpapi
+    except ImportError as exc:
+        raise RuntimeError(
+            "blpapi is not installed, so OI/volume cannot be fetched from "
+            "Bloomberg on this machine. It is not on the default PyPI index:\n"
+            "    pip install --index-url "
+            "https://blpapi.bloomberg.com/repository/releases/python/simple/ "
+            "blpapi\n"
+            "A logged-in Bloomberg Terminal is also required. To run without "
+            "one, use --from-excel and fill data/numbers.xlsx."
+        ) from exc
+    return blpapi
 
 def all_oi_zero(results):
     """
@@ -87,6 +110,7 @@ def fetch_fields(securities):
     unique = list(dict.fromkeys(securities))
     results = {}
 
+    blpapi = _import_blpapi()
     session = blpapi.Session()
     try:
         if not session.start():
