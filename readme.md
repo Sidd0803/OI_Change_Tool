@@ -9,7 +9,8 @@ OI_Change_tool/
 │   ├── entrypoint.py           # Shared guards: input present, ticker order aligned
 │   ├── expiry.py               # Expired options report OI Change: 0
 │   ├── template.py             # Step 1: parse Bloomberg chat log → template
-│   ├── bloomberg_tickers.py    # Step 2: filter OI Change lines → bloomberg_tickers.txt
+│   ├── consolidate.py         # Step 2: group repeated structures in template.txt
+│   ├── bloomberg_tickers.py    # Step 3: filter OI Change lines → bloomberg_tickers.txt
 │   ├── bloomberg_fetch.py      # Fetch OI change + volume from Bloomberg (blpapi)
 │   ├── generate_final_output.py        # Step 3a: generate final_output.txt (Element Chat)
 │   ├── generate_recap_input_txt.py     # Step 3b: generate recap_input.txt
@@ -17,6 +18,7 @@ OI_Change_tool/
 │   └── occ_flex.py             # Flex color: OI change from OCC flex reports
 ├── tests/                      # Test suite
 │   ├── test_bloomberg_tickers.py
+│   ├── test_consolidate.py
 │   ├── test_entrypoint.py
 │   ├── test_expiry.py
 │   ├── test_occ_flex.py
@@ -67,7 +69,7 @@ Pick one, several (`1,3`), or `4` for all.
 | 2 | Flex color | `occ_flex.py` | `flex_output.txt` | OCC (no Terminal) |
 | 3 | OI / Volume | `generate_final_output.py` | `final_output.txt` | Bloomberg |
 
-Reports 1 and 3 share a prep step (`template.py` → `bloomberg_tickers.py`), which runs once even when both are selected. Report 2 doesn't need it and skips it.
+Reports 1 and 3 share a prep chain (`template.py` → `consolidate.py` → `bloomberg_tickers.py`), which runs once even when both are selected. Report 2 doesn't need it and skips it.
 
 Flags:
 
@@ -83,6 +85,7 @@ When you ask for more than one report, a failure in any single one is reported a
 | Step | Module | Does |
 |---|---|---|
 | Prep | `template.py` | Parses the chat log into `template.txt`. Handles single options, call/put spreads, risk reversals, cross-expiry. |
+| Prep | `consolidate.py` | Groups blocks that trade the same structure, so a series repeated through the day carries one OI Change line. |
 | Prep | `bloomberg_tickers.py` | Turns the OI Change lines into Bloomberg securities in `bloomberg_tickers.txt`. |
 | 1 | `generate_recap_input_txt.py` | Fills OI change + volume → `recap_input.txt`. |
 | 1 | `generate_trade_recap.py` | Renders the branded `trade_recap.html`. |
@@ -100,6 +103,7 @@ Each step can also be run on its own, for when you want to change an intermediat
 ```
 python src/template.py                        # original_input.txt -> template.txt
                                               #   (edit template.txt here)
+python src/consolidate.py                     # group repeated structures, in place
 python src/bloomberg_tickers.py               # template.txt -> bloomberg_tickers.txt
 python src/generate_final_output.py           # -> final_output.txt        (report 3)
 python src/generate_recap_input_txt.py        # -> recap_input.txt         (report 1)
@@ -107,7 +111,36 @@ python src/generate_trade_recap.py ../data/recap_input.txt ../data/trade_recap.h
 python src/occ_flex.py --date 7/31/2026       # -> flex_output.txt         (report 2)
 ```
 
-Each takes `--help`. Only `template.py` rebuilds `template.txt`; everything downstream reads it as-is, so **your edits survive** as long as you don't re-run step 1. `occ_flex.py` reads `original_input.txt` directly and needs no intermediates.
+Each takes `--help`. `consolidate.py` rewrites `template.txt` in place and is safe to run twice. Only `template.py` rebuilds `template.txt` from the chat log; everything downstream reads it as-is, so **your edits survive** as long as you don't re-run step 1. `occ_flex.py` reads `original_input.txt` directly and needs no intermediates.
+
+### Grouping repeated structures
+
+The chat log usually carries the same option traded several times in a day. `template.py` emits one block per print, so the same series gets its own OI Change line in each and the fill steps stamp the identical Bloomberg figure onto every copy:
+
+```
+QRVO Oct 40 Call 124x traded 74.21 mid; stk ref 113.84
+
+QRVO Oct 40 Call OI Change:
+---------------------------------
+QRVO Oct 40 Call bot 200x at 74.51; stk ref 113.49
+
+QRVO Oct 40 Call OI Change:
+---------------------------------
+```
+
+`consolidate.py` merges them, keeping every trade in the order it appeared under one OI Change line:
+
+```
+QRVO Oct 40 Call 124x traded 74.21 mid; stk ref 113.84
+QRVO Oct 40 Call bot 200x at 74.51; stk ref 113.49
+
+QRVO Oct 40 Call OI Change:
+---------------------------------
+```
+
+Blocks group only when their **full** set of OI Change lines matches, so a two-leg spread never merges with a single leg of itself. Two things are deliberately left alone: a block whose trade `template.py` could not parse (it has no OI Change line, and folding it into a neighbour would hide it), and identical description lines (two fills of the same size at the same price are two trades). It also means each series is queried from Bloomberg once instead of once per print.
+
+---
 
 **If you reorder `template.txt`, re-run `bloomberg_tickers.py` before the fill steps.** OI values are matched to trades by position, so a reordered template against a stale ticker list would put values on the wrong trades. The fill steps check for this and stop with an explanation rather than producing a plausible-looking wrong report. Keep each ticker's lines grouped together — the ticker list groups consecutive lines, so the same ticker split across two places in the file won't line up.
 

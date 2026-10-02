@@ -43,6 +43,7 @@ import entrypoint
 from occ_flex import previous_business_day
 import template
 import bloomberg_tickers
+import consolidate
 import generate_recap_input_txt
 import generate_final_output
 import generate_trade_recap
@@ -154,10 +155,13 @@ def run_prep(input_file, step):
     _banner(step, "Parse chat log -> template.txt")
     template.template(input_file, TEMPLATE_FILE)
 
-    _banner(step + 1, "Build Bloomberg tickers -> bloomberg_tickers.txt")
+    _banner(step + 1, "Group repeated structures -> template.txt")
+    consolidate.main(TEMPLATE_FILE)
+
+    _banner(step + 2, "Build Bloomberg tickers -> bloomberg_tickers.txt")
     bloomberg_tickers.filter_oi_change_lines(TEMPLATE_FILE, FILTERED_FILE)
     bloomberg_tickers.process_file_to_bloomberg(FILTERED_FILE, TICKERS_FILE)
-    return step + 2
+    return step + 3
 
 
 def run_recap(from_excel, step):
