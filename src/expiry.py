@@ -20,7 +20,7 @@ generate_recap_input_txt, generate_final_output, occ_flex — goes through here
 so there is one expiry parser rather than several drifting apart.
 """
 import re
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 
 from bloomberg_tickers import convert_to_bloomberg_format
 
@@ -30,6 +30,14 @@ from bloomberg_tickers import convert_to_bloomberg_format
 _EXPIRY_RE = re.compile(r'\b(\d{1,2})/(\d{1,2})/(\d{2}(?:\d{2})?)\b')
 
 ZERO = '0'
+
+
+def previous_business_day(ref=None):
+    """The most recent weekday before `ref` (default: today)."""
+    d = (ref or date.today()) - timedelta(days=1)
+    while d.weekday() >= 5:  # 5 = Saturday, 6 = Sunday
+        d -= timedelta(days=1)
+    return d
 
 
 def parse_expiry(security):
@@ -78,6 +86,21 @@ def has_expired(expiry, as_of=None):
 def is_expired(security, today=None):
     """True if the Bloomberg security string names a contract already expired."""
     return has_expired(parse_expiry(security), today)
+
+
+def expired_for_recap(expiry, trade_date):
+    """
+    True when a contract was already dead by the trading day being reported.
+
+    Distinct from has_expired, which keeps a contract live *through* its expiry
+    date and measures against today. A recap covers the previous business day's
+    trades, so a contract that expired on or before that day has nothing left
+    to say about open interest: its OI change would read 0, and a 0 there tells
+    the reader nothing. Those lines get dropped rather than printed.
+    """
+    if expiry is None:
+        return False
+    return expiry <= trade_date
 
 
 def zero_expired(substitutions, template_lines, as_of=None):

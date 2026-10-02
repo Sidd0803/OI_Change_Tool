@@ -1,4 +1,11 @@
+import os
 import re
+
+# Resolved from this file, not the working directory: these functions are
+# imported from several entry points with different cwds, and a relative
+# path made the data file's visibility depend on who imported whom first.
+DATES_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                          '..', 'data', 'dates.txt')
 
 
 def filter_oi_change_lines(input_file, output_file):
@@ -31,7 +38,7 @@ def convert_to_bloomberg_format(input_string):
     month_year_to_date = {}
     month_to_first_date = {}
 
-    with open('../data/dates.txt', 'r') as f:
+    with open(DATES_FILE, 'r') as f:
         for line in f:
             date_str = line.strip()
             if not date_str:

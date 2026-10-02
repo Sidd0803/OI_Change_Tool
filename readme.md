@@ -85,7 +85,7 @@ When you ask for more than one report, a failure in any single one is reported a
 | Step | Module | Does |
 |---|---|---|
 | Prep | `template.py` | Parses the chat log into `template.txt`. Handles single options, call/put spreads, risk reversals, cross-expiry. |
-| Prep | `consolidate.py` | Groups blocks that trade the same structure, so a series repeated through the day carries one OI Change line. |
+| Prep | `consolidate.py` | Cuts expired OI lines, then groups blocks that trade the same structure so a series repeated through the day carries one OI Change line. |
 | Prep | `bloomberg_tickers.py` | Turns the OI Change lines into Bloomberg securities in `bloomberg_tickers.txt`. |
 | 1 | `generate_recap_input_txt.py` | Fills OI change + volume → `recap_input.txt`. |
 | 1 | `generate_trade_recap.py` | Renders the branded `trade_recap.html`. |
@@ -103,7 +103,7 @@ Each step can also be run on its own, for when you want to change an intermediat
 ```
 python src/template.py                        # original_input.txt -> template.txt
                                               #   (edit template.txt here)
-python src/consolidate.py                     # group repeated structures, in place
+python src/consolidate.py                     # cut expired legs + group repeats, in place
 python src/bloomberg_tickers.py               # template.txt -> bloomberg_tickers.txt
 python src/generate_final_output.py           # -> final_output.txt        (report 3)
 python src/generate_recap_input_txt.py        # -> recap_input.txt         (report 1)
@@ -137,6 +137,10 @@ QRVO Oct 40 Call bot 200x at 74.51; stk ref 113.49
 QRVO Oct 40 Call OI Change:
 ---------------------------------
 ```
+
+It also cuts the OI Change lines of contracts already dead by the trading day being reported — their OI change reads 0, and a 0 there tells the reader nothing. A multi-leg trade keeps its live legs and its description intact, so an `Oct5th/Oct2nd` spread recapped after Oct 2 still shows both legs in the text with one OI line for the surviving leg. A trade with no live legs left drops out entirely. `--date M/D/YYYY` sets the trading day; it defaults to the previous business day, so run it the day after the trades.
+
+Cutting happens **before** grouping, and the order matters: two trades can differ only in a leg that is now dead, and once those are cut both present as the same structure with the same OI figure. Grouping first would leave them side by side as visibly identical blocks.
 
 Blocks group only when their **full** set of OI Change lines matches, so a two-leg spread never merges with a single leg of itself. Two things are deliberately left alone: a block whose trade `template.py` could not parse (it has no OI Change line, and folding it into a neighbour would hide it), and identical description lines (two fills of the same size at the same price are two trades). It also means each series is queried from Bloomberg once instead of once per print.
 

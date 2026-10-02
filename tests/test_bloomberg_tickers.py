@@ -141,8 +141,9 @@ class TestErrorCases(unittest.TestCase):
             convert_to_bloomberg_format("AAPL May26 150 Call OI Change:")
 
     def test_year_beyond_file(self):
+        # dates.txt runs to Dec 2029; 2031 is past the end of it.
         with self.assertRaises(ValueError):
-            convert_to_bloomberg_format("AAPL Jun29 150 Call OI Change:")
+            convert_to_bloomberg_format("AAPL Jun31 150 Call OI Change:")
 
     def test_invalid_month_name(self):
         with self.assertRaises(ValueError):
